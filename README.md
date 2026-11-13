@@ -107,15 +107,62 @@ events-pages/
 
 **문구·디자인**
 - 회사 메시지 기준(CUBIG Bible)에 맞는지 검토 후 공개합니다. 제품 이름 표기: `Syntitan`, `LLM Capsule`, `DTS`
-- 신청 폼이 필요하면 직접 만들지 말고 HubSpot 폼을 넣어 주세요(마케팅팀에 요청).
 
-**추적(GA4·UTM)**
+**추적(GA4)**
 - 틀(`_template`)의 ⑤ 자리에 GA4 추적 코드가 이미 들어 있습니다. 그대로 두면 방문·유입 경로·외부 링크 클릭·PDF 다운로드가 자동으로 잡힙니다. 지우거나 다른 추적 코드를 추가하지 마세요.
 - 버튼 클릭처럼 따로 세고 싶은 행동이 있으면 마케팅팀에 요청해 주세요.
-- 광고·메일·SNS에 링크를 걸 때는 UTM이 붙은 주소를 써 주세요(규칙은 마케팅팀 안내).
 
 ---
 
-## 5. 문의
+## 5. UTM 규칙 (회사 UTM 운영 가이드 기준)
+
+**한 줄 판단: 이 링크를 누르기 전에 사람이 CUBIG 사이트 밖에 있나요?** 예 → UTM 붙임 / 아니오 → UTM 붙이지 않음.
+
+| 링크 | UTM | 예시 |
+|---|---|---|
+| 메일·SNS·QR·광고 → 이벤트 페이지 | **붙임** | 아래 예시 |
+| 이벤트 페이지 → Syntitan·LLM Capsule·cubig.ai | **붙이지 않음** | `https://syntitan.ai/` 그대로 |
+| 이벤트 페이지 → 다른 이벤트 페이지 | **붙이지 않음** | |
+
+- 이벤트 페이지(events.cubig.ai)도 CUBIG 사이트입니다. 페이지 안의 제품 버튼에 UTM을 붙이면, 방문자가 원래 들어온 경로(메일·QR·SNS)가 덮여서 지워집니다. 제품으로 넘어간 건 GA4가 자동으로 이어서 셉니다.
+
+**붙이는 값 (모두 영문 소문자, 단어 사이는 하이픈)**
+
+| 파라미터 | 무엇 | 값 |
+|---|---|---|
+| `utm_source` | 어디서 | `linkedin` · `x` · `youtube` · `outbound`(아웃바운드 메일) · 행사 주최·장소 이름(QR) |
+| `utm_medium` | 어떤 방식 | `social` · `video` · `email` · `offline`(행사 QR·인쇄물) · `referral` |
+| `utm_campaign` | 어떤 행사 | 행사 폴더 이름과 같게(예: `websummit-2026`) |
+| `utm_content` | 같은 행사 안의 구분(선택) | `qr-booth` · `invite-mail-1` · `ceo-post` |
+
+예시
+```
+메일 초대장:   https://events.cubig.ai/webinar-1201/?utm_source=outbound&utm_medium=email&utm_campaign=webinar-1201&utm_content=invite-mail-1
+부스 QR:       https://events.cubig.ai/websummit-2026/?utm_source=websummit&utm_medium=offline&utm_campaign=websummit-2026&utm_content=qr-booth
+LinkedIn 게시: https://events.cubig.ai/webinar-1201/?utm_source=linkedin&utm_medium=social&utm_campaign=webinar-1201&utm_content=ceo-post
+```
+
+- `utm_term`은 쓰지 않습니다(검색광고 전용).
+- 사람 이름·주차로 campaign을 만들지 않습니다.
+- QR은 인쇄 전에 휴대폰으로 찍어서 주소창에 UTM이 그대로 남는지 확인합니다.
+
+---
+
+## 6. 신청 폼 넣기 (HubSpot)
+
+폼은 직접 만들지 말고 **HubSpot 폼을 삽입**합니다. 제출 내용이 바로 HubSpot 연락처로 들어가기 때문입니다.
+
+1. HubSpot → **Marketing → Forms**에서 폼을 만들거나 기존 폼을 고릅니다. 폼 이름은 행사 폴더 이름을 넣어 구분합니다(예: `[Event] webinar-1201 registration`).
+2. 개인정보 동의 문구를 켜 둡니다(폼 설정의 데이터 개인정보 보호·동의 옵션). 유럽 방문자도 들어오는 페이지입니다.
+3. 제출 뒤 동작을 정합니다: 감사 문구 표시 또는 감사 페이지로 이동.
+4. 폼을 게시(Publish)한 뒤 **Share → Embed code**를 눌러 나오는 코드를 **그대로 복사**합니다. 코드를 직접 고치거나 새로 쓰지 않습니다.
+5. 페이지 본문의 폼이 들어갈 자리(틀의 ⑦ 주석 위치)에 붙여 넣고, 로컬 미리보기에서 폼이 보이는지·제출이 되는지 확인합니다. 테스트 제출은 HubSpot에서 지워 주세요.
+6. PR에 '신청 폼 있음 + 폼 이름'을 적어 주세요. 마케팅팀이 GA4에서 신청 완료를 셀 수 있게 설정합니다.
+
+- 폼 삽입 코드 안의 계정 번호(portal ID)·폼 ID는 공개돼도 괜찮습니다. HubSpot 로그인 정보·API 키는 절대 넣지 않습니다.
+
+---
+
+## 7. 문의
 
 권한·게시·추적 관련 문의는 마케팅팀 슬랙으로 남겨 주세요.
