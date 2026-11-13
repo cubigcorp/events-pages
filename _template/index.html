@@ -1,39 +1,60 @@
 <!doctype html>
+<!--
+  새 페이지 시작 체크리스트
+  1. 이 파일을 '폴더이름/index.html' 로 복사 (폴더이름 = 영어 소문자·숫자·하이픈만, 곧 주소)
+  2. 아래에서 대문자로 된 자리표시를 모두 바꾸기: FOLDER-NAME, EVENT TITLE, ONE OR TWO SENTENCES
+  3. 한국어 페이지면 바로 아래 lang="en" 을 lang="ko" 로
+  4. 공유 미리보기 이미지(1200×630, og.png)를 같은 폴더에 올리기
+  5. 검색 노출·추적 코드는 마케팅팀이 처리 (①·⑤ 줄은 그대로 두기)
+-->
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 
-<!-- ① 검색 노출: 기본은 검색 제외. 노출하려면 PR에 요청(마케팅 검토 후 이 줄 삭제) -->
+<!-- ① 검색 노출: 기본은 검색 제외. 노출하려면 PR에 요청(마케팅 검토 후 이 줄 삭제 + 아래 canonical 주석 해제) -->
 <meta name="robots" content="noindex">
+<!-- <link rel="canonical" href="https://events.cubig.ai/FOLDER-NAME/"> -->
 
 <!-- ② 브라우저 탭·검색 결과 제목 (60자 이내) -->
-<title>Event title | CUBIG</title>
+<title>EVENT TITLE | CUBIG</title>
 
 <!-- ③ 검색 결과·공유 미리보기 설명 (160자 이내) -->
-<meta name="description" content="One or two sentences about this event.">
+<meta name="description" content="ONE OR TWO SENTENCES about this event.">
 
-<!-- ④ 공유 미리보기(링크드인·슬랙 등). 폴더이름·이미지 파일명을 바꿔 주세요 -->
-<meta property="og:title" content="Event title | CUBIG">
-<meta property="og:description" content="One or two sentences about this event.">
-<meta property="og:image" content="https://events.cubig.ai/folder-name/og.png">
-<meta property="og:url" content="https://events.cubig.ai/folder-name/">
-<link rel="canonical" href="https://events.cubig.ai/folder-name/">
+<!-- ④ 공유 미리보기(링크드인·슬랙·X). 이미지 주소는 https:// 로 시작하는 전체 주소여야 합니다 -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="CUBIG">
+<meta property="og:title" content="EVENT TITLE | CUBIG">
+<meta property="og:description" content="ONE OR TWO SENTENCES about this event.">
+<meta property="og:url" content="https://events.cubig.ai/FOLDER-NAME/">
+<meta property="og:image" content="https://events.cubig.ai/FOLDER-NAME/og.png">
+<meta name="twitter:card" content="summary_large_image">
+
+<!-- 브라우저 탭 아이콘 (CUBIG 공홈과 같은 것, 수정 불필요) -->
+<link rel="icon" href="https://cubig.ai/wp-content/themes/cubig/assets/images/logo/favicon.png" media="(prefers-color-scheme: light)">
+<link rel="icon" href="https://cubig.ai/wp-content/themes/cubig/assets/images/logo/favicon-dark.png" media="(prefers-color-scheme: dark)">
 
 <!-- ⑤ 추적 코드 자리: 마케팅팀이 넣습니다. 직접 추가·삭제하지 마세요 -->
 
+<!-- 공통 머리글(CUBIG 로고)·바닥글(정책 링크). 행사 디자인상 빼야 하면 이 줄만 지우세요 -->
+<script src="/assets/site-chrome.js" defer></script>
+
 <style>
-  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;color:#111;background:#fff;line-height:1.6}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Apple SD Gothic Neo","Noto Sans KR",Helvetica,Arial,sans-serif;color:#111;background:#fff;line-height:1.6;word-break:keep-all}
   main{max-width:960px;margin:0 auto;padding:64px 24px}
-  h1{font-size:40px;line-height:1.2;margin:0 0 16px}
-  a.button{display:inline-block;padding:12px 24px;border-radius:8px;background:#111;color:#fff;text-decoration:none}
+  h1{font-size:clamp(28px,5vw,40px);line-height:1.25;margin:0 0 16px}
+  img{max-width:100%;height:auto}
+  a.button{display:inline-block;min-height:44px;padding:12px 24px;border-radius:8px;background:#111;color:#fff;text-decoration:none}
 </style>
 </head>
 <body>
 <main>
-  <!-- ⑥ 본문: 여기부터 자유롭게 -->
-  <h1>Event title</h1>
+  <!-- ⑥ 본문: 여기부터 자유롭게. 이미지는 같은 폴더에 두고 파일 이름만 쓰면 됩니다. alt(이미지 설명)는 꼭 채워 주세요 -->
+  <h1>EVENT TITLE</h1>
   <p>Date · Location</p>
+  <!-- <img src="hero.webp" alt="이미지 설명"> -->
   <p><a class="button" href="https://cubig.ai">Learn more</a></p>
 </main>
 </body>

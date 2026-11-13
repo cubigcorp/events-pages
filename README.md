@@ -25,6 +25,9 @@ events-pages/
 ├─ index.html            ← events.cubig.ai 첫 화면 (건드리지 않음)
 ├─ CNAME                 ← 주소 연결 파일 (절대 수정·삭제 금지)
 ├─ .nojekyll             ← 설정 파일 (수정 금지)
+├─ assets/              ← 공통 파일 (수정은 마케팅팀 검토 후)
+│   ├─ site-chrome.js    ← 공통 머리글(CUBIG 로고)·바닥글(정책 링크)
+│   └─ cubig-logo.svg
 ├─ _template/            ← 새 페이지 시작용 틀
 │   └─ index.html
 ├─ webinar-1201/         ← 예시: 페이지 폴더
@@ -36,6 +39,7 @@ events-pages/
 - 폴더 이름이 곧 주소입니다. `webinar-1201/` → `https://events.cubig.ai/webinar-1201/`
 - 폴더 이름 규칙: **영어 소문자·숫자·하이픈(-)만**, 띄어쓰기·한글·대문자 ❌ (예: `ai-ready-summit-2026`)
 - 이미지·파일은 그 페이지 폴더 안에 같이 둡니다.
+- 틀에는 공통 머리글·바닥글 한 줄(`/assets/site-chrome.js`)이 들어 있습니다. 위에는 CUBIG 로고(누르면 cubig.ai), 아래에는 개인정보처리방침·쿠키정책·문의 링크가 자동으로 붙습니다. 행사 디자인상 빼야 하면 그 줄만 지우되, **정책 링크는 페이지 어딘가에 꼭 남겨 주세요.**
 
 ---
 
