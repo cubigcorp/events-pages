@@ -26,9 +26,19 @@
 ## 3. 건드리지 말 것
 
 - `CNAME` — 지우거나 바꾸면 events.cubig.ai 연결이 끊깁니다.
-- `.nojekyll`, `.github/`, 루트 `index.html`, `assets/` 전체(공통 머리글·바닥글·로고)
+- `.nojekyll`, `.github/`, 루트 `index.html`(cubig.ai로 넘김), `404.html`, `robots.txt`, `assets/` 전체(공통 머리글·바닥글·로고)
 - 각 페이지 `<head>`의 **⑤ 추적 코드**(GA4 `G-8MRD9BZ1VJ`). 지우거나 바꾸거나 다른 추적 코드(GTM·픽셀·다른 분석 도구)를 추가하지 않습니다. 필요하면 PR에 요청으로 적습니다.
-- `<meta name="robots" content="noindex">` — 검색 노출은 마케팅 검토 후에만 뺍니다.
+- 이미 검색 제외(`noindex`)된 페이지의 그 줄 — 끝난 행사라 일부러 꺼 둔 것입니다. 다시 켜려면 사람에게 먼저 묻습니다.
+
+## 3-1. 검색 노출 규칙
+
+- **다가오는 행사 페이지 = 검색 노출 켬**(템플릿 기본값). `canonical`을 그 페이지 주소로 맞춥니다.
+- **끝난 행사·내부용·테스트 페이지 = 끔**: `<meta name="robots" content="noindex">` 주석을 풀고 canonical은 둡니다. 행사가 끝난 페이지를 손볼 때는 사람에게 검색 제외로 바꿀지 묻습니다.
+- **공홈(cubig.ai)과 겹치지 않게 쓰기**: 검색에 나오는 페이지는 행사가 주인공입니다.
+  - 제목·설명·첫 제목(h1)에 행사 이름·날짜·장소를 넣습니다(예: `CUBIG at Web Summit 2026 | Booth and meetings`).
+  - 제품 설명은 2~3문장으로 짧게 쓰고, 자세한 내용은 공홈 페이지로 링크합니다: Syntitan `https://cubig.ai/syntitan/` · LLM Capsule `https://cubig.ai/llmcapsule/` · DTS `https://cubig.ai/dts/`
+  - 공홈 문단을 길게 그대로 복사하지 않습니다(같은 문장이 두 곳에 있으면 검색 순위가 갈립니다).
+- **사이트맵**: 검색 노출을 켠 페이지는 루트 `sitemap.xml`에 주소를 추가합니다(없으면 새로 만들고 `robots.txt` 끝에 `Sitemap: https://events.cubig.ai/sitemap.xml` 한 줄 추가, 처음 만들 때 사람에게 서치콘솔 제출을 안내). 검색 제외로 바꾼 페이지는 사이트맵에서 뺍니다.
 
 ## 4. 공개 저장소 주의
 

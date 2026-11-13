@@ -5,16 +5,18 @@
   2. 아래에서 대문자로 된 자리표시를 모두 바꾸기: FOLDER-NAME, EVENT TITLE, ONE OR TWO SENTENCES
   3. 한국어 페이지면 바로 아래 lang="en" 을 lang="ko" 로
   4. 공유 미리보기 이미지(1200×630, og.png)를 같은 폴더에 올리기
-  5. 검색 노출·추적 코드는 마케팅팀이 처리 (①·⑤ 줄은 그대로 두기)
+  5. 다가오는 행사 = 검색 노출 켜진 상태 그대로. 행사가 끝나면 ① 아래 noindex 줄의 주석을 풀어 검색 제외
+  6. 추적 코드(⑤)는 그대로 두기
 -->
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 
-<!-- ① 검색 노출: 기본은 검색 제외. 노출하려면 PR에 요청(마케팅 검토 후 이 줄 삭제 + 아래 canonical 주석 해제) -->
-<meta name="robots" content="noindex">
-<!-- <link rel="canonical" href="https://events.cubig.ai/FOLDER-NAME/"> -->
+<!-- ① 검색 노출: 다가오는 행사는 켜 둠(대표 주소 = 아래 canonical).
+     행사가 끝났거나 검색에 나오면 안 되는 페이지는 아래 noindex 줄의 주석을 풀어 검색 제외로 -->
+<link rel="canonical" href="https://events.cubig.ai/FOLDER-NAME/">
+<!-- <meta name="robots" content="noindex"> -->
 
 <!-- ② 브라우저 탭·검색 결과 제목 (60자 이내) -->
 <title>EVENT TITLE | CUBIG</title>
