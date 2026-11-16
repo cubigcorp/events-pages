@@ -1,0 +1,23 @@
+# PR마다 페이지 규칙을 자동 검사합니다 (tools/check_pages.py, 로컬 검사와 같음).
+name: Page check
+on:
+  pull_request:
+  push:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  check:
+    name: Page check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: 페이지 검사
+        run: |
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            python3 tools/check_pages.py --base "origin/${{ github.base_ref }}"
+          else
+            python3 tools/check_pages.py
+          fi
