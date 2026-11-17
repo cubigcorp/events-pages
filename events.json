@@ -1,5 +1,5 @@
 {
-  "_readme": "events.cubig.ai 행사 목록 정본 (지도·연혁·전체 목록·메뉴가 모두 이 파일을 읽음). 행사 하나 = events 한 줄. type: exhibition 전시·행사 / stage 수상·무대(피칭·발표·수상) / live On air. kind: 화면 세부 분류(exhibition·pitch·award·live·next). label·label_ko: 연혁에 보이는 이름, date: 연혁 날짜 표기, ko:true 는 한국어 사이트에만 노출. 예정 여부는 날짜(end 또는 start)로 자동 판단하므로 kind 에 next 를 쓰지 않음. map: 지도 좌표(x,y는 world-dots.svg 기준)와 도시 이름, stamp·stamp_city: 해외 도장 문구, badge: 지난 카드에 보일 짧은 표시, card_title: 카드에 보일 짧은 이름, booking·booking_label: 다가오는 행사 칸의 현장 미팅 버튼. meet: 상시 30분 미팅 페이지(cubig.ai/events/meet/)가 읽는 값. booking = 구글 캘린더 예약 링크(calendar.google.com/calendar/appointments/… 또는 calendar.app.google/…만), from·to = 한국 시간 HH:MM, weekdays_only = 평일만. 바꾸면 15분 안에 공홈에 반영.",
+  "_readme": "events.cubig.ai 행사 목록 정본 (지도·연혁·전체 목록·메뉴가 모두 이 파일을 읽음). 행사 하나 = events 한 줄. type: exhibition 전시·행사 / stage 수상·무대(피칭·발표·수상) / live On air. kind: 화면 세부 분류(exhibition·pitch·award·live·next). label·label_ko: 연혁에 보이는 이름, date: 연혁 날짜 표기, ko:true 는 한국어 사이트에만 노출. 예정 여부는 날짜(end 또는 start)로 자동 판단하므로 kind 에 next 를 쓰지 않음. map: 지도 좌표(x,y는 world-dots.svg 기준)와 도시 이름, stamp·stamp_city: 해외 도장 문구, badge: 지난 카드에 보일 짧은 표시, card_title: 카드에 보일 짧은 이름, major: true = 대표 행사(공홈 /events 예정 영역에서 먼저 보임, 없으면 날짜순), booking·booking_label: 다가오는 행사 칸의 현장 미팅 버튼. meet: 상시 30분 미팅 페이지(cubig.ai/events/meet/)가 읽는 값. booking = 구글 캘린더 예약 링크(calendar.google.com/calendar/appointments/… 또는 calendar.app.google/…만), from·to = 한국 시간 HH:MM, weekdays_only = 평일만. 바꾸면 15분 안에 공홈에 반영.",
   "meet": {
     "booking": "https://calendar.google.com/calendar/appointments/schedules/AcZssZ3o4cv2tXe0EboOtPoiHR8cImEPuUCo1bnxBBYTFL15V8ld8zTm4Ok6Zj4GxaQhCVQKKjO6c55J",
     "from": "09:00",
@@ -21,6 +21,7 @@
       "city": "New York",
       "cc": "US",
       "intl": true,
+      "major": true,
       "photo": "/assets/media/ai-summit-ny-2026/stage.jpg",
       "src": "https://newyork.theaisummit.com/",
       "thumb": "/assets/media/ai-summit-ny-2026/stage-thumb.webp",
