@@ -27,11 +27,13 @@ jobs:
           ref: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.ref || github.ref }}
           repository: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name || github.repository }}
 
+      - name: 도구 준비
+        run: pip install --quiet pillow beautifulsoup4
+
       - name: 자동 정리 (같은 저장소 PR만)
         id: fix
         if: env.SAME_REPO == 'true'
         run: |
-          pip install --quiet pillow
           python3 tools/autofix_pages.py --report /tmp/fix.md
           if [ -n "$(git status --porcelain)" ]; then
             git config user.name "github-actions[bot]"
