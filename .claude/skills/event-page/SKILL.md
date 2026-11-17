@@ -29,6 +29,7 @@ description: events.cubig.ai 행사·On air 페이지를 만들거나 고칠 때
 - 고치지 않을 것 → §7 (CNAME·⑤ 추적 코드·검색 설정·공통 파일 무단 수정)
 
 ## 4. 끝내기 전
+- [ ] `python3 tools/page_seo.py <폴더이름>` (검색용 JSON-LD·x-default — 디자인 페이지를 새로 넣었거나 events.json·설명·대표 사진을 바꿨을 때)
 - [ ] `python3 tools/check_pages.py` 오류 0건
 - [ ] `python3 -m http.server 8090` (저장소 루트) → 데스크톱 1440px·모바일 375px 확인, 스크린샷
 - [ ] 문구: 제품 이름 표기, 금지 표현, 영어 문구에 엠대시·큰따옴표 없음 (CLAUDE.md §11)

@@ -41,6 +41,7 @@ events-pages/
 ├─ tools/sync_site_chrome.py  공홈 머리글·바닥글이 바뀌면 다시 돌림(로컬 공홈 8080 또는 --base https://cubig.ai)
 ├─ tools/upgrade_detail_v2.py 옛 짧은 기록형 페이지를 v2 로 바꿈(<main> 안만 고침, 다른 행사 카드는 events.json 에서)
 ├─ tools/make_basic_pages.py  상세 페이지가 없는 행사에 영·한 기본 페이지를 만듦(§3)
+├─ tools/page_seo.py         상세 페이지에 검색용 행사 정보(JSON-LD Event)·hreflang x-default 를 넣음(§8)
 └─ .claude/               팀 공용 Claude Code 설정 (/event-page 스킬, 금지 동작, 미리보기)
 ```
 
@@ -177,11 +178,14 @@ events-pages/
 
 ## 8. 검색 노출 규칙
 
-- **다가오는 행사·On air 페이지 = 검색 노출 켬**(템플릿 기본값). `canonical`을 그 페이지 주소로, 한국어판이 있으면 `hreflang` en·ko를 서로 연결합니다.
+- **다가오는 행사·On air 페이지 = 검색 노출 켬**(템플릿 기본값). `canonical`을 그 페이지 주소로, 한국어판이 있으면 `hreflang` en·ko를 서로 연결하고 `x-default`는 영문판으로 둡니다.
+- **검색용 행사 정보(JSON-LD)**: 상세 페이지(영·한)마다 schema.org Event + BreadcrumbList가 `<head>`에 들어갑니다. 공홈 허브 /events JSON-LD와 같은 값·형식이고, 직접 쓰지 않고 `python3 tools/page_seo.py <폴더이름>`으로 만듭니다(events.json·canonical·meta description·첫 대표 사진에서 가져옴, `make_basic_pages.py`는 자동). events.json·설명·대표 사진을 바꾸면 다시 돌립니다. 없으면 `check_pages.py` 오류, 다르면 경고.
+- **제목 형식**: 영어 `<행사명> | CUBIG Events`, 한국어 `<행사명> | CUBIG 행사`(필요하면 행사명 뒤에 참가·수상·우승 같은 말). 영어 제목 앞에 `CUBIG at`을 붙이지 않습니다.
+- **meta description 길이**: 영어 100~160자(목표 110~155), 한국어 60~160자. 한국어는 글자 폭이 넓어 검색 결과에서 80자 안팎에서 잘리니 앞부분에 핵심을 둡니다. 범위를 벗어나면 `check_pages.py`가 경고합니다.
 - **내부용·테스트 페이지 = 끔**: `<meta name="robots" content="noindex">` 를 넣고 사이트맵에서 뺍니다.
 - **끝난 행사**: 검색 유지 여부는 사람이 정합니다(지금 websummit-2026·oracle-ai-world-2026은 유지). 임의로 끄거나 켜지 않습니다. 행사가 끝나면 '예정'으로 쓴 정보(부스 안내·행사 기간 예약 링크)는 빼거나 '지난 행사' 표현으로 바꿉니다. AI 검색이 지난 일정을 현재 정보로 가져갈 수 있습니다.
 - **공홈(cubig.ai)과 겹치지 않게 쓰기**: 검색에 나오는 페이지는 행사가 주인공입니다.
-  - 제목·설명·첫 제목(h1)에 행사 이름·날짜·장소를 넣습니다(예: `CUBIG at Web Summit Lisbon 2026`).
+  - 제목·설명·첫 제목(h1)에 행사 이름·날짜·장소를 넣습니다(예: 제목 `Web Summit Lisbon 2026 | CUBIG Events`, h1 `CUBIG at Web Summit Lisbon 2026`).
   - 제품 설명은 2~3문장으로 짧게 쓰고, 자세한 내용은 공홈 페이지로 링크합니다: Syntitan `https://cubig.ai/syntitan/` · LLM Capsule `https://cubig.ai/llmcapsule/` · DTS `https://cubig.ai/dts/`
   - 공홈 문단을 길게 그대로 복사하지 않습니다.
 - **사이트맵**: 검색 노출을 켠 페이지(한국어판 포함)는 루트 `sitemap.xml`에 있어야 합니다. 검색 제외로 바꾼 페이지는 뺍니다. 검사 도구가 둘 다 확인합니다.

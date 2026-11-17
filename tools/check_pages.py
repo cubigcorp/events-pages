@@ -236,6 +236,8 @@ def check_events_json():
                 err(where, f"page 경로에 파일이 없습니다: {page}")
         if page and (ROOT / page).exists():
             check_card_photo(where, e, ROOT / page)
+        if page:
+            check_seo(e)
         if e.get("type") and e["type"] not in EVENT_TYPES:
             warn(where, f"type '{e['type']}'는 처음 보는 양식입니다({EVENT_TYPES_HINT}). 새 양식이면 CLAUDE.md §5 절차를 따라 주세요.")
 
@@ -262,6 +264,39 @@ def check_card_photo(where, e, page_path):
         warn(where, f"photo가 상세 페이지 대표 사진({imgs[0]})과 다릅니다. 허브 카드와 상세 첫 화면이 같은 사진이어야 합니다.")
     if e.get("thumb") and _img_stem(e["thumb"], page_dir) not in (hero, hero + "-thumb"):
         warn(where, f"thumb가 상세 페이지 대표 사진({imgs[0]})의 작은 사본이 아닙니다. 같은 폴더에 '<이름>-thumb.webp'로 만들어 주세요.")
+
+
+LD_BLOCK = re.compile(r'<script type="application/ld\+json" id="ev-jsonld">([\s\S]*?)</script>')
+
+
+def check_seo(e):
+    """행사 상세 페이지(영·한)의 검색용 정보: JSON-LD Event·x-default·설명 길이."""
+    import page_seo  # tools/ 안 (이 파일과 같은 폴더)
+    for ko in (False, True):
+        p = ROOT / ("ko" if ko else "") / e["page"]
+        if not p.exists():
+            continue
+        r, h = rel(p), p.read_text(encoding="utf-8")
+        fix = f"python3 tools/page_seo.py {e['page'].split('/')[0]}"
+        m = LD_BLOCK.search(h)
+        if not m:
+            err(r, f"검색용 행사 정보(JSON-LD Event)가 없습니다. '{fix}'를 돌려 주세요.")
+        else:
+            try:
+                graph = json.loads(m.group(1)).get("@graph", [])
+            except (json.JSONDecodeError, AttributeError) as ex:
+                err(r, f"JSON-LD 형식 오류: {ex}. '{fix}'를 다시 돌려 주세요.")
+                graph = None
+            if graph is not None and not any(isinstance(x, dict) and x.get("@type") == "Event" for x in graph):
+                err(r, f"JSON-LD에 Event가 없습니다. '{fix}'를 돌려 주세요.")
+            elif graph is not None and page_seo.apply(h, e, p, ko) != h:
+                warn(r, f"검색용 행사 정보가 events.json·페이지 설명·대표 사진과 다릅니다. '{fix}'를 다시 돌려 주세요.")
+        if 'hreflang="x-default"' not in h:
+            warn(r, f"hreflang x-default 줄이 없습니다. '{fix}'를 돌려 주세요.")
+        d = page_seo.meta(h, "name", "description")
+        lo, hi = (60, 160) if ko else (100, 160)
+        if d and not lo <= len(d) <= hi:
+            warn(r, f"meta description이 {len(d)}자입니다({'한국어' if ko else '영어'} {lo}~{hi}자 권장).")
 
 
 def check_files():

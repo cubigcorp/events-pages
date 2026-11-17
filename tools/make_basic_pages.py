@@ -7,6 +7,7 @@
   - 만든 페이지에는 <meta name="ev-generated" content="make_basic_pages"> 표시가 붙는다.
     나중에 디자인 페이지로 바꿀 때는 그 파일을 그냥 덮어쓰면 된다.
   - events.json 의 page 칸이 비어 있으면 '<id>/index.html' 로 채운다.
+  - 검색용 행사 정보(JSON-LD)·hreflang x-default 도 같이 넣는다(page_seo.py).
   - 글은 events.json 에 있는 것만 쓴다(지어내지 않음): title(_ko)·summary(_ko)·badge(_ko)·date·장소·src·booking.
 
 사용:
@@ -16,6 +17,8 @@
 import argparse, html, json, os, re, sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from upgrade_detail_v2 import card, fmt, CITY_KO  # 허브와 같은 카드·날짜·지명 규칙
+import page_seo  # 검색용 JSON-LD·x-default (page_seo.py)
+from pathlib import Path
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE = 'https://events.cubig.ai/'
@@ -217,7 +220,7 @@ def main():
             made.append(os.path.relpath(f, ROOT))
             if not a.dry_run:
                 os.makedirs(os.path.dirname(f), exist_ok=True)
-                open(f, 'w', encoding='utf-8').write(build(e, ko, events))
+                open(f, 'w', encoding='utf-8').write(page_seo.apply(build(e, ko, events), e, Path(f), ko))
     if filled and not a.dry_run:
         # page 칸만 글자 그대로 바꿈(나머지 줄 모양 유지)
         for i in filled:

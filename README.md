@@ -60,7 +60,7 @@ events-pages/
 │   └─ hero.webp          ← 이 페이지에서만 쓰는 이미지
 ├─ ko/websummit-2026/     ← 같은 페이지의 한국어판
 ├─ meet/                  ← 옛 미팅 주소(cubig.ai/events/meet/ 로 넘김)
-├─ tools/                 ← 검사 도구(check_pages.py)·기본 페이지 생성(make_basic_pages.py)·공홈 머리글 가져오기 등
+├─ tools/                 ← 검사 도구(check_pages.py)·기본 페이지 생성(make_basic_pages.py)·검색용 행사 정보(page_seo.py)·공홈 머리글 가져오기 등
 └─ .claude/               ← 팀 공용 Claude Code 설정 (모두 같은 순서로 일하게 함)
 ```
 
@@ -143,7 +143,7 @@ PR을 올리면 GitHub가 자동으로 검사합니다(PR 화면 아래 **Page c
 | ❌ 빨강 | 고쳐야 하는 오류가 있음. **빨간불이면 승인해도 합쳐지지 않습니다.** **Details** 를 누르면 무엇이 문제인지 한국어로 나옵니다 |
 | ⚠️ 경고 | 통과는 했지만 확인할 것(공통 파일 변경, 큰 이미지 등) |
 
-검사 항목: ⑤ 추적 코드 · 다른 추적 코드 추가 여부 · 검색 설정(canonical·사이트맵·noindex) · 자리표시 남음 · 제품 링크의 UTM · 예약 링크 종료일 · 제품 이름 표기 · 이미지 크기 · `events.json` 형식 · 키·토큰처럼 보이는 문자열 · 공통 파일 변경
+검사 항목: ⑤ 추적 코드 · 다른 추적 코드 추가 여부 · 검색 설정(canonical·사이트맵·noindex·x-default) · 검색용 행사 정보(JSON-LD Event) · 설명 길이 · 허브 카드 사진 = 상세 대표 사진 · 자리표시 남음 · 제품 링크의 UTM · 예약 링크 종료일 · 제품 이름 표기 · 이미지 크기 · `events.json` 형식 · 키·토큰처럼 보이는 문자열 · 공통 파일 변경
 
 ---
 
