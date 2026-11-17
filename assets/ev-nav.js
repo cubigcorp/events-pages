@@ -13,6 +13,11 @@
     var a = e.target.closest && e.target.closest('a[href]');
     if (!a || typeof gtag !== 'function' || a.closest('#site-header, .site-footer')) return;
     var h = a.getAttribute('href') || '';
+    // 행사 공식 포털의 CUBIG 프로필(부스 위치 자리) = cta_click events_portal (11-17 🏷️, 위치 판정보다 먼저)
+    if (a.getAttribute('data-ev-href') === 'portal') {
+      gtag('event', 'cta_click', { cta_id: 'events_portal', cta_location: 'event-detail-find', link_url: a.href });
+      return;
+    }
     var loc = a.closest('.ev-sub') ? 'event-detail-subbar' : (a.getAttribute('data-ev-href') === 'booking' ? 'event-detail-booking' : 'event-detail-hero');
     if (/cubig\.ai\/(ko\/)?events\/meet/.test(h)) {
       gtag('event', 'cta_click', { cta_id: 'events_meet', cta_location: loc });
@@ -30,7 +35,8 @@
       var u; try { u = new URL(a.href); } catch (x) { u = null; }
       if (u && /(^|\.)cubig\.ai$/.test(u.hostname) && !(u.pathname === location.pathname && u.hash)) {
         var p = u.pathname.replace(/^\/ko(\/|$)/, '/');
-        var id = u.hostname === 'events.cubig.ai' ? 'event_detail_event' : (/^\/news\//.test(p) ? 'event_detail_news' : (/^\/contact/.test(p) ? 'event_detail_contact' : (/^\/events\/?$/.test(p) ? 'event_detail_hub' : 'event_detail_other')));
+        // 부스 지도 크게 보기(이미지 주소) = event_detail_map (11-17 🏷️, event_detail_event 판정보다 먼저)
+        var id = /\.(webp|png|jpe?g)$/i.test(u.pathname) ? 'event_detail_map' : u.hostname === 'events.cubig.ai' ? 'event_detail_event' : (/^\/news\//.test(p) ? 'event_detail_news' : (/^\/contact/.test(p) ? 'event_detail_contact' : (/^\/events\/?$/.test(p) ? 'event_detail_hub' : 'event_detail_other')));
         gtag('event', 'internal_link_click', { link_id: id, link_url: a.href });
       }
     }
