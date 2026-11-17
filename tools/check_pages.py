@@ -234,8 +234,34 @@ def check_events_json():
         if page:
             if not (ROOT / page).exists():
                 err(where, f"page 경로에 파일이 없습니다: {page}")
+        if page and (ROOT / page).exists():
+            check_card_photo(where, e, ROOT / page)
         if e.get("type") and e["type"] not in EVENT_TYPES:
             warn(where, f"type '{e['type']}'는 처음 보는 양식입니다({EVENT_TYPES_HINT}). 새 양식이면 CLAUDE.md §5 절차를 따라 주세요.")
+
+
+def _img_stem(src, page_dir):
+    """이미지 주소 → 저장소 기준 경로(확장자·?v= 뺀 것). 상대 경로는 페이지 폴더 기준."""
+    s = src.split("?")[0].split("#")[0]
+    s = s.replace(SITE, "/", 1)
+    s = s.lstrip("/") if s.startswith("/") else (page_dir / s).relative_to(ROOT).as_posix()
+    return re.sub(r"\.(jpe?g|png|webp|avif)$", "", s, flags=re.I)
+
+
+def check_card_photo(where, e, page_path):
+    """thumb·photo = 상세 페이지 첫 화면 대표 사진과 같은 사진인지 (CLAUDE.md events.json 칸 표)."""
+    html = strip_comments(page_path.read_text(encoding="utf-8"))
+    m = re.search(r"<main[\s\S]*", html)
+    imgs = [s for s in re.findall(r"<img\b[^>]*?\bsrc=\"([^\"]+)\"", m.group(0) if m else html)
+            if not s.split("?")[0].lower().endswith(".svg")]
+    if not imgs:
+        return
+    page_dir = page_path.parent
+    hero = _img_stem(imgs[0], page_dir)
+    if e.get("photo") and _img_stem(e["photo"], page_dir) != hero:
+        warn(where, f"photo가 상세 페이지 대표 사진({imgs[0]})과 다릅니다. 허브 카드와 상세 첫 화면이 같은 사진이어야 합니다.")
+    if e.get("thumb") and _img_stem(e["thumb"], page_dir) not in (hero, hero + "-thumb"):
+        warn(where, f"thumb가 상세 페이지 대표 사진({imgs[0]})의 작은 사본이 아닙니다. 같은 폴더에 '<이름>-thumb.webp'로 만들어 주세요.")
 
 
 def check_files():
