@@ -43,10 +43,12 @@ def link_href(h, rel_hreflang):
 
 
 def hero_image(h, page_path):
-    """<main> 안 첫 사진(svg 제외) → 절대주소. 없으면 og:image."""
+    """<main> 안 첫 사진(svg 제외) → 절대주소. <main>이 없으면 <body> 첫 사진, 사진이 없으면 og:image."""
     body = re.sub(r"<!--[\s\S]*?-->", "", h)
-    m = re.search(r"<main[\s\S]*", body)
-    for src in re.findall(r'<img\b[^>]*?\bsrc="([^"]+)"', m.group(0) if m else ""):
+    body = re.sub(r"<(script|style)\b[\s\S]*?</\1>", "", body)
+    body = re.sub(r"<template\b[\s\S]*?</template>", "", body)
+    m = re.search(r"<main[\s\S]*", body) or re.search(r"<body[\s\S]*", body)
+    for src in re.findall(r'<img\b[^>]*?\bsrc=["\']([^"\']+)', m.group(0) if m else ""):
         if src.split("?")[0].lower().endswith(".svg"):
             continue
         if src.startswith("http"):
@@ -129,10 +131,38 @@ def apply(h, e, page_path, ko):
     out = LD_RE.sub("", h)
     out = out.replace("</head>", render(build(e, out, page_path, ko)) + "\n</head>", 1)
     if 'hreflang="x-default"' not in out:
-        en = link_href(out, 'alternate" hreflang="en')
-        out = re.sub(r'(<link rel="alternate" hreflang="ko" href="[^"]*">)',
-                     lambda m: m.group(1) + f'\n<link rel="alternate" hreflang="x-default" href="{en}">', out, count=1)
+        en = link_href(out, 'alternate" hreflang="en') or SITE + e["page"].split("/")[0] + "/"
+        line = f'<link rel="alternate" hreflang="x-default" href="{en}">'
+        m = (re.search(r'<link rel="alternate" hreflang="ko" href="[^"]*">', out)
+             or re.search(r'<link rel="alternate" hreflang="en" href="[^"]*">', out)
+             or re.search(r'<link rel="canonical" href="[^"]*">', out))
+        out = out[:m.end()] + "\n" + line + out[m.end():] if m else out.replace("</head>", line + "\n</head>", 1)
     return out
+
+
+EN_MEET = "Book a 30-minute online meeting with the CUBIG team."
+KO_MEET = "CUBIG 팀과 30분 온라인 미팅을 신청할 수 있습니다."
+FULL_MONTH = dict(Jan="January", Feb="February", Mar="March", Apr="April", May="May", Jun="June", Jul="July",
+                  Aug="August", Sep="September", Oct="October", Nov="November", Dec="December")
+
+
+def augment_desc(e, text, ko):
+    """짧은 설명 보강(사실은 events.json 날짜·페이지의 미팅 버튼만): 영어 110자 미만 = 날짜 + 미팅 문장(155자 안), 한국어 70자 미만 = 미팅 문장."""
+    text = (text or "").strip()
+    if ko:
+        return f"{text} {KO_MEET}".strip() if len(text) < 70 else text
+    if len(text) >= 110:
+        return text
+    date = e.get("date") or ""
+    if not date and e.get("start"):
+        from upgrade_detail_v2 import fmt  # 허브와 같은 날짜 표기
+        date = fmt(e, False)
+    date = re.sub(r"\b(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\b", lambda m: FULL_MONTH[m.group(1)], date)
+    if date and not re.search(r"(January|February|March|April|May|June|July|August|September|October|November|December) \d{4}", text):
+        text = f"{text} {'Aired ' if e.get('type') == 'live' else ''}{date}.".strip()
+    if len(text) < 110 and len(text) + 1 + len(EN_MEET) <= 155:
+        text = f"{text} {EN_MEET}"
+    return text
 
 
 def pages(events, only=None):

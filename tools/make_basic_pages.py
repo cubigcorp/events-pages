@@ -115,7 +115,7 @@ def build(e, ko, events):
     pool.sort(key=lambda x: abs(int(x['start'].replace('-', '')) - int(e['start'].replace('-', ''))))
     cards = '\n'.join(card(x, ko) for x in pool[:2])
     with_line = ' · '.join(v for v in [w, badge] if v)
-    desc = summary or title
+    desc = page_seo.augment_desc(e, summary or title, ko)  # 짧으면 날짜·미팅 문장 보강
     og = (BASE.rstrip('/') + photo) if photo.startswith('/') else photo
     lang = 'ko' if ko else 'en'
     cta = f' data-cta="{meet}"'
@@ -200,10 +200,8 @@ def add_sitemap(urls):
         open(p, 'w', encoding='utf-8').write(sm.replace('</urlset>', add + '</urlset>', 1))
 
 
-def main():
-    ap = argparse.ArgumentParser()
-    ap.add_argument('--dry-run', action='store_true')
-    a = ap.parse_args()
+def make_missing(dry_run=False):
+    """빠진 영·한 상세 페이지를 만들고 (page 칸 채운 행사 id 목록, 만든 파일 목록)을 돌려줌. autofix_pages.py도 씀."""
     path = os.path.join(ROOT, 'events.json')
     raw = open(path, encoding='utf-8').read()
     data = json.loads(raw)
@@ -219,16 +217,24 @@ def main():
             if os.path.exists(f):
                 continue
             made.append(os.path.relpath(f, ROOT))
-            if not a.dry_run:
+            if not dry_run:
                 os.makedirs(os.path.dirname(f), exist_ok=True)
                 open(f, 'w', encoding='utf-8').write(page_seo.apply(page_blocks.apply(build(e, ko, events), e, ko), e, Path(f), ko))
-    if filled and not a.dry_run:
+    if filled and not dry_run:
         # page 칸만 글자 그대로 바꿈(나머지 줄 모양 유지)
         for i in filled:
             raw = re.sub(r'("id": "%s",.*?"page": )null' % re.escape(i), r'\1"%s/index.html"' % i, raw, count=1, flags=re.S)
         open(path, 'w', encoding='utf-8').write(raw)
-    if made and not a.dry_run:
+    if made and not dry_run:
         add_sitemap([BASE + os.path.dirname(m).rstrip('/') + '/' for m in made])
+    return filled, made
+
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument('--dry-run', action='store_true')
+    a = ap.parse_args()
+    filled, made = make_missing(a.dry_run)
     print('page 칸 채움:', filled or '없음')
     print('새로 만든 페이지:' if not a.dry_run else '만들 페이지:', made or '없음')
 

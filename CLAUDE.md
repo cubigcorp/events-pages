@@ -27,12 +27,14 @@
 
 | 자동으로 고침(없을 때만 채움) | 경고만(사람이 고침) |
 |---|---|
-| canonical · hreflang en/ko/x-default · title · description · OG/트위터 · 아이콘 | events.json에 그 페이지 줄이 없음(자동 정리 불가) |
+| canonical · hreflang en/ko/x-default · description(짧으면 날짜·미팅 문장 보강) · OG/트위터 · 아이콘 | events.json에 그 페이지 줄이 없음(자동 정리 불가) |
+| title: `<행사명> \| CUBIG Events` / `\| CUBIG 행사` 형식이 아니면 events.json 기준으로 다시 씀 | 한국어 소개(`summary_ko`) 없이 만든 한국어 기본 페이지 |
+| 영·한 중 빠진 페이지 = 기본 양식으로 생성(`make_basic_pages.py`) | 사진에 alt 없음 |
 | GA4 ⑤ 추적 코드 블록 | 대표 행사 여부(`major`) 없음(다가오는 행사) |
 | 공홈 머리글·바닥글·버튼 측정 연결(`cubig-site.css`·`ev-site.css`·`cubig-site.js`·`ev-nav.js`) | 본문 밖 자체 머리글·바닥글(`<header>`·`<footer>`) — 지우지 않음 |
 | 검색용 행사 정보 JSON-LD(events.json 기준으로 항상 다시 씀) | 금지 표현·영어 엠대시·큰따옴표(§11) |
 | 기본 양식 페이지의 부스 위치·현장 기록 자리(`<!-- ev:… -->` 사이만) | 끝난 행사에 남은 예정 문구 |
-| events.json `photo`가 비면 상세 첫 대표 사진, `thumb`가 없으면 640px 작은 사본 | 설명 길이 · 대표 사진과 카드 사진이 다름 |
+| events.json `photo`가 비면 상세 첫 대표 사진(`<main>`이 없으면 본문 첫 사진), `thumb`가 없으면 640px 작은 사본 | 설명 길이 · 대표 사진과 카드 사진이 다름 |
 | sitemap.xml에 없는 검색 노출 페이지 추가 | |
 
 - 본문(`<main>`)의 디자인·문구는 자동으로 바꾸지 않습니다. 버튼 클릭 측정은 링크 주소로 잡으므로(`ev-nav.js`) 사람이 만든 HTML에 측정 속성을 따로 붙일 필요가 없습니다.

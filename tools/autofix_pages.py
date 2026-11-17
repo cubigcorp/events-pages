@@ -28,6 +28,7 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+import make_basic_pages  # noqa: E402
 import page_blocks  # noqa: E402
 import page_seo  # noqa: E402
 
@@ -90,9 +91,15 @@ def fix_head(h, e, rel_page, ko, done):
         h = add_to_head(h, f'<link rel="alternate" hreflang="en" href="{en}">', True); done.append("hreflang en")
     if 'hreflang="ko"' not in head and (ROOT / "ko" / rel_page).exists():
         h = add_to_head(h, f'<link rel="alternate" hreflang="ko" href="{kr}">', True); done.append("hreflang ko")
-    if not re.search(r"<title>[^<]{3,}</title>", head):
-        h = re.sub(r"<title>\s*</title>\n?", "", h)
-        h = add_to_head(h, f"<title>{esc(title)} | {SUFFIX[1 if ko else 0]}</title>", True); done.append("title")
+    suffix = " | " + SUFFIX[1 if ko else 0]
+    want_title = f"<title>{esc(title)}{suffix}</title>"
+    tm = re.search(r"<title>([^<]*)</title>", head)
+    if not tm or not htmllib.unescape(tm.group(1)).strip().endswith(suffix):
+        # 제목 형식 = '<행사명> | CUBIG Events' / '| CUBIG 행사' (CLAUDE.md §8). 형식이 아니면 events.json 기준으로 다시 씀
+        h = re.sub(r"<title>[^<]*</title>\n?", "", h, count=1)
+        h = add_to_head(h, want_title, True)
+        done.append("title(형식 맞춤)" if tm and tm.group(1).strip() else "title")
+    desc = page_seo.augment_desc(e, desc, ko)  # 짧으면 날짜·미팅 문장 보강(사실은 events.json·페이지 버튼만)
     if desc and not re.search(r'<meta name="description"', head):
         h = add_to_head(h, f'<meta name="description" content="{esc(desc)}">', True); done.append("description")
     img = page_seo.hero_image(h, ROOT / ("ko" if ko else "") / rel_page)
@@ -158,6 +165,8 @@ def fix_event_data(e, raw, done_all):
     """photo가 비면 상세 대표 사진, thumb가 없으면 작은 사본."""
     page = ROOT / e["page"]
     if not page.exists():
+        page = ROOT / "ko" / e["page"]
+    if not page.exists():
         return raw
     if not e.get("photo"):
         img = page_seo.hero_image(page.read_text(encoding="utf-8"), page)
@@ -197,8 +206,18 @@ def main():
     events = [e for e in json.loads(raw).get("events", []) if e.get("page")]
     done_all, per_page, sitemap_urls = [], {}, []
 
+    # 대표 사진·썸네일을 먼저 채움(새로 만들 기본 페이지도 같은 사진을 쓰게)
+    if not a.dry_run:
+        for e in events:
+            raw = fix_event_data(e, raw, done_all)
+        ev_path.write_text(raw, encoding="utf-8")
+    # 영·한 중 빠진 페이지는 기본 양식으로 만듦(모든 행사는 영·한 상세 페이지 — CLAUDE.md §3)
+    _, made = make_basic_pages.make_missing(a.dry_run)
+    if made:
+        done_all.append("기본 양식 페이지 생성(빠진 언어): " + ", ".join(made))
+        raw = ev_path.read_text(encoding="utf-8")
+        events = [e for e in json.loads(raw).get("events", []) if e.get("page")]
     for e in events:
-        raw = fix_event_data(e, raw, done_all) if not a.dry_run else raw
         for ko in (False, True):
             p = ROOT / ("ko" if ko else "") / e["page"]
             if not p.exists():
@@ -210,8 +229,10 @@ def main():
             if b != new:
                 done.append("부스 위치·현장 기록 자리")
             s = page_seo.apply(b, e, p, ko)
-            if s != b:
-                done.append("검색용 행사 정보(JSON-LD)·x-default")
+            if page_seo.LD_RE.sub("", s) != page_seo.LD_RE.sub("", b) and 'hreflang="x-default"' not in b:
+                done.append("hreflang x-default")
+            if page_seo.LD_RE.search(s).group(0) != (page_seo.LD_RE.search(b).group(0) if page_seo.LD_RE.search(b) else ""):
+                done.append("검색용 행사 정보(JSON-LD)")
             if s != h:
                 per_page[p.relative_to(ROOT).as_posix()] = done
                 if not a.dry_run:

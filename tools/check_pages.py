@@ -243,6 +243,10 @@ def check_events_json():
         for k, v in [("booth_map", e.get("booth_map"))] + [("photos", x) for x in (e.get("photos") or [])]:
             if isinstance(v, str) and v.startswith("/") and not (ROOT / v.lstrip("/")).exists():
                 err(where, f"{k} 파일이 없습니다: {v}")
+        ko_page = ROOT / "ko" / page if page else None
+        if (ko_page and ko_page.exists() and not e.get("summary_ko")
+                and 'name="ev-generated"' in ko_page.read_text(encoding="utf-8", errors="ignore")):
+            warn(where, "한국어 소개(summary_ko)가 없어 한국어 기본 페이지에 영어 글이 들어갔습니다. title_ko·summary_ko를 채운 뒤 ko/ 기본 페이지를 지우고 'python3 tools/make_basic_pages.py'로 다시 만들어 주세요.")
         if e.get("portal") and not str(e["portal"]).startswith("https://"):
             err(where, f"portal 주소는 https:// 로 시작해야 합니다: {e['portal']}")
         if e.get("photos") is not None and not isinstance(e.get("photos"), list):
@@ -281,6 +285,10 @@ def check_copy(r, html):
             warn(r, "영어 문구에 엠대시(\u2014)가 있습니다. 쉼표·마침표로 바꿔 주세요(CLAUDE.md §11).")
         if re.search(r"[\"\u201c\u201d]", text):
             warn(r, "영어 문구에 큰따옴표가 있습니다. 빼거나 작은따옴표로 바꿔 주세요(CLAUDE.md §11).")
+    for tag in re.findall(r"<img\b[^>]*>", main or whole):
+        if not re.search(r"\balt=", tag):
+            warn(r, f"사진에 alt(대체 글)가 없습니다: {tag[:90]} — 내용이 있는 사진은 설명을, 꾸밈용은 alt=\"\"를 넣어 주세요.")
+            break
     if main and re.search(r"<(header|footer)\b", whole.replace(main, "")):
         warn(r, "본문 밖에 자체 머리글·바닥글(<header>·<footer>)이 있습니다. 공홈 머리글·바닥글과 겹치니 빼 주세요(자동으로 지우지 않음).")
     slug = r[3:] if ko else r
@@ -337,11 +345,14 @@ LD_BLOCK = re.compile(r'<script type="application/ld\+json" id="ev-jsonld">([\s\
 
 
 def check_seo(e):
-    """행사 상세 페이지(영·한)의 검색용 정보: JSON-LD Event·x-default·설명 길이."""
+    """행사 상세 페이지(영·한)의 검색용 정보: JSON-LD Event·x-default·설명 길이. 영·한 둘 다 있어야 함."""
     import page_seo  # tools/ 안 (이 파일과 같은 폴더)
     for ko in (False, True):
         p = ROOT / ("ko" if ko else "") / e["page"]
         if not p.exists():
+            other = ROOT / ("" if ko else "ko") / e["page"]
+            if other.exists():
+                err(rel(other), f"{'한국어' if ko else '영어'}판({'ko/' if ko else ''}{e['page']})이 없습니다. 모든 행사는 영·한 상세 페이지가 있어야 합니다. 'python3 tools/make_basic_pages.py'로 기본 페이지를 만들어 주세요(PR 자동 정리도 만듦).")
             continue
         r, h = rel(p), p.read_text(encoding="utf-8")
         fix = f"python3 tools/page_seo.py {e['page'].split('/')[0]}"
