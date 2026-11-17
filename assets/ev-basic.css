@@ -137,3 +137,32 @@ a.ev-it:hover .ev-it__go i{transform:translateX(3px)}
 @media (prefers-reduced-motion:reduce){
   .ev-it__im img,.ev-it__go i,.more .link::after,.d-btn,.d-hero__ph img,.d-go i{transition:none}
 }
+
+/* ── 데이터 자리 (tools/page_blocks.py, events.json 값이 있을 때만 생김 · 2026-11-17) ──
+   부스 위치(.d-find) = booth_map·portal / 현장 기록(.d-record) = photos.
+   끝난 행사(html.is-past, ev-nav.js): [data-past-hide] 숨김, 현장 기록은 히어로 바로 아래로 옮겨짐. */
+.is-past [data-past-hide]{display:none !important}
+.d-find{padding:64px 0 0}
+.d-find + .wrap .d-body--one{padding-top:56px}
+.d-find__h,.d-record__h{font-size:clamp(22px,2vw,28px);line-height:1.2;letter-spacing:-.02em;font-weight:500;color:var(--h-ink);margin:0 0 20px}
+.d-find__in{display:flex;flex-direction:column;align-items:flex-start;gap:16px}
+.d-find__map{position:relative;display:block;width:100%;max-width:760px;border:1px solid var(--h-line-2);border-radius:var(--h-r);overflow:hidden;background:#fff;text-decoration:none}
+.d-find__map img{display:block;width:100%;height:auto;max-height:520px;object-fit:contain;background:#fff}
+.d-find__zoom{position:absolute;right:12px;bottom:12px;display:inline-flex;align-items:center;height:32px;padding:0 12px;border-radius:8px;background:rgba(22,22,26,.78);color:#fff;font-size:13px;font-weight:500}
+.d-find__map:hover .d-find__zoom{background:var(--h-ink)}
+.d-record{padding:var(--h-py) 0;border-top:1px solid var(--h-line-2);background:#fff}
+.d-record__grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.d-record__grid[data-n="1"]{grid-template-columns:minmax(0,760px)}
+.d-record__grid[data-n="2"]{grid-template-columns:repeat(2,minmax(0,1fr))}
+.d-record__grid[data-n="3"]{grid-template-columns:repeat(3,minmax(0,1fr))}
+.d-record__ph{display:block;aspect-ratio:4/3;border-radius:var(--h-r);overflow:hidden;background:var(--h-line)}
+.d-record__ph img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .5s var(--h-ease)}
+.d-record__ph:hover img{transform:scale(1.03)}
+.d-record__cr{margin:12px 0 0;font-size:12px;color:var(--h-soft)}
+.is-past .d-hero + .d-record{border-top:0;padding:56px 0 0;background:transparent}
+@media (max-width:759px){
+  .d-find{padding-top:48px}
+  .d-record__grid,.d-record__grid[data-n]{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .d-record__grid[data-n="1"]{grid-template-columns:minmax(0,1fr)}
+}
+@media (prefers-reduced-motion:reduce){ .d-record__ph img{transition:none} }

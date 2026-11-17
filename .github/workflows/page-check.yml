@@ -1,23 +1,105 @@
-# PR마다 페이지 규칙을 자동 검사합니다 (tools/check_pages.py, 로컬 검사와 같음).
+# PR마다: ① 자동 정리(tools/autofix_pages.py — 머리·공통 틀·측정·데이터 연결만, 본문 디자인은 그대로)를 PR 브랜치에 커밋
+#         ② 페이지 규칙 검사(tools/check_pages.py, 로컬 검사와 같음) ③ 고친 것·남은 경고를 PR 댓글 하나로 알림.
+# main은 사람이 합칩니다. 다른 저장소(포크)에서 온 PR은 쓰기 권한이 없어 검사만 합니다.
 name: Page check
 on:
   pull_request:
   push:
     branches: [main]
 permissions:
-  contents: read
+  contents: write
+  pull-requests: write
+  checks: write
+concurrency:
+  group: page-check-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
 jobs:
   check:
     name: Page check
     runs-on: ubuntu-latest
+    env:
+      SAME_REPO: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository }}
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: 페이지 검사
+          ref: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.ref || github.ref }}
+          repository: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name || github.repository }}
+
+      - name: 자동 정리 (같은 저장소 PR만)
+        id: fix
+        if: env.SAME_REPO == 'true'
         run: |
-          if [ "${{ github.event_name }}" = "pull_request" ]; then
-            python3 tools/check_pages.py --base "origin/${{ github.base_ref }}"
+          pip install --quiet pillow
+          python3 tools/autofix_pages.py --report /tmp/fix.md
+          if [ -n "$(git status --porcelain)" ]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add -A
+            git commit -q -m "자동 정리: 머리·공통 틀·측정·검색 정보 (tools/autofix_pages.py)"
+            git push -q origin HEAD:${{ github.event.pull_request.head.ref }}
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+            echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
           else
-            python3 tools/check_pages.py
+            echo "changed=false" >> "$GITHUB_OUTPUT"
           fi
+
+      - name: 페이지 검사
+        id: check
+        run: |
+          set +e
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            git fetch -q origin "${{ github.base_ref }}"
+            python3 tools/check_pages.py --base "origin/${{ github.base_ref }}" > /tmp/check.txt 2>&1
+          else
+            python3 tools/check_pages.py > /tmp/check.txt 2>&1
+          fi
+          code=$?
+          cat /tmp/check.txt
+          echo "code=$code" >> "$GITHUB_OUTPUT"
+
+      # 봇이 올린 커밋에는 검사가 다시 돌지 않으므로, 같은 결과를 그 커밋에 'Page check'로 붙입니다(main 합치기 조건).
+      - name: 자동 정리 커밋에 검사 결과 붙이기
+        if: steps.fix.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          concl=$([ "${{ steps.check.outputs.code }}" = "0" ] && echo success || echo failure)
+          tail -c 60000 /tmp/check.txt > /tmp/check-tail.txt
+          jq -n --arg sha "${{ steps.fix.outputs.sha }}" --arg c "$concl" --rawfile t /tmp/check-tail.txt \
+            '{name:"Page check", head_sha:$sha, status:"completed", conclusion:$c, output:{title:"Page check", summary:"자동 정리 뒤 검사 결과", text:$t}}' \
+            | gh api repos/${{ github.repository }}/check-runs --input - > /dev/null
+
+      - name: PR 댓글 (하나만 두고 갱신)
+        if: env.SAME_REPO == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR: ${{ github.event.pull_request.number }}
+        run: |
+          {
+            echo "<!-- page-check -->"
+            echo "### 페이지 자동 정리·검사"
+            echo
+            if [ "${{ steps.fix.outputs.changed }}" = "true" ]; then
+              echo "**자동으로 고쳐서 이 PR에 커밋했습니다** (본문 디자인·문구는 그대로). 로컬에서 이어 작업하면 먼저 \`git pull\` 해 주세요."
+              echo
+              cat /tmp/fix.md
+            else
+              echo "자동으로 고칠 것 없음."
+            fi
+            echo
+            echo "**검사 결과** (✖ 오류는 고쳐야 합칠 수 있음 · ⚠ 경고는 사람이 판단)"
+            echo
+            echo '```'
+            tail -c 50000 /tmp/check.txt
+            echo '```'
+          } > /tmp/comment.md
+          id=$(gh api "repos/${{ github.repository }}/issues/$PR/comments" --paginate --jq '.[] | select(.body | startswith("<!-- page-check -->")) | .id' | head -1)
+          if [ -n "$id" ]; then
+            gh api -X PATCH "repos/${{ github.repository }}/issues/comments/$id" -F body=@/tmp/comment.md > /dev/null
+          else
+            gh api "repos/${{ github.repository }}/issues/$PR/comments" -F body=@/tmp/comment.md > /dev/null
+          fi
+
+      - name: 검사 결과
+        run: exit ${{ steps.check.outputs.code }}

@@ -18,6 +18,7 @@ import argparse, html, json, os, re, sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from upgrade_detail_v2 import card, fmt, CITY_KO  # 허브와 같은 카드·날짜·지명 규칙
 import page_seo  # 검색용 JSON-LD·x-default (page_seo.py)
+import page_blocks  # 부스 위치·현장 기록 자리 (page_blocks.py)
 from pathlib import Path
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -220,7 +221,7 @@ def main():
             made.append(os.path.relpath(f, ROOT))
             if not a.dry_run:
                 os.makedirs(os.path.dirname(f), exist_ok=True)
-                open(f, 'w', encoding='utf-8').write(page_seo.apply(build(e, ko, events), e, Path(f), ko))
+                open(f, 'w', encoding='utf-8').write(page_seo.apply(page_blocks.apply(build(e, ko, events), e, ko), e, Path(f), ko))
     if filled and not a.dry_run:
         # page 칸만 글자 그대로 바꿈(나머지 줄 모양 유지)
         for i in filled:

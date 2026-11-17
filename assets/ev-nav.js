@@ -94,6 +94,13 @@
       if(el.tagName==='A' && el.getAttribute('data-booking-after')!=='hide'){ el.href=el.getAttribute('data-booking-after')||meet; el.removeAttribute('target'); el.setAttribute('data-booking-ended',''); }
       else { el.hidden=true; el.style.display='none'; }
     });
+    /* 끝난 행사 = '현장 기록' 모드(11-17 윤주님 피드백 3·현세): html.is-past → [data-past-hide](부스 지도 등) 숨김,
+       현장 기록 사진(.d-record)을 히어로 바로 아래로 올림. 기본 양식 페이지(page_blocks.py)에만 해당 블록이 있음. */
+    if(me && t>d(me.end||me.start)){
+      document.documentElement.classList.add('is-past');
+      var rec=document.querySelector('.d-record'), hero=document.querySelector('.d-hero');
+      if(rec && hero) hero.parentNode.insertBefore(rec, hero.nextSibling);
+    }
   }
 
   function mount(data){

@@ -19,6 +19,25 @@
 6. 커밋 → 브랜치 푸시 → `gh pr create`. 본문은 `.github/pull_request_template.md` 체크리스트를 채우고 데스크톱·모바일 스크린샷을 붙입니다.
 7. PR이 승인돼 합쳐지면 1분 안팎으로 공개됩니다. 승인 전에는 공개되지 않습니다.
 
+## 0-1. 두 가지 작업 경로 (2026-11-17 현세)
+
+- **① Claude가 저장소에서 직접 작업**: 이 문서 순서대로 만듭니다(틀 페이지 복사 또는 `make_basic_pages.py`).
+- **② 다른 도구(피그마·ChatGPT·손코딩 등)로 만든 HTML을 폴더에 넣기만**: `폴더이름/index.html`·`ko/폴더이름/index.html` + `events.json` 한 줄을 넣고 PR을 올리면, GitHub 자동 검사가 `tools/autofix_pages.py`로 정리해 **PR 브랜치에 커밋**하고 결과를 PR 댓글 하나로 알립니다. main은 사람이 합칩니다.
+- 두 경로 모두 PR에서 같은 자동 정리·검사를 거칩니다. 로컬에서 미리 돌려도 됩니다: `python3 tools/autofix_pages.py` → `python3 tools/check_pages.py`.
+
+| 자동으로 고침(없을 때만 채움) | 경고만(사람이 고침) |
+|---|---|
+| canonical · hreflang en/ko/x-default · title · description · OG/트위터 · 아이콘 | events.json에 그 페이지 줄이 없음(자동 정리 불가) |
+| GA4 ⑤ 추적 코드 블록 | 대표 행사 여부(`major`) 없음(다가오는 행사) |
+| 공홈 머리글·바닥글·버튼 측정 연결(`cubig-site.css`·`ev-site.css`·`cubig-site.js`·`ev-nav.js`) | 본문 밖 자체 머리글·바닥글(`<header>`·`<footer>`) — 지우지 않음 |
+| 검색용 행사 정보 JSON-LD(events.json 기준으로 항상 다시 씀) | 금지 표현·영어 엠대시·큰따옴표(§11) |
+| 기본 양식 페이지의 부스 위치·현장 기록 자리(`<!-- ev:… -->` 사이만) | 끝난 행사에 남은 예정 문구 |
+| events.json `photo`가 비면 상세 첫 대표 사진, `thumb`가 없으면 640px 작은 사본 | 설명 길이 · 대표 사진과 카드 사진이 다름 |
+| sitemap.xml에 없는 검색 노출 페이지 추가 | |
+
+- 본문(`<main>`)의 디자인·문구는 자동으로 바꾸지 않습니다. 버튼 클릭 측정은 링크 주소로 잡으므로(`ev-nav.js`) 사람이 만든 HTML에 측정 속성을 따로 붙일 필요가 없습니다.
+- 자동 정리 커밋이 올라오면 로컬에서 이어 작업하기 전에 `git pull` 합니다.
+
 ## 1. 구조
 
 ```
@@ -42,6 +61,8 @@ events-pages/
 ├─ tools/upgrade_detail_v2.py 옛 짧은 기록형 페이지를 v2 로 바꿈(<main> 안만 고침, 다른 행사 카드는 events.json 에서)
 ├─ tools/make_basic_pages.py  상세 페이지가 없는 행사에 영·한 기본 페이지를 만듦(§3)
 ├─ tools/page_seo.py         상세 페이지에 검색용 행사 정보(JSON-LD Event)·hreflang x-default 를 넣음(§8)
+├─ tools/page_blocks.py      기본 양식 페이지의 데이터 자리(부스 위치·현장 기록, events.json 값이 있을 때만)
+├─ tools/autofix_pages.py    PR 자동 정리(§0-1) — 머리·공통 틀·측정·데이터 연결만 맞춤
 └─ .claude/               팀 공용 Claude Code 설정 (/event-page 스킬, 금지 동작, 미리보기)
 ```
 
@@ -83,7 +104,7 @@ events-pages/
 
 1. 양식을 정하고 §2의 틀 페이지를 `폴더이름/index.html` 로 복사합니다. 한국어판은 `ko/폴더이름/index.html` 로 만듭니다(영·한 서로 `hreflang` 연결).
 2. 제목·설명·canonical·OG·본문·사진을 그 행사 내용으로 모두 바꿉니다. 틀 행사의 이름·날짜가 남아 있지 않은지 확인합니다.
-3. `events.json` 에 한 줄 추가합니다(§6). 디자인 페이지가 아직 없으면 `page` 없이 넣고 `python3 tools/make_basic_pages.py` 로 기본 페이지를 만듭니다(위 상자). 모든 행사는 영·한 상세 페이지가 있어야 합니다.
+3. `events.json` 에 한 줄 추가합니다(§6). 대표 행사 여부(`major`)를 모르면 작성자에게 묻고 `true`/`false`로 적습니다. 디자인 페이지가 아직 없으면 `page` 없이 넣고 `python3 tools/make_basic_pages.py` 로 기본 페이지를 만듭니다(위 상자). 모든 행사는 영·한 상세 페이지가 있어야 합니다.
 4. `sitemap.xml` 에 영어·한국어 주소를 추가합니다(기본 페이지 생성 도구는 자동으로 추가).
 5. 현장 미팅 버튼은 events.json 의 end 날짜가 지나면 자동으로 처리됩니다. 기본 틀 페이지는 버튼을 숨기고(옆에 온라인 미팅 링크가 있으므로), 큰 행사 페이지는 상시 미팅으로 바꿉니다. 따로 날짜를 적지 않아도 됩니다(§9-1).
 6. 사진이 없으면 §6-2 조건으로 찾습니다.
@@ -132,7 +153,11 @@ events-pages/
 | `kind` | | 세부 분류: `exhibition` · `pitch` · `award` · `live` |
 | `label` · `label_ko` · `date` | | 연혁에 보이는 이름 · 날짜 표기 (없으면 title·start로 만듦) |
 | `city` · `cc` · `intl` | | 도시 · 나라 코드 · 해외 여부(해외 도장) |
-| `major` | | 대표 행사 표시(`true`). 해외 대형 전시·컨퍼런스, 국내라도 큰 전시. 공홈 /events 예정 영역(배너·예정 카드)에서 먼저 보이고, 같은 급끼리는 날짜순. 없으면 날짜순. 기준이 애매하면 마케팅팀(현세) 확인 |
+| `major` | 다가오는 행사는 ✓ | 대표 행사 여부 `true`/`false`. 대표 = 해외 대형 전시·컨퍼런스, 국내라도 큰 전시. 공홈 /events 예정 영역(배너·예정 카드)에서 `true`가 먼저 보이고, 같은 급끼리는 날짜순. **새 행사를 넣을 때 값을 모르면 작성자에게 묻고 꼭 적습니다**(빠지면 `check_pages.py` 경고). 기준이 애매하면 마케팅팀(현세) 확인 |
+| `organizer` · `organizer_url` | | 행사 주최자 이름·주소. 검색용 정보(JSON-LD)에 들어감. 공식 사이트로 확인된 것만(추측 ❌) |
+| `booth_map` | | 부스 위치 지도 이미지 경로(예 `/assets/media/<행사>/booth-map.webp`). 기본 양식 페이지에 '부스 위치' 자리가 생기고, 누르면 크게 열림. 행사가 끝나면 자동으로 숨김 |
+| `portal` · `portal_label` · `portal_label_ko` | | 행사 공식 포털의 CUBIG 프로필 주소와 링크 글자(없으면 'CUBIG on the event portal' / '행사 포털의 CUBIG 프로필') |
+| `photos` | | 현장 사진 목록(`["/assets/media/photos/<행사>/01.jpg", …]`). 기본 양식 페이지에 '현장 기록'으로 들어가고, 행사가 끝나면 히어로 바로 아래로 올라옴 |
 | `ko` | | 쓰지 않음(2026-11-17부터 모든 행사 영·한 둘 다 표시) |
 | `src` | | 보도자료·행사 공식 사이트·영상 주소 (기본 페이지 버튼 이름이 주소에 따라 정해짐) |
 | `card_title` · `card_title_ko` | | 메인 카드의 짧은 이름 |

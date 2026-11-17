@@ -14,6 +14,7 @@ description: events.cubig.ai 행사·On air 페이지를 만들거나 고칠 때
 
 ## 2. 필요한 정보 받기 (없으면 묻기, 지어내지 않기)
 - 행사·방송 이름, 날짜(현지), 장소 또는 채널, 폴더 이름(영어 소문자·숫자·하이픈)
+- 대표 행사인지(`major` true/false — 모르면 묻기), 부스 위치 지도·행사 포털 프로필 주소(있으면)
 - 양식: On the floor(`exhibition`) / On stage(`stage`) / On air(`live`)
 - 사진: 우리 팀 사진·보도자료 이미지가 없으면 CLAUDE.md §6-2 조건으로 찾기
 - 한국어판은 항상 같이 만듦(국문·영문 전용 없음), 검색 노출(다가오는 행사 = 켬이 기본)
@@ -29,6 +30,7 @@ description: events.cubig.ai 행사·On air 페이지를 만들거나 고칠 때
 - 고치지 않을 것 → §7 (CNAME·⑤ 추적 코드·검색 설정·공통 파일 무단 수정)
 
 ## 4. 끝내기 전
+- [ ] 다른 도구로 만든 HTML을 받았으면 `python3 tools/autofix_pages.py`(머리·공통 틀·측정·검색 정보 자동 정리, CLAUDE.md §0-1)
 - [ ] `python3 tools/page_seo.py <폴더이름>` (검색용 JSON-LD·x-default — 디자인 페이지를 새로 넣었거나 events.json·설명·대표 사진을 바꿨을 때)
 - [ ] `python3 tools/check_pages.py` 오류 0건
 - [ ] `python3 -m http.server 8090` (저장소 루트) → 데스크톱 1440px·모바일 375px 확인, 스크린샷

@@ -60,7 +60,7 @@ events-pages/
 │   └─ hero.webp          ← 이 페이지에서만 쓰는 이미지
 ├─ ko/websummit-2026/     ← 같은 페이지의 한국어판
 ├─ meet/                  ← 옛 미팅 주소(cubig.ai/events/meet/ 로 넘김)
-├─ tools/                 ← 검사 도구(check_pages.py)·기본 페이지 생성(make_basic_pages.py)·검색용 행사 정보(page_seo.py)·공홈 머리글 가져오기 등
+├─ tools/                 ← 검사 도구(check_pages.py)·기본 페이지 생성(make_basic_pages.py)·검색용 행사 정보(page_seo.py)·PR 자동 정리(autofix_pages.py)·공홈 머리글 가져오기 등
 └─ .claude/               ← 팀 공용 Claude Code 설정 (모두 같은 순서로 일하게 함)
 ```
 
@@ -143,7 +143,9 @@ PR을 올리면 GitHub가 자동으로 검사합니다(PR 화면 아래 **Page c
 | ❌ 빨강 | 고쳐야 하는 오류가 있음. **빨간불이면 승인해도 합쳐지지 않습니다.** **Details** 를 누르면 무엇이 문제인지 한국어로 나옵니다 |
 | ⚠️ 경고 | 통과는 했지만 확인할 것(공통 파일 변경, 큰 이미지 등) |
 
-검사 항목: ⑤ 추적 코드 · 다른 추적 코드 추가 여부 · 검색 설정(canonical·사이트맵·noindex·x-default) · 검색용 행사 정보(JSON-LD Event) · 설명 길이 · 허브 카드 사진 = 상세 대표 사진 · 자리표시 남음 · 제품 링크의 UTM · 예약 링크 종료일 · 제품 이름 표기 · 이미지 크기 · `events.json` 형식 · 키·토큰처럼 보이는 문자열 · 공통 파일 변경
+PR을 올리면 먼저 자동 정리(머리·공통 틀·측정·검색 정보·썸네일·사이트맵 — 본문 디자인은 그대로, CLAUDE.md §0-1)가 PR 브랜치에 커밋되고, 결과가 PR 댓글 하나로 올라옵니다. 그래서 다른 도구로 만든 HTML도 폴더에 넣고 events.json 한 줄만 쓰면 됩니다.
+
+검사 항목: ⑤ 추적 코드 · 다른 추적 코드 추가 여부 · 검색 설정(canonical·사이트맵·noindex·x-default) · 검색용 행사 정보(JSON-LD Event) · 설명 길이 · 허브 카드 사진 = 상세 대표 사진 · 대표 행사 여부(major) · 금지 표현·엠대시·큰따옴표 · 끝난 행사의 예정 문구 · 자체 머리글·바닥글 · 자리표시 남음 · 제품 링크의 UTM · 예약 링크 종료일 · 제품 이름 표기 · 이미지 크기 · `events.json` 형식 · 키·토큰처럼 보이는 문자열 · 공통 파일 변경
 
 ---
 

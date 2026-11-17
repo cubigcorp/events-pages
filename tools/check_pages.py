@@ -54,6 +54,7 @@ EVENT_REQUIRED = ["id", "type", "title", "start"]
 EVENT_TYPES = ("exhibition", "stage", "live")  # 새 양식을 만들면 여기에도 추가(CLAUDE.md §5)
 EVENT_TYPES_HINT = "README·CLAUDE.md §2 양식 표"
 DATE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
+TODAY = __import__("datetime").date.today().isoformat()
 
 errors, warns = [], []
 _EVENT_PAGES = None
@@ -193,6 +194,7 @@ def check_html(p, sitemap):
     text = re.sub(r"<(script|style)[\s\S]*?</\1>|<[^>]+>", " ", html)
     if WRONG_NAME.search(text):
         err(r, "제품 이름 표기: Syntitan 으로 써 주세요.")
+    check_copy(r, html)
 
     # 비밀 값
     for pat, name in SECRET_PATTERNS:
@@ -238,8 +240,73 @@ def check_events_json():
             check_card_photo(where, e, ROOT / page)
         if page:
             check_seo(e)
+        for k, v in [("booth_map", e.get("booth_map"))] + [("photos", x) for x in (e.get("photos") or [])]:
+            if isinstance(v, str) and v.startswith("/") and not (ROOT / v.lstrip("/")).exists():
+                err(where, f"{k} 파일이 없습니다: {v}")
+        if e.get("portal") and not str(e["portal"]).startswith("https://"):
+            err(where, f"portal 주소는 https:// 로 시작해야 합니다: {e['portal']}")
+        if e.get("photos") is not None and not isinstance(e.get("photos"), list):
+            err(where, "photos는 사진 경로 목록([\"/assets/...\", ...])이어야 합니다.")
+        last = str(e.get("end") or e.get("start") or "")
+        if DATE.match(last) and last >= TODAY and "major" not in e:
+            warn(where, "다가오는 행사인데 대표 행사 여부(major)가 없습니다. 작성자에게 물어 true/false로 적어 주세요(CLAUDE.md §6).")
         if e.get("type") and e["type"] not in EVENT_TYPES:
             warn(where, f"type '{e['type']}'는 처음 보는 양식입니다({EVENT_TYPES_HINT}). 새 양식이면 CLAUDE.md §5 절차를 따라 주세요.")
+
+
+# 고칠 수 없어 사람에게 알리는 것 (PR 자동 정리 뒤에도 남으면 PR 댓글에 보임, CLAUDE.md §11)
+FORBIDDEN = re.compile(r"zero exposure|zero access|100% safe|guaranteed compliance|mathematically impossible|zero risk|"
+                       r"\b(?:revolutionary|world'?s best|only solution|next[- ]generation)\b|"
+                       r"데이터가 전혀 나가지 않|혁신적|차세대|업계 최고|유일한 솔루션", re.I)
+FUTURE_EN = re.compile(r"\b(?:will (?:exhibit|be at|join|attend|present|showcase|demo)|see you (?:at|in)|visit us at|join us at|come (?:see|meet) us|meet us at)\b", re.I)
+FUTURE_KO = re.compile(r"예정입니다|에서 만나요|부스로 오세요|찾아 주세요|방문해 주세요|만나 뵙겠습니다")
+NON_EVENT_DIRS = {"all", "meet", "assets", "tools"}
+
+
+def _main_text(html):
+    h = re.sub(r"<(script|style)[\s\S]*?</\1>", " ", html)
+    m = re.search(r"<main[\s\S]*?</main>", h)
+    return (m.group(0) if m else ""), h
+
+
+def check_copy(r, html):
+    main, whole = _main_text(html)
+    text = re.sub(r"<[^>]+>", " ", main)
+    ko = r.startswith("ko/")
+    m = FORBIDDEN.search(text)
+    if m:
+        warn(r, f"금지 표현 '{m.group(0)}'이(가) 있습니다(CLAUDE.md §11). 바꿔 주세요.")
+    if not ko and r != "index.html":
+        if "\u2014" in text:
+            warn(r, "영어 문구에 엠대시(\u2014)가 있습니다. 쉼표·마침표로 바꿔 주세요(CLAUDE.md §11).")
+        if re.search(r"[\"\u201c\u201d]", text):
+            warn(r, "영어 문구에 큰따옴표가 있습니다. 빼거나 작은따옴표로 바꿔 주세요(CLAUDE.md §11).")
+    if main and re.search(r"<(header|footer)\b", whole.replace(main, "")):
+        warn(r, "본문 밖에 자체 머리글·바닥글(<header>·<footer>)이 있습니다. 공홈 머리글·바닥글과 겹치니 빼 주세요(자동으로 지우지 않음).")
+    slug = r[3:] if ko else r
+    e = _EVENT_BY_PAGE().get(slug)
+    if e:
+        last = str(e.get("end") or e.get("start") or "")
+        if DATE.match(last) and last < TODAY:
+            f = (FUTURE_KO if ko else FUTURE_EN).search(text)
+            if f:
+                warn(r, f"끝난 행사인데 예정 문구 '{f.group(0)}'가 남아 있습니다. 지난 행사 표현으로 바꿔 주세요(CLAUDE.md §3 행사가 끝난 뒤).")
+    elif r.count("/") == 1 and r.endswith("/index.html") and r.split("/")[0] not in NON_EVENT_DIRS:
+        warn(r, "events.json에 이 페이지(page) 줄이 없습니다. 행사 한 줄을 넣어야 허브에 보이고 자동 정리(머리·검색 정보)도 됩니다(CLAUDE.md §6).")
+
+
+_EBP = None
+
+
+def _EVENT_BY_PAGE():
+    global _EBP
+    if _EBP is None:
+        try:
+            data = json.loads((ROOT / "events.json").read_text(encoding="utf-8"))
+            _EBP = {str(e.get("page") or "").lstrip("/"): e for e in data.get("events", []) if e.get("page")}
+        except Exception:  # noqa: BLE001
+            _EBP = {}
+    return _EBP
 
 
 def _img_stem(src, page_dir):

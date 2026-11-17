@@ -104,6 +104,11 @@ def build(e, h, page_path, ko):
         "inLanguage": "ko" if ko else "en",
         "performer": ORG,
     })
+    if e.get("organizer"):  # 행사 주최자(확인된 것만 events.json에 적음)
+        org = {"@type": "Organization", "name": e["organizer"]}
+        if e.get("organizer_url"):
+            org["url"] = e["organizer_url"]
+        ev["organizer"] = org
     crumbs = {
         "@type": "BreadcrumbList",
         "itemListElement": [
