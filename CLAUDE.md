@@ -26,11 +26,11 @@ events-pages/
 ├─ events.json            행사 목록 정본 (이벤트 페이지 메인·머리글 메뉴·전체 목록이 모두 읽음, §6)
 ├─ assets/                공통 파일 (모든 페이지에 반영)
 │  ├─ ev.css              공통 바탕
-│  ├─ ev-nav.js           머리글·메뉴·바닥글
+│  ├─ ev-nav.js           행사 서브배너·카드 상태·예약 버튼 자동 처리·GA4 버튼 측정 (공홈 머리글이 없는 페이지만 옛 머리글·바닥글)
 │  ├─ ev-detail.css       양식: On the floor 큰 페이지(Web Summit·Oracle)
 │  ├─ ev-pages.css        양식: On stage·On air·미팅·하위 상세 페이지
 │  ├─ ev-basic.css        짧은 기록형 상세 페이지 v2(허브 룩) — ev-pages.css 뒤에 읽음
-│  ├─ site/               cubig.ai 공홈 머리글·바닥글 복사본(cubig-site.css·js) — tools/sync_site_chrome.py 가 만듦, 손으로 고치지 않음
+│  ├─ site/               cubig.ai 공홈 머리글·바닥글 복사본(cubig-site.css·js, tools/sync_site_chrome.py 가 만듦, 손으로 고치지 않음) + ev-site.css(머리글 아래 여백·서브배너)
 │  ├─ history.js          events.json 을 읽어 연혁·전체 목록을 그림
 │  └─ media/              여러 페이지가 같이 쓰는 이미지
 ├─ (틀 페이지)            새 페이지는 같은 양식의 기존 페이지를 복사 (§2)
@@ -40,6 +40,7 @@ events-pages/
 ├─ tools/check_pages.py   검사 도구 (GitHub 자동 검사와 같음)
 ├─ tools/sync_site_chrome.py  공홈 머리글·바닥글이 바뀌면 다시 돌림(로컬 공홈 8080 또는 --base https://cubig.ai)
 ├─ tools/upgrade_detail_v2.py 옛 짧은 기록형 페이지를 v2 로 바꿈(<main> 안만 고침, 다른 행사 카드는 events.json 에서)
+├─ tools/make_basic_pages.py  상세 페이지가 없는 행사에 영·한 기본 페이지를 만듦(§3)
 └─ .claude/               팀 공용 Claude Code 설정 (/event-page 스킬, 금지 동작, 미리보기)
 ```
 
@@ -47,7 +48,7 @@ events-pages/
 - 폴더 이름: 영어 소문자·숫자·하이픈만. 한국어판은 같은 이름으로 `ko/` 아래에 둡니다.
 - 그 페이지에서만 쓰는 이미지·PDF는 그 페이지 폴더 안에 둡니다. 이미지는 1MB 이하(.webp·.jpg), 한 파일 100MB 초과 불가. 영상은 YouTube 등에 올리고 삽입합니다(`youtube-nocookie.com` 권장).
 - 이미 공개된 폴더의 이름 변경·삭제 금지(광고·메일 링크가 깨짐). 필요하면 사람에게 먼저 묻습니다.
-- 루트 `index.html`은 cubig.ai로 넘기는 페이지입니다. 이벤트 페이지 메인(행사 목록·지도·배너)은 `cubig.ai/events`에 있고, `events.json`을 읽어 보여 줍니다.
+- 루트 `index.html`은 행사 허브 `cubig.ai/events/`로 넘기는 페이지입니다(주소 뒤 유입 꼬리표는 그대로 넘김). 이벤트 페이지 메인(행사 목록·지도·배너)은 `cubig.ai/events`에 있고, `events.json`을 읽어 보여 줍니다.
 
 **역할**
 
@@ -64,14 +65,16 @@ events-pages/
 | 양식 (`type`) | 메인 묶음 이름 | 언제 | 틀 페이지 |
 |---|---|---|---|
 | `exhibition` | On the floor / 전시·행사 | 전시·컨퍼런스 부스, 전시 참가 | 큰 행사: `websummit-2026/` · `oracle-ai-world-2026/`, 짧은 기록: `vivatech-2025/` |
-| `stage` | On stage / 수상·무대 | 피칭, 발표, 데모데이, 수상, 선정 | `t-challenge-2026/` |
-| `live` | On air | 크리에이터 라이브·인터뷰·방송 영상 | `alex-wang-2026/` |
+| `stage` | On stage / 무대·수상 | 피칭, 발표, 데모데이, 수상, 선정 | `t-challenge-2026/` |
+| `live` | On air / 라이브 방송 | 크리에이터 라이브·인터뷰·방송 영상 | `alex-wang-2026/` |
 
 - 짧은 기록형 상세 페이지 구조(v2, 2026-11-17): 공홈 머리글 → 히어로(왼쪽 종류·제목·한 줄 설명·버튼 / 오른쪽 대표 사진) → 가로 정보 줄(`dl.d-facts`) → 본문(첫 문단 크게, 소제목 왼쪽·"CUBIG이 보여준 것" 목록 오른쪽) → 다른 행사(허브와 같은 카드) → 공홈 바닥글. 행사 머리글은 히어로를 지나면 나오는 서브배너(행사 · 행사 이름 · 미팅 신청)입니다.
-- 버튼 줄(`.d-acts`): 검정 버튼 = 보도자료·영상 등 대표 링크 하나, 선 버튼 = 다른 링크, 글자 링크 = 온라인 미팅 신청. 같은 링크를 두 번 걸지 않습니다.
+- 버튼 줄(`.d-acts`): 검정 버튼 = 대표 링크 하나(다가오는 행사는 현장 미팅, 끝난 행사는 보도자료·영상), 선 버튼 = 다른 링크 하나, 글자 링크 = 온라인 미팅 신청(모든 상세 페이지에 붙음). 같은 링크를 두 번 걸지 않습니다.
+- 다른 링크가 2개 이상이면 둘째 줄 '다른 곳에서 보기'(`.d-alt` · `.d-chip`)로 모읍니다. `upgrade_detail_v2.py`가 자동으로 정리합니다. 모바일에서는 버튼을 화면 폭으로 세로로 쌓습니다.
+- 버튼 구조(`.d-go`·`.ev-sub`·`data-ev-href`)는 GA4 버튼 측정이 읽습니다. 바꾸면 PR에 적고 마케팅팀(태그 담당)에 알립니다(§7).
 - 다른 행사 카드의 이름·날짜·장소 문구는 허브와 같아야 합니다. 직접 쓰지 말고 링크만 바꾼 뒤 `python3 tools/upgrade_detail_v2.py <폴더이름>` 으로 다시 만듭니다.
 - 어느 양식인지 애매하면 사용자에게 묻습니다. 기존 양식으로 안 되면 §5(새 양식)입니다.
-- 세 양식 모두 공통 바탕(`ev.css`)과 `ev-nav.js`를 같이 씁니다. 짧은 기록형은 공홈 머리글·바닥글(`assets/site/`)도 씁니다(큰 행사 페이지 Web Summit·Oracle은 아직 옛 머리글).
+- 세 양식 모두 공통 바탕(`ev.css`)·`ev-nav.js`와 공홈 머리글·바닥글(`assets/site/`)을 같이 씁니다(큰 행사 페이지 Web Summit·Oracle 포함).
 
 ## 3. 새 페이지 만들기
 
@@ -79,9 +82,9 @@ events-pages/
 
 1. 양식을 정하고 §2의 틀 페이지를 `폴더이름/index.html` 로 복사합니다. 한국어판은 `ko/폴더이름/index.html` 로 만듭니다(영·한 서로 `hreflang` 연결).
 2. 제목·설명·canonical·OG·본문·사진을 그 행사 내용으로 모두 바꿉니다. 틀 행사의 이름·날짜가 남아 있지 않은지 확인합니다.
-3. `events.json` 에 한 줄 추가합니다(§6). 상세 페이지가 아직 없으면 `page` 없이 먼저 넣어도 됩니다. 메인에는 누를 수 없는 카드로 보입니다.
-4. `sitemap.xml` 에 영어·한국어 주소를 추가합니다.
-5. 현장 미팅 버튼은 events.json 의 end 날짜가 지나면 자동으로 상시 미팅으로 바뀝니다. 따로 날짜를 적지 않아도 됩니다(§9-1).
+3. `events.json` 에 한 줄 추가합니다(§6). 디자인 페이지가 아직 없으면 `page` 없이 넣고 `python3 tools/make_basic_pages.py` 로 기본 페이지를 만듭니다(위 상자). 모든 행사는 영·한 상세 페이지가 있어야 합니다.
+4. `sitemap.xml` 에 영어·한국어 주소를 추가합니다(기본 페이지 생성 도구는 자동으로 추가).
+5. 현장 미팅 버튼은 events.json 의 end 날짜가 지나면 자동으로 처리됩니다. 기본 틀 페이지는 버튼을 숨기고(옆에 온라인 미팅 링크가 있으므로), 큰 행사 페이지는 상시 미팅으로 바꿉니다. 따로 날짜를 적지 않아도 됩니다(§9-1).
 6. 사진이 없으면 §6-2 조건으로 찾습니다.
 7. §0의 4~7번(검사 → 미리보기 → PR).
 8. 메인 배너를 이 행사로 바꿀지 사용자(행사 담당자)에게 묻고, 바꾸기로 하면 현세님께 반영을 요청하라고 알려 줍니다.
@@ -121,20 +124,20 @@ events-pages/
 | `start` | ✅ | `YYYY-MM-DD` (행사 현지 날짜) |
 | `end` | | `YYYY-MM-DD` (하루짜리면 생략) |
 | `place` | | 도시·장소 또는 방송 채널 |
-| `page` | | `폴더이름/index.html`, 페이지가 없으면 `null` |
+| `page` | | `폴더이름/index.html`. 비어 있으면 `make_basic_pages.py`가 기본 페이지를 만들고 채움 |
 | `summary` · `summary_ko` | | 한 줄 소개 (상세 페이지 description과 같게) |
 | `thumb` · `photo` · `credit` | | 썸네일 · 대표 사진 · 사진 출처 표기. `thumb`는 photo 원본을 쓰지 말고 작은 사본(640px 폭 webp, 장당 60KB 안쪽, 같은 폴더 `<이름>-thumb.webp`)으로. 허브 카드·달력이 이 파일을 내려받는다. 만들기: `cwebp -q 75 -resize 640 0 원본.jpg -o 원본-thumb.webp` |
 | `video` · `with` · `length` | | On air: 영상 주소 · 함께한 사람·채널 · 길이 |
 | `kind` | | 세부 분류: `exhibition` · `pitch` · `award` · `live` |
 | `label` · `label_ko` · `date` | | 연혁에 보이는 이름 · 날짜 표기 (없으면 title·start로 만듦) |
 | `city` · `cc` · `intl` | | 도시 · 나라 코드 · 해외 여부(해외 도장) |
-| `ko` | | `true`면 한국어 사이트에만 표시 |
-| `src` | | 보도자료 주소 |
+| `ko` | | 쓰지 않음(2026-11-17부터 모든 행사 영·한 둘 다 표시) |
+| `src` | | 보도자료·행사 공식 사이트·영상 주소 (기본 페이지 버튼 이름이 주소에 따라 정해짐) |
 | `card_title` · `card_title_ko` | | 메인 카드의 짧은 이름 |
 | `badge` · `badge_ko` | | 지난 카드에 보일 짧은 표시 (예: `Booth #2032`, `Runner-up`) |
 | `map` | | 지도 위치 `{"x": 384, "y": 175.5, "label": "New York", "label_ko": "뉴욕"}` (x·y는 `assets/media/art/world-dots.svg` 좌표). 같은 도시는 같은 label로 쓰면 한 점으로 묶임. `label_ko` = 한국어 허브에 보일 도시 이름 |
 | `stamp` · `stamp_city` | | 해외 도장 문구 (없으면 행사 이름 대문자) |
-| `booking` · `booking_label` · `booking_label_ko` | | 다가오는 행사 칸의 현장 미팅 버튼 |
+| `booking` · `booking_label` · `booking_label_ko` | | 현장 미팅 예약 링크와 버튼 이름 (허브 다가오는 행사 칸·기본 상세 페이지 첫 버튼) |
 
 **최상위 `meet` 칸 (상시 30분 미팅 페이지 cubig.ai/events/meet/ 가 읽음)**: `events` 옆에 하나만 둡니다.
 `"meet": {"booking": "<구글 캘린더 예약 링크>", "from": "09:00", "to": "22:00", "weekdays_only": true}`
@@ -167,6 +170,7 @@ events-pages/
 
 - `CNAME`(지우면 events.cubig.ai 연결이 끊김), `.nojekyll`, `.github/`, `.claude/`, `tools/`, 루트 `index.html`, `404.html`, `robots.txt`
 - 각 페이지 `<head>`의 **⑤ 추적 코드**(GA4 `G-8MRD9BZ1VJ`). 지우거나 바꾸거나 다른 추적 코드(GTM·픽셀·다른 분석 도구)를 추가하지 않습니다. 필요하면 PR에 요청으로 적습니다.
+- 버튼 클릭 측정(미팅 신청·현장 미팅·메일·제품 링크·PDF)은 `assets/ev-nav.js` 첫머리에 있습니다. 이벤트 이름은 마케팅팀 택소노미와 글자 그대로 맞춰져 있어 임의로 바꾸지 않습니다.
 - 각 페이지의 검색 노출 설정(`noindex` 줄·canonical) — 바꾸려면 사람에게 먼저 묻습니다.
 - 공통 파일(`assets/`)과 틀 페이지(§2)는 §4·§5 절차로만 고칩니다.
 
@@ -191,7 +195,7 @@ events-pages/
 ## 9-1. 미팅 예약 링크
 
 - 예약 링크는 **crm@cubig.ai 공용 계정에서 만든 Google 예약 페이지만** 씁니다. 개인 계정으로 만든 예약 링크는 넣지 않습니다(휴가·퇴사 시 끊김). 누구 계정 링크인지 링크만으로는 알 수 없으니, 사용자에게 확인하고 PR에 적습니다.
-- 행사 예약 링크는 events.json 에서 그 페이지 행사의 end(없으면 start)를 찾아, 그다음 날부터 상시 30분 미팅 페이지(`https://cubig.ai/events/meet/`, 한국어 `https://cubig.ai/ko/events/meet/`)로 자동으로 바뀝니다(`assets/ev-nav.js`, 공통 crm@ 링크는 제외). 다른 날짜로 끊고 싶을 때만 아래처럼 `data-booking-until`을 적습니다(적으면 이 날짜가 우선).
+- 행사 예약 링크는 events.json 에서 그 페이지 행사의 end(없으면 start)를 찾아, 그다음 날부터 상시 30분 미팅 페이지(`https://cubig.ai/events/meet/`, 한국어 `https://cubig.ai/ko/events/meet/`)로 자동으로 바뀝니다(`assets/ev-nav.js`, 공통 crm@ 링크는 제외). 버튼에 `data-booking-after="hide"`가 있으면 바꾸지 않고 숨깁니다(기본 틀 페이지). 다른 날짜로 끊고 싶을 때만 아래처럼 `data-booking-until`을 적습니다(적으면 이 날짜가 우선).
   ```html
   <a class="btn" href="https://calendar.app.google/..." data-booking-until="2026-12-10">Book a meeting</a>
   <iframe src="https://calendar.google.com/calendar/appointments/schedules/...?gv=true" data-booking-until="2026-12-10"></iframe>
@@ -255,16 +259,17 @@ events-pages/
 | 영어판 | 한국어판 |
 |---|---|
 | Upcoming / Next event / See you at | 예정 / 다가오는 행사 ("다음 행사에서 만납니다"는 쓰지 않음) |
-| Happening now · Just wrapped · Wrapped | 진행 중 · 방금 끝남 · 종료 |
+| Upcoming · Happening now · Wrapped (카드 상태) | 예정 · 진행 중 · 종료 |
 | See details → / Event page → / Details → | 자세히 보기 → |
 | Watch → | 영상 보기 → |
 | See all → | 전체 보기 → |
-| Book a call / Book a meeting | 온라인 미팅 신청하기 |
+| Book a call / Book a meeting / Book an online meeting | 온라인 미팅 신청하기 |
+| Also on | 다른 곳에서 보기 |
 | Meet us at [행사] | [행사] 현장 미팅 잡기 |
 | What CUBIG brought | CUBIG이 보여준 것 |
 | At a glance | 한눈에 보기 |
 | Read more | 자세히 보기 |
-| On the floor · On stage · On air | 전시·행사 · 수상·무대 · On air |
+| On the floor · On stage · On air | 전시·행사 · 무대·수상 · 라이브 방송 (허브와 같은 이름) |
 | 한눈에 보기 상자 칸 | 행사 · 장소 · 일시 · 부스 · 주최 · 결과 (일정·날짜 대신 "일시"로 통일) |
 | T-Challenge | T Challenge (하이픈 없음) |
 | 날짜 | 2026년 11월 9–12일 · 2025년 9월 30일–10월 2일 · 2026년 6월 |

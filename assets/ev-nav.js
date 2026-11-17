@@ -29,7 +29,7 @@
     }
   }, true);
 
-  var TYPES = KO ? { exhibition: '전시·행사', stage: '수상·무대', live: 'On air' } : { exhibition: 'On the floor', stage: 'On stage', live: 'On air' };
+  var TYPES = KO ? { exhibition: '전시·행사', stage: '무대·수상', live: '라이브 방송' } : { exhibition: 'On the floor', stage: 'On stage', live: 'On air' };
   var M = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
   function d(s){ var p=s.split('-'); return new Date(+p[0], +p[1]-1, +p[2]); }
   function fmt(e){
