@@ -9,6 +9,8 @@
   "events": [
     {
       "id": "zz-expo-2027",
+      "thumb": "/assets/media/oracle-2026/floor-2026-thumb.webp",
+      "photo": "/assets/media/oracle-2026/floor-2026.webp",
       "type": "exhibition",
       "title": "Zz Expo 2027",
       "start": "2027-03-01",
