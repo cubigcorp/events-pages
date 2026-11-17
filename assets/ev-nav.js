@@ -25,9 +25,25 @@
       gtag('event', 'file_download', { file_name: f, file_extension: 'pdf', link_url: a.href });
     } else {
       var m = h.match(/cubig\.ai\/(?:ko\/)?(syntitan|dts|llmcapsule)\b/);
-      if (m) gtag('event', 'cta_click', { cta_id: 'events_product', target: m[1], cta_location: 'event-detail' });
+      if (m) { gtag('event', 'cta_click', { cta_id: 'events_product', target: m[1], cta_location: 'event-detail' }); return; }
+      // 공홈·행사 사이트의 다른 링크(기사·문의·허브·다른 행사 등) = internal_link_click (공홈과 같은 이름, 11-17 🏷️)
+      var u; try { u = new URL(a.href); } catch (x) { u = null; }
+      if (u && /(^|\.)cubig\.ai$/.test(u.hostname) && !(u.pathname === location.pathname && u.hash)) {
+        var p = u.pathname.replace(/^\/ko(\/|$)/, '/');
+        var id = u.hostname === 'events.cubig.ai' ? 'event_detail_event' : (/^\/news\//.test(p) ? 'event_detail_news' : (/^\/contact/.test(p) ? 'event_detail_contact' : (/^\/events\/?$/.test(p) ? 'event_detail_hub' : 'event_detail_other')));
+        gtag('event', 'internal_link_click', { link_id: id, link_url: a.href });
+      }
     }
   }, true);
+
+  // 스크롤 깊이 = scroll_depth (공홈과 같은 25·50·75·90%, 페이지마다 단계별 1번)
+  var SD = [25, 50, 75, 90], sdDone = {}, sdT;
+  function sdCheck() {
+    var d = document.documentElement, max = d.scrollHeight - d.clientHeight; if (max <= 0 || typeof gtag !== 'function') return;
+    var pct = (window.scrollY || d.scrollTop) / max * 100;
+    SD.forEach(function (t) { if (pct >= t && !sdDone[t]) { sdDone[t] = 1; gtag('event', 'scroll_depth', { percent_scrolled: t }); } });
+  }
+  window.addEventListener('scroll', function () { clearTimeout(sdT); sdT = setTimeout(sdCheck, 200); }, { passive: true });
 
   var TYPES = KO ? { exhibition: '전시·행사', stage: '무대·수상', live: '라이브 방송' } : { exhibition: 'On the floor', stage: 'On stage', live: 'On air' };
   var M = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
