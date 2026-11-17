@@ -18,6 +18,7 @@ jobs:
     name: Page check
     runs-on: ubuntu-latest
     env:
+      PYTHONDONTWRITEBYTECODE: "1"
       SAME_REPO: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository }}
     steps:
       - uses: actions/checkout@v4
@@ -91,7 +92,7 @@ jobs:
             echo "**검사 결과** (✖ 오류는 고쳐야 합칠 수 있음 · ⚠ 경고는 사람이 판단)"
             echo
             echo '```'
-            tail -c 50000 /tmp/check.txt
+            grep -v '^::' /tmp/check.txt | tail -c 50000
             echo '```'
           } > /tmp/comment.md
           id=$(gh api "repos/${{ github.repository }}/issues/$PR/comments" --paginate --jq '.[] | select(.body | startswith("<!-- page-check -->")) | .id' | head -1)
