@@ -8,6 +8,20 @@
   },
   "events": [
     {
+      "id": "zz-expo-2027",
+      "type": "exhibition",
+      "title": "Zz Expo 2027",
+      "start": "2027-03-01",
+      "end": "2027-03-02",
+      "place": "Berlin",
+      "city": "Berlin",
+      "cc": "DE",
+      "date": "Mar 1–2, 2027",
+      "major": false,
+      "summary": "Test entry for the automatic cleanup workflow. CUBIG exhibits at Zz Expo 2027 in Berlin. Do not merge this test.",
+      "page": "zz-expo-2027/index.html"
+    },
+    {
       "id": "ai-summit-new-york-2026",
       "type": "exhibition",
       "title": "AI Summit New York",
