@@ -155,7 +155,7 @@ events-pages/
 | `kind` | | 세부 분류: `exhibition` · `pitch` · `award` · `live` |
 | `label` · `label_ko` · `date` | | 연혁에 보이는 이름 · 날짜 표기 (없으면 title·start로 만듦) |
 | `city` · `cc` · `intl` | | 도시 · 나라 코드 · 해외 여부(해외 도장) |
-| `major` | 다가오는 행사는 ✓ | 대표 행사 여부 `true`/`false`. 대표 = 해외 대형 전시·컨퍼런스, 국내라도 큰 전시. 공홈 /events 예정 영역(배너·예정 카드)에서 `true`가 먼저 보이고, 같은 급끼리는 날짜순. **새 행사를 넣을 때 값을 모르면 작성자에게 묻고 꼭 적습니다**(빠지면 `check_pages.py` 경고). 기준이 애매하면 마케팅팀(현세) 확인 |
+| `major` | 다가오는 행사는 ✓ | 대표 행사 여부 `true`/`false`. 대표 = 해외 대형 전시·컨퍼런스, 국내라도 큰 전시. 공홈 /events 예정 영역(배너·예정 카드)에서 `true`가 먼저 보이고, 같은 급끼리는 날짜순. **새 행사를 넣을 때 값을 모르면 작성자에게 묻고 꼭 적습니다**(빠지면 `check_pages.py` 경고). 기준은 GTM이 정하고, 애매하면 GTM(수경님) 확인 |
 | `organizer` · `organizer_url` | | 행사 주최자 이름·주소. 검색용 정보(JSON-LD)에 들어감. 공식 사이트로 확인된 것만(추측 ❌) |
 | `booth_map` | | 부스 위치 지도 이미지 경로(예 `/assets/media/<행사>/booth-map.webp`). 기본 양식 페이지에 '부스 위치' 자리가 생기고, 누르면 크게 열림. 행사가 끝나면 자동으로 숨김 |
 | `portal` · `portal_label` · `portal_label_ko` | | 행사 공식 포털의 CUBIG 프로필 주소와 링크 글자(없으면 'CUBIG on the event portal' / '행사 포털의 CUBIG 프로필') |
