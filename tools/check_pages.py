@@ -264,7 +264,7 @@ NON_EVENT_DIRS = {"all", "meet", "assets", "tools"}
 
 
 def _main_text(html):
-    h = re.sub(r"<(script|style)[\s\S]*?</\1>", " ", html)
+    h = re.sub(r"<(script|style|template)\b[\s\S]*?</\1>", " ", html)  # <template> 안은 화면에 안 나옴(다음 행사용 보관)
     m = re.search(r"<main[\s\S]*?</main>", h)
     return (m.group(0) if m else ""), h
 
