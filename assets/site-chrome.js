@@ -26,7 +26,7 @@
     var hd = document.createElement('header');
     hd.className = 'cubig-hd';
     hd.innerHTML = '<div class="cubig-hd-in"><a href="https://cubig.ai/" aria-label="CUBIG home">' +
-      '<img src="/assets/cubig-logo.svg" alt="CUBIG" width="141" height="24"></a></div>';
+      '<img src="/assets/cubig-logo.svg?v=21b075f454" alt="CUBIG" width="132" height="24"></a></div>';
     document.body.insertBefore(hd, document.body.firstChild);
 
     var ft = document.createElement('footer');

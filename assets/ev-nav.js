@@ -134,7 +134,7 @@
     var NAV=KO?[['syntitan/','플랫폼'],['llmcapsule/','역량'],['proof/','신뢰 증거'],['blogs/','자료'],['company/','회사']]
               :[['syntitan/','Platform'],['llmcapsule/','Capabilities'],['proof/','Proof'],['blogs/','Learn'],['company/','Company']];
     var hd=el('<header class="ev-hd"><div class="wrap">'+
-      '<a class="logo" href="'+C+'" aria-label="CUBIG"><img src="/assets/cubig-logo.svg" alt="CUBIG" width="129" height="22"></a>'+
+      '<a class="logo" href="'+C+'" aria-label="CUBIG"><img src="/assets/cubig-logo.svg?v=21b075f454" alt="CUBIG" width="121" height="22"></a>'+
       '<a class="ev-home" href="'+C+'events/">'+(KO?'행사':'Events')+'</a>'+
       '<nav class="ev-gnav" aria-label="cubig.ai">'+NAV.map(function(n){return '<a href="'+C+n[0]+'">'+n[1]+'</a>';}).join('')+'</nav>'+
       '<div class="right">'+langToggle()+'<a class="ev-contact" href="'+C+'contact/">'+(KO?'문의하기':'Contact')+'</a>'+(cta?'<a class="btn" href="'+cta+'">'+ctaLabel+'</a>':'')+
@@ -170,7 +170,7 @@
       groups+='<div class="grp"><h4>'+TYPES[k]+'</h4>'+rows+'</div>';
     });
     var menu=el('<div class="ev-menu" aria-hidden="true"><div class="dim"></div><nav class="panel" aria-label="Events">'+
-      '<div class="top"><a class="logo" href="'+C+'"><img src="/assets/cubig-logo.svg" alt="CUBIG" width="117" height="20"></a><button class="close" aria-label="'+(KO?'메뉴 닫기':'Close menu')+'">×</button></div>'+
+      '<div class="top"><a class="logo" href="'+C+'"><img src="/assets/cubig-logo.svg?v=21b075f454" alt="CUBIG" width="110" height="20"></a><button class="close" aria-label="'+(KO?'메뉴 닫기':'Close menu')+'">×</button></div>'+
       (KO?'<div class="grp"><a href="https://cubig.ai/ko/events/">전체 행사<small>cubig.ai</small></a><a href="https://cubig.ai/press/">프레스 키트<small>cubig.ai</small></a></div>':'<div class="grp"><a href="https://cubig.ai/events/">All events<small>cubig.ai</small></a><a href="https://cubig.ai/press/">Press kit<small>cubig.ai</small></a></div>')+
       groups+(data.channel?'<div class="grp"><a href="'+data.channel+'" target="_blank" rel="noopener">'+(KO?'CUBIG 유튜브':'CUBIG on YouTube')+'<small>↗</small></a></div>':'')+'</nav></div>');
     var btn=hd.querySelector('.burger');

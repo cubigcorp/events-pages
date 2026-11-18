@@ -4,7 +4,7 @@
 공홈(워드프레스 테마)이 그린 머리글(#site-header)·바닥글(footer.site-footer) HTML 과
 그 둘에 쓰이는 CSS·JS 만 골라 아래 두 파일을 다시 만든다. 손으로 고치지 말고 이 도구를 다시 돌린다.
 
-  assets/site/cubig-site.css  머리글·바닥글 CSS (테마 variables·base·header·footer·ibm-overrides 에서 고름)
+  assets/site/cubig-site.css  머리글·바닥글 CSS (테마 variables·base·header·footer·global-overrides 에서 고름)
   assets/site/cubig-site.js   머리글·바닥글 HTML(영·한) + 메가메뉴·모바일 메뉴·언어 전환 JS
 
 사용:
@@ -24,7 +24,7 @@ import tinycss2
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 LIVE = 'https://cubig.ai'
 THEME_URL = LIVE + '/wp-content/themes/cubig/assets/'
-CSS_FILES = ['variables', 'base', 'header', 'footer', 'ibm-overrides']
+CSS_FILES = ['variables', 'base', 'header', 'footer', 'global-overrides']  # ibm-overrides → global-overrides(테마 d0a35b53, 이름만 바뀜)
 SPECIFIC = re.compile(r'site-header|site-footer|nav-|footer-|cubig-langhint|\bbtn\b|btn--')
 PSEUDO = re.compile(r'::?(?:hover|focus-visible|focus-within|focus|active|visited|before|after|placeholder|marker|selection|-webkit-[a-z-]+|-moz-[a-z-]+)(?:\([^)]*\))?')
 SCOPE = ':where(#site-header,.site-footer)'
