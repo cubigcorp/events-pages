@@ -22,7 +22,7 @@
 ## 0-1. 두 가지 작업 경로 (2026-11-17 현세)
 
 - **① Claude가 저장소에서 직접 작업**: 이 문서 순서대로 만듭니다(틀 페이지 복사 또는 `make_basic_pages.py`).
-- **② 다른 도구(피그마·ChatGPT·손코딩 등)로 만든 HTML을 폴더에 넣기만**: `폴더이름/index.html`·`ko/폴더이름/index.html` + `events.json` 한 줄을 넣고 PR을 올리면, GitHub 자동 검사가 `tools/autofix_pages.py`로 정리해 **PR 브랜치에 커밋**하고 결과를 PR 댓글 하나로 알립니다. main은 사람이 합칩니다.
+- **② 다른 도구(피그마·ChatGPT·손코딩 등)로 만든 HTML을 폴더에 넣기만**: `폴더이름/index.html`·`ko/폴더이름/index.html` + `events.json` 한 줄을 넣고 PR을 올리면, GitHub 자동 검사가 `tools/autofix_pages.py`로 정리해 **PR 브랜치에 커밋**하고 결과를 PR 댓글 하나로 알립니다(고친 것·오류·경고가 있을 때만 새 댓글 = 작성자 메일, 다 통과면 메일 없음). 공통 파일을 바꿨으면 PR 본문 '공통 파일 변경' 체크박스를 [x]로 표시하면 그 경고가 참고로 내려갑니다. main은 사람이 합칩니다.
 - 두 경로 모두 PR에서 같은 자동 정리·검사를 거칩니다. 로컬에서 미리 돌려도 됩니다: `python3 tools/autofix_pages.py` → `python3 tools/check_pages.py`.
 
 | 자동으로 고침(없을 때만 채움) | 경고만(사람이 고침) |

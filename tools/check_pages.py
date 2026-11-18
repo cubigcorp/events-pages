@@ -56,7 +56,7 @@ EVENT_TYPES_HINT = "README·CLAUDE.md §2 양식 표"
 DATE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
 TODAY = __import__("datetime").date.today().isoformat()
 
-errors, warns = [], []
+errors, warns, notes = [], [], []  # notes = 참고(경고 수에 안 셈)
 _EVENT_PAGES = None
 
 
@@ -410,7 +410,10 @@ def check_changed(base):
             if f in NEVER:
                 err(f, "이 파일은 바꾸면 사이트 연결·설정이 깨집니다. 마케팅팀 확인 없이 바꾸지 않습니다.")
             elif f in SHARED or f.startswith(shared_dirs):
-                warn(f, "공통 파일이 바뀌었습니다. 모든 페이지에 반영되니 기존 페이지 화면도 확인하고 PR에 '공통 파일 변경'이라고 적어 주세요.")
+                if os.environ.get("COMMON_ACK") == "1":  # PR 본문에 '공통 파일 변경'을 확인했다고 적음 → 경고 대신 참고만
+                    notes.append((f, "공통 파일 변경 (PR에 확인 표시됨)"))
+                else:
+                    warn(f, "공통 파일이 바뀌었습니다. 모든 페이지에 반영되니 기존 페이지 화면도 확인하고 PR에 '공통 파일 변경'이라고 적어 주세요(템플릿의 '공통 파일 변경' 체크박스를 [x]로).")
 
 
 def main():
@@ -443,6 +446,8 @@ def main():
         lines.append(f"⚠ {path}: {msg}")
         if GH:
             print(f"::warning file={path}::{msg}")
+    for path, msg in notes:
+        lines.append(f"ℹ {path}: {msg}")
     summary = f"오류 {len(errors)}건 · 경고 {len(warns)}건"
     print("\n".join(lines) if lines else "문제 없음")
     print(("❌ " if errors else "✅ ") + summary)

@@ -1,9 +1,12 @@
 # PR마다: ① 자동 정리(tools/autofix_pages.py — 머리·공통 틀·측정·데이터 연결만, 본문 디자인은 그대로)를 PR 브랜치에 커밋
 #         ② 페이지 규칙 검사(tools/check_pages.py, 로컬 검사와 같음) ③ 고친 것·남은 경고를 PR 댓글 하나로 알림.
+# 댓글(=작성자 메일)은 자동으로 고쳤거나 오류·경고가 있을 때만 새로 답니다. 다 통과면 기존 댓글만 '통과'로 고칩니다(수정은 메일 안 감).
+# PR 본문에 '공통 파일 변경'을 확인했다고 적으면(템플릿 체크박스 [x]) 그 경고는 참고(ℹ)로 내려갑니다. 본문을 고치면 다시 검사합니다.
 # main은 사람이 합칩니다. 다른 저장소(포크)에서 온 PR은 쓰기 권한이 없어 검사만 합니다.
 name: Page check
 on:
   pull_request:
+    types: [opened, synchronize, reopened, edited]
   push:
     branches: [main]
 permissions:
@@ -49,8 +52,15 @@ jobs:
 
       - name: 페이지 검사
         id: check
+        env:
+          PR_BODY: ${{ github.event.pull_request.body }}
         run: |
           set +e
+          # PR 본문에서 공통 파일 변경 확인 표시 찾기: 체크박스 [x] 또는 템플릿 제목 줄 밖의 '공통 파일 변경'
+          if printf '%s' "$PR_BODY" | grep -qiE '^[[:space:]]*- \[x\].*(기존 페이지 화면|공통 파일)' \
+             || printf '%s' "$PR_BODY" | grep -v '^## 공통 파일 변경' | grep -q '공통 파일 변경'; then
+            export COMMON_ACK=1
+          fi
           if [ "${{ github.event_name }}" = "pull_request" ]; then
             git fetch -q origin "${{ github.base_ref }}"
             python3 tools/check_pages.py --base "origin/${{ github.base_ref }}" > /tmp/check.txt 2>&1
@@ -60,6 +70,7 @@ jobs:
           code=$?
           cat /tmp/check.txt
           echo "code=$code" >> "$GITHUB_OUTPUT"
+          echo "issues=$(grep -cE '^(✖|⚠) ' /tmp/check.txt)" >> "$GITHUB_OUTPUT"
 
       # 봇이 올린 커밋에는 검사가 다시 돌지 않으므로, 같은 결과를 그 커밋에 'Page check'로 붙입니다(main 합치기 조건).
       - name: 자동 정리 커밋에 검사 결과 붙이기
@@ -73,12 +84,21 @@ jobs:
             '{name:"Page check", head_sha:$sha, status:"completed", conclusion:$c, output:{title:"Page check", summary:"자동 정리 뒤 검사 결과", text:$t}}' \
             | gh api repos/${{ github.repository }}/check-runs --input - > /dev/null
 
-      - name: PR 댓글 (하나만 두고 갱신)
+      - name: PR 댓글 (하나만 두고 갱신, 알릴 것 있을 때만 새로)
         if: env.SAME_REPO == 'true'
         env:
           GH_TOKEN: ${{ github.token }}
           PR: ${{ github.event.pull_request.number }}
         run: |
+          id=$(gh api "repos/${{ github.repository }}/issues/$PR/comments" --paginate --jq '.[] | select(.body | startswith("<!-- page-check -->")) | .id' | head -1)
+          if [ "${{ steps.fix.outputs.changed }}" != "true" ] && [ "${{ steps.check.outputs.issues }}" = "0" ]; then
+            # 알릴 것 없음: 새 댓글(메일)은 안 달고, 예전 댓글이 있으면 '통과'로만 고침
+            if [ -n "$id" ]; then
+              printf '<!-- page-check -->\n### 페이지 자동 정리·검사\n\n✅ 모두 통과 (고칠 것·경고 없음)\n' > /tmp/comment.md
+              gh api -X PATCH "repos/${{ github.repository }}/issues/comments/$id" -F body=@/tmp/comment.md > /dev/null
+            fi
+            exit 0
+          fi
           {
             echo "<!-- page-check -->"
             echo "### 페이지 자동 정리·검사"
@@ -97,7 +117,6 @@ jobs:
             grep -v '^::' /tmp/check.txt | tail -c 50000
             echo '```'
           } > /tmp/comment.md
-          id=$(gh api "repos/${{ github.repository }}/issues/$PR/comments" --paginate --jq '.[] | select(.body | startswith("<!-- page-check -->")) | .id' | head -1)
           if [ -n "$id" ]; then
             gh api -X PATCH "repos/${{ github.repository }}/issues/comments/$id" -F body=@/tmp/comment.md > /dev/null
           else
