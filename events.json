@@ -9,6 +9,8 @@
   "events": [
     {
       "id": "ai-summit-new-york-2026",
+      "organizer_url": "https://www.informa.com/",
+      "organizer": "Informa",
       "type": "exhibition",
       "title": "AI Summit New York",
       "start": "2026-12-09",
