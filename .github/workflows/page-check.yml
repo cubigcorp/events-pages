@@ -56,8 +56,9 @@ jobs:
           PR_BODY: ${{ github.event.pull_request.body }}
         run: |
           set +e
-          # PR 본문에서 공통 파일 변경 확인 표시 찾기: 체크박스 [x] 또는 템플릿 제목 줄 밖의 '공통 파일 변경'
-          if printf '%s' "$PR_BODY" | grep -qiE '^[[:space:]]*- \[x\].*(기존 페이지 화면|공통 파일)' \
+          # PR 본문에서 공통 파일 변경 확인 표시 찾기: '## 공통 파일 변경' 절 안의 체크박스 [x] 아무거나,
+          # 또는 그 제목 줄 밖에 적은 '공통 파일 변경'
+          if printf '%s' "$PR_BODY" | awk '/^##/{s=($0 ~ /공통 파일 변경/)} s && /^[[:space:]]*- \[[xX]\]/{f=1} END{exit !f}' \
              || printf '%s' "$PR_BODY" | grep -v '^## 공통 파일 변경' | grep -q '공통 파일 변경'; then
             export COMMON_ACK=1
           fi

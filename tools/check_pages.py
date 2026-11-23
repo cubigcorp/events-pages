@@ -327,7 +327,8 @@ def _img_stem(src, page_dir):
 
 def check_card_photo(where, e, page_path):
     """thumb·photo = 상세 페이지 첫 화면 대표 사진과 같은 사진인지 (CLAUDE.md events.json 칸 표)."""
-    html = strip_comments(page_path.read_text(encoding="utf-8"))
+    import page_seo  # tools/ 안 (이 파일과 같은 폴더)
+    html = page_seo.strip_other_events(strip_comments(page_path.read_text(encoding="utf-8")))
     m = re.search(r"<main[\s\S]*", html)
     imgs = [s for s in re.findall(r"<img\b[^>]*?\bsrc=\"([^\"]+)\"", m.group(0) if m else html)
             if not s.split("?")[0].lower().endswith(".svg")]
