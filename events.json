@@ -24,9 +24,9 @@
       "cc": "US",
       "intl": true,
       "major": true,
-      "photo": "/assets/media/ai-summit-ny-2026/stage.jpg",
+      "photo": "/assets/media/ai-summit-ny-2026/stage-2025.webp",
       "src": "https://newyork.theaisummit.com/",
-      "thumb": "/assets/media/ai-summit-ny-2026/stage-thumb.webp",
+      "thumb": "/assets/media/ai-summit-ny-2026/stage-2025-thumb.webp",
       "map": {
         "x": 384.0,
         "y": 175.5,
@@ -46,7 +46,8 @@
       "booking_label": "Meet us at AI Summit",
       "booking_label_ko": "AI Summit 현장 미팅 잡기",
       "summary": "CUBIG exhibits at The AI Summit New York at the Javits Center (Start-up Pod S1) and meets teams at the booth for 30-minute conversations.",
-      "summary_ko": "CUBIG은 뉴욕 Javits Center에서 열리는 The AI Summit New York에 부스(Start-up Pod S1)로 참가해 30분 현장 미팅을 진행합니다."
+      "summary_ko": "CUBIG은 뉴욕 Javits Center에서 열리는 The AI Summit New York에 부스(Start-up Pod S1)로 참가해 30분 현장 미팅을 진행합니다.",
+      "credit": "Photo: The AI Summit New York"
     },
     {
       "id": "genai-works-live-2026",
@@ -765,7 +766,16 @@
       "title_ko": "MWC 2025 4YFN 참가",
       "intl": true,
       "photo": "/assets/media/photos/mwc-4yfn-2025/s-IMG_3002-fira-entrance-queue.jpg",
-      "thumb": "/assets/media/photos/mwc-4yfn-2025/s-IMG_3002-fira-entrance-queue-thumb.webp"
+      "thumb": "/assets/media/photos/mwc-4yfn-2025/s-IMG_3002-fira-entrance-queue-thumb.webp",
+      "map": {
+        "x": 688.7,
+        "y": 172.3,
+        "label": "Barcelona",
+        "label_ko": "바르셀로나",
+        "below": true,
+        "dx": 40.0,
+        "dy": 84.0
+      }
     },
     {
       "id": "ces-2025",
@@ -786,7 +796,15 @@
       "title_ko": "CES 2025 참가",
       "intl": true,
       "photo": "/assets/media/photos/ces-2025/s-IMG_1526-eureka-park-hall.jpg",
-      "thumb": "/assets/media/photos/ces-2025/s-IMG_1526-eureka-park-hall-thumb.webp"
+      "thumb": "/assets/media/photos/ces-2025/s-IMG_1526-eureka-park-hall-thumb.webp",
+      "map": {
+        "x": 219.4,
+        "y": 196.8,
+        "label": "Las Vegas",
+        "label_ko": "라스베이거스",
+        "dx": -10.0,
+        "dy": -80.0
+      }
     },
     {
       "id": "k-startup-grand-finals-2024",
@@ -906,7 +924,15 @@
       "summary": "CUBIG took part in Slush 2024 in Helsinki on November 20–21, 2024, through the Seoul Business Agency’s Slush support program.",
       "summary_ko": "CUBIG은 서울경제진흥원(SBA) Slush 참가지원 사업에 선정돼 2024년 11월 20–21일 헬싱키에서 열린 Slush 2024에 참가했습니다.",
       "title_ko": "Slush 2024 참가",
-      "intl": true
+      "intl": true,
+      "map": {
+        "x": 779.8,
+        "y": 83.9,
+        "label": "Helsinki",
+        "label_ko": "헬싱키",
+        "dx": 40.0,
+        "dy": -70.0
+      }
     },
     {
       "id": "singapore-fintech-festival-2024",
@@ -927,7 +953,15 @@
       "title_ko": "Singapore FinTech Festival 2024 참가",
       "intl": true,
       "photo": "/assets/media/photos/singapore-fintech-festival-2024/s-IMG_1065-seoul-fintech-demoday-room.jpg",
-      "thumb": "/assets/media/photos/singapore-fintech-festival-2024/s-IMG_1065-seoul-fintech-demoday-room-thumb.webp"
+      "thumb": "/assets/media/photos/singapore-fintech-festival-2024/s-IMG_1065-seoul-fintech-demoday-room-thumb.webp",
+      "map": {
+        "x": 1095.3,
+        "y": 360.7,
+        "label": "Singapore",
+        "label_ko": "싱가포르",
+        "dx": -62.0,
+        "dy": -34.0
+      }
     },
     {
       "id": "ai-security-day-2024",

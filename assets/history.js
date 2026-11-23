@@ -32,7 +32,7 @@ if ((document.documentElement.lang||'en').slice(0,2)!=='ko') HISTORY = HISTORY.f
 var IS_KO=(document.documentElement.lang||'en').slice(0,2)==='ko';
 /* 한국어 사이트: name_ko가 있으면 이름 교체, 날짜는 'YYYY년 M월'로 */
 var NAME_KO = {}; /* 한국어 이름은 events.json 의 label_ko 에 있습니다 */
-var CITY_KO = {'Seoul':'서울','Seongnam':'성남','Las Vegas':'라스베이거스','Lisbon':'리스본','New York':'뉴욕','Paris':'파리','Osaka':'오사카','Tokyo':'도쿄','Osaka · Tokyo':'오사카 · 도쿄','Barcelona':'바르셀로나','Singapore':'싱가포르','Silicon Valley':'실리콘밸리','Belfast':'벨파스트','Busan':'부산','Online':'온라인','US':'미국','Deutsche Telekom final':'Deutsche Telekom 결선'}; /* 국문 페이지에는 영어 지명을 쓰지 않음 (현세님 피드백 11/17). 새 도시는 여기에 추가 */
+var CITY_KO = {'Seoul':'서울','Seongnam':'성남','Las Vegas':'라스베이거스','Lisbon':'리스본','New York':'뉴욕','Paris':'파리','Osaka':'오사카','Tokyo':'도쿄','Osaka · Tokyo':'오사카 · 도쿄','Barcelona':'바르셀로나','Helsinki':'헬싱키','Singapore':'싱가포르','Silicon Valley':'실리콘밸리','Belfast':'벨파스트','Busan':'부산','Online':'온라인','US':'미국','Deutsche Telekom final':'Deutsche Telekom 결선'}; /* 국문 페이지에는 영어 지명을 쓰지 않음 (현세님 피드백 11/17). 새 도시는 여기에 추가 */
 var MON_EN = {Jan:1,Feb:2,Mar:3,Apr:4,May:5,Jun:6,Jul:7,Aug:8,Sep:9,Oct:10,Nov:11,Dec:12};
 /* 'Nov 9–12, 2026' → '2026년 11월 9–12일', 'Sep 30–Oct 2, 2025' → '2025년 9월 30일–10월 2일', 'Jun 2026' → '2026년 6월' */
 function dateKo(t){
