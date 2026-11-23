@@ -42,11 +42,20 @@ def link_href(h, rel_hreflang):
     return m.group(1) if m else ""
 
 
+OTHER_EVENTS_RE = re.compile(r'<section class="more"[\s\S]*?</section>')
+
+
+def strip_other_events(h):
+    """'다른 행사' 카드 묶음(<section class="more">)을 뺌. 그 안 사진은 다른 행사 것이라 이 페이지 대표 사진이 아님."""
+    return OTHER_EVENTS_RE.sub("", h)
+
+
 def hero_image(h, page_path):
-    """<main> 안 첫 사진(svg 제외) → 절대주소. <main>이 없으면 <body> 첫 사진, 사진이 없으면 og:image."""
+    """<main> 안 첫 사진(svg·'다른 행사' 카드 제외) → 절대주소. <main>이 없으면 <body> 첫 사진, 사진이 없으면 og:image."""
     body = re.sub(r"<!--[\s\S]*?-->", "", h)
     body = re.sub(r"<(script|style)\b[\s\S]*?</\1>", "", body)
     body = re.sub(r"<template\b[\s\S]*?</template>", "", body)
+    body = strip_other_events(body)
     m = re.search(r"<main[\s\S]*", body) or re.search(r"<body[\s\S]*", body)
     for src in re.findall(r'<img\b[^>]*?\bsrc=["\']([^"\']+)', m.group(0) if m else ""):
         if src.split("?")[0].lower().endswith(".svg"):
