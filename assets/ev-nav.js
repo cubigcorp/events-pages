@@ -18,7 +18,11 @@
       gtag('event', 'cta_click', { cta_id: 'events_portal', cta_location: 'event-detail-find', link_url: a.href });
       return;
     }
-    var loc = a.closest('.ev-sub') ? 'event-detail-subbar' : (a.getAttribute('data-ev-href') === 'booking' ? 'event-detail-booking' : 'event-detail-hero');
+    // 위치 판정 순서: 하단 예약 칸(bottom) → 고정 띠(subbar) → 본문 예약 링크(booking) → 첫 화면(hero). (11-23 🏷️)
+    // 하단 칸 HTML 속성값 'events-book'은 GA4에 그대로 보내지 않고 event-detail-bottom으로 바꿔 보냄(위치값 규칙 event-detail-*).
+    var loc = (a.getAttribute('data-cta-location') === 'events-book' || a.closest('#book, .ev-close')) ? 'event-detail-bottom'
+      : a.closest('.ev-sub') ? 'event-detail-subbar'
+      : (a.getAttribute('data-ev-href') === 'booking' ? 'event-detail-booking' : 'event-detail-hero');
     if (/cubig\.ai\/(ko\/)?events\/meet/.test(h)) {
       gtag('event', 'cta_click', { cta_id: 'events_meet', cta_location: loc });
     } else if (/calendar\.app\.google|calendar\.google\.com\/calendar\/appointments/.test(h)) {
