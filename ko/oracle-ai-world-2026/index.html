@@ -21,7 +21,6 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="https://events.cubig.ai/oracle-ai-world-2026/favicon.png" media="(prefers-color-scheme: light)">
 <link rel="icon" href="https://events.cubig.ai/oracle-ai-world-2026/favicon-dark.png" media="(prefers-color-scheme: dark)">
-<link rel="apple-touch-icon" href="/oracle-ai-world-2026/apple-touch-icon.png">
 
 <!-- ⑤ 추적 코드 (GA4, 마케팅팀 관리 — 직접 수정·삭제하지 마세요) -->
 <script>
@@ -32,65 +31,13 @@ gtag('config', 'G-8MRD9BZ1VJ');
 </script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-8MRD9BZ1VJ"></script>
 
-<!-- ============================================================
-     EVENT CONFIG: swap this block to make the next event page
-     (e.g. AI Summit New York). Values below are taken from this
-     page; do not add facts that are not confirmed.
-       dates     : Oct 26–28, 2026 (Las Vegas time)
-       venue     : The Venetian Expo, Las Vegas
-       booth     : #2032
-       landmark  : back of the hall, on the left, near booth #2020
-       hours     : not published here, so omitted
-       accent    : #6A4FD0 (the only accent colour)
-       keyVisual : /assets/media/oracle-2026/floor-2026.webp (+ credit line in hero)
-       map       : inline SVG in the "Find us" section (simplified, not official)
-       booking   : cubig.ai/events/meet/ after the event (data-cta on <body>); boothBooking = event-days calendar link
-     ============================================================ -->
-<script>
-window.EVENT = {
-  name: "Oracle AI World 2026",
-  dates: "2026년 10월 26–28일",
-  datesNote: "Las Vegas 현지 시간",
-  venue: "The Venetian Expo, Las Vegas",
-  booth: "#2032",
-  landmark: "전시장 입구에서 지도 경로를 따라 안쪽 왼편에 있습니다. CUBIG 부스는 #2032이며 부스 #2020 근처입니다.",
-  hours: "",
-  accent: "#6A4FD0",
-  keyVisual: "/assets/media/oracle-2026/floor-2026.webp",
-  strip: "Oracle AI World 2026 · Las Vegas",
-  start: "2026-10-26",          /* first day, local date */
-  end: "2026-10-28",            /* last day, local date */
-  area: "",                     /* hall / area: unknown, so the row is hidden */
-  mapsUrl: "https://www.google.com/maps/search/?api=1&query=The+Venetian+Expo+Las+Vegas",
-  booking: "https://cubig.ai/ko/events/meet/",            /* after the event: online meeting page (original after-event URL was empty) */
-  boothBooking: "https://calendar.app.google/oCAQAos8bo4denCr7"   /* during-event calendar link, kept for reuse */
-};
-document.addEventListener("DOMContentLoaded", function () {
-  var E = window.EVENT;
-  document.documentElement.style.setProperty("--ev-accent", E.accent);
-  document.querySelectorAll("[data-ev]").forEach(function (el) {
-    var k = el.getAttribute("data-ev");
-    if (E[k] === "" && el.hasAttribute("data-ev-optional")) { el.remove(); return; }
-    if (E[k] != null) el.textContent = E[k];
-  });
-  var st = document.querySelector("[data-ev-status]");
-  if (st && E.start && E.end) {
-    var now = new Date(), s0 = new Date(E.start + "T00:00:00"), s1 = new Date(E.end + "T23:59:59");
-    st.setAttribute("data-ev-status", now < s0 ? "upcoming" : now > s1 ? "ended" : "live");
-    var lab = st.querySelector(".state");
-    if (lab) lab.textContent = now < s0 ? "예정" : now > s1 ? "행사 종료" : "진행 중";
-  }
-  document.querySelectorAll("[data-ev-row]").forEach(function (el) { if (!E[el.getAttribute("data-ev-row")]) el.remove(); });
-  document.querySelectorAll("[data-ev-href]").forEach(function (el) { el.href = E[el.getAttribute("data-ev-href")]; });
-});
-</script>
 <link rel="stylesheet" href="/assets/ev.css">
-<link rel="stylesheet" href="/assets/ev-detail.css">
+<link rel="stylesheet" href="/assets/ev-pages.css">
 <link rel="stylesheet" href="/assets/site/cubig-site.css">
 <link rel="stylesheet" href="/assets/site/ev-site.css">
+<link rel="stylesheet" href="/assets/ev-basic.css">
 <script src="/assets/site/cubig-site.js" defer></script>
 <script src="/assets/ev-nav.js" defer></script>
-<script src="/assets/ev-detail.js" defer></script>
 <!-- Visual pattern blocks (page-scoped; copy to other landing pages): Gartner band, big stats, "Where CUBIG comes in", stack flow, cycle loop -->
 <style>
 /* Kept until the next event reuses them: booth module (inside <template>) and Oracle 6-step cycle */
@@ -200,212 +147,77 @@ document.addEventListener("DOMContentLoaded", function () {
 }
 </script>
 </head>
-<body data-cta="https://cubig.ai/ko/events/meet/" data-cta-label="온라인 미팅 신청하기" data-lang-toggle>
-<main class="dt">
-
-  <!-- 1 · HERO (visual-led). Job: what CUBIG brings, and the event recap. -->
-  <section class="hero">
-    <div class="wrap">
-      <h1 class="ev-h1">Oracle AI World 2026에서 만난 CUBIG</h1>
-      <p class="h1-sub">데이터를 AI-ready 상태로 만들고 계속 유지합니다.</p>
-      <div class="hero-row">
-        <div>
-          <p class="lead">부스 #2032를 찾아 주셔서 감사합니다.<br>Syntitan은 Use Case별로 데이터를 검증하고, 결과마다 어떤 데이터 Version에서 나왔는지 기록합니다.</p>
-          <div class="actions">
-            <a class="btn" data-ev-href="booking" href="https://cubig.ai/ko/events/meet/">온라인 미팅 신청하기</a>
-            <a class="link" href="https://syntitan.ai/" target="_blank" rel="noopener">Syntitan 무료로 체험하기</a>
-          </div>
-        </div>
-        <dl class="meta" aria-label="행사 정보">
-          <div><dt>일정</dt><dd data-ev="dates">2026년 10월 26–28일</dd></div>
-          <div><dt>장소</dt><dd data-ev="venue">The Venetian Expo, 라스베이거스</dd></div>
-        </dl>
-      </div>
-    </div>
-    <div class="wrap">
-      <figure class="bleed">
-        <img src="/assets/media/oracle-2026/floor-2026.webp" alt="라스베이거스 The Venetian Expo에서 열린 Oracle AI World 2026 전시장">
-        <figcaption class="cap"><i></i>Oracle AI World 2026, The Venetian Expo, 라스베이거스 · 사진: CUBIG</figcaption>
-      </figure>
-    </div>
-    <div class="wrap">
-      <p class="gline"><img src="/assets/media/brand/gartner.svg" alt="Gartner"><span>2026년 Gartner® 리포트 3건 등재*, 2025년부터 총 4건.</span><a class="link" href="https://cubig.ai/news/cubig-gartner-recognition-ai-ready-data/" target="_blank" rel="noopener">뉴스 보기</a></p>
-      <div class="band4"><div><b>3</b><span>건, 2026년 한 해 Gartner® 리포트 등재*</span></div><div><b>2위</b><span>T Challenge 2026 결선 12팀 중</span></div><div><b>+30%p</b><span>보험사 상담 분류 모델의 weighted F1</span></div><div><b>#2032</b><span>The Venetian Expo CUBIG 부스, 10월 26–28일</span></div></div>
-      <div class="strip3"><img src="/assets/media/photos/oracle-2026/booth-talk-1.jpg" alt="Oracle AI World 2026 CUBIG 부스 #2032, 부스 방문객에게 Syntitan을 소개하는 CUBIG 팀" loading="lazy"><img src="/assets/media/photos/oracle-2026/booth-demo.jpg" alt="Oracle AI World 2026 CUBIG 부스 #2032, 노트북으로 Syntitan 데모를 체험하는 방문객" loading="lazy"><img src="/assets/media/photos/oracle-2026/booth-talk-3.jpg" alt="Oracle AI World 2026 CUBIG 부스 #2032" loading="lazy"></div>
-    </div>
-  </section>
-
-  <!-- 2 · PROBLEM  [5:7] headline + stacked survey numbers | numbered blockers -->
-  <section class="sec v rv">
-    <div class="wrap">
-      <div class="vis2 top">
-        <div><h2>데이터를 한곳에 모아도 바로 AI에 쓸 수 있는 것은 아닙니다.</h2><p class="say">AI Use Case가 파일럿과 운영 사이에서 멈추는 지점과, 지점별로 맡는 제품입니다.</p><div class="nstack"><div><b>57%</b><span>데이터 리더가 데이터 신뢰성 문제로 파일럿을 운영까지 가져가지 못한다고 답했습니다.</span></div><div><b>5.7h</b><span>분석가 한 명이 매주 데이터 준비·정리에 쓰는 시간입니다.</span></div></div></div>
-        <ol class="steps6 numl">
-          <li><b>01</b><div><h3>꼭 필요한 사례가 부족합니다.</h3><p>드문 사례는 학습이나 테스트에 쓸 만큼 모이지 않습니다.</p><span class=k>DTS</span></div></li>
-          <li><b>02</b><div><h3>데이터가 있어도 쓸 수 없습니다.</h3><p>민감 데이터와 접근 규칙 때문에 학습, 테스트, LLM 활용이 막힙니다.</p><span class=k>LLM Capsule · DTS</span></div></li>
-          <li><b>03</b><div><h3>데이터가 업무에 맞지 않습니다.</h3><p>빠진 값, 제각각인 형식, 숨은 규칙이 있으면 업무에 바로 쓰기 어렵습니다.</p><span class=k>Syntitan · Ready for Raw Data, Ready for Model</span></div></li>
-          <li><b>04</b><div><h3>한 번 잘 된 결과도 다시 확인해야 합니다.</h3><p>데이터·모델·정책이 바뀌면 예전 결과가 어디서 나왔는지 찾아 다시 확인하기 어렵습니다.</p><span class=k>Syntitan · Version &amp; Execution Trace</span></div></li>
-        </ol>
-      </div>
-      <p class="srcs">출처: Informatica, CDO Insights 2026 (데이터 리더 600명) · Alteryx, 2026 State of the Data Analyst. 설문 결과이며, CUBIG 도입 후 줄어드는 양을 추정한 값은 아닙니다.</p>
-    </div>
-  </section>
-
-  <!-- 3 · HOW IT WORKS  [centrepiece] flow diagram + product video -->
-  <section class="sec v hw rv" aria-labelledby="hw-h">
-    <div class="wrap">
-      <h2 id="hw-h">Syntitan이 AI 업무에 맞게 데이터를 준비하는 방식입니다.</h2>
-      <p class="say">데이터는 기존 플랫폼에 그대로 둡니다. Syntitan은 고칠 부분을 찾고, 고친 결과가 Use Case에서 통하는지 확인하며, 결과마다 해당 Version을 남깁니다.</p>
-      <div class="flowmap" role="img" aria-label="원본 Dataset은 기존 데이터 플랫폼에 그대로 있습니다. Syntitan에서 Project는 복사본 v1에서 시작해 Ready for Raw Data, Model, Agent로 점검합니다. DTS는 부족한 사례를 채우고, LLM Capsule은 외부 AI로 가는 기록을 보호합니다. 결과는 Version으로 남아 모델, Agent, 업무에 쓰입니다. 결과가 기준에 못 미치면 Prove / Recover로 빈 곳을 채우고 다시 검증합니다.">
-        <div class="fm-side"><span class="t">기존 데이터 플랫폼</span><h3>원본 Dataset</h3><p>지금 있는 곳에 그대로 둡니다. 저장과 관리 방식은 바뀌지 않습니다.</p></div>
-        <div class="fm-arrow" aria-hidden="true"><svg viewBox="0 0 32 16"><path d="M1 8h28M23 2l6 6-6 6" fill="none" stroke="#6A4FD0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <div class="fm-core">
-          <div class="head"><img src="/assets/media/websummit-2026/syntitan.png" alt="Syntitan"><span>AI-ready data platform</span></div>
-          <div class="fm-row">
-            <div class="fm-box"><b>Project · v1</b><span>Use Case 하나를 위한 복사본</span></div>
-            <div class="fm-arrow" style="" aria-hidden="true"><svg viewBox="0 0 32 16"><path d="M1 8h28M23 2l6 6-6 6" fill="none" stroke="#6A4FD0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-            <div class="fm-readyset"><span class="lab">이 Use Case에 필요한 점검을 셋 중에서 순서와 관계없이 고릅니다</span><div class="fm-ready">
-              <div class="fm-box"><b>Ready for Raw Data</b><span>쓸 수 있는 상태일까요?</span></div>
-              <div class="fm-box"><b>Ready for Model</b><span>같은 평가로 준비 전후 비교</span></div>
-              <div class="fm-box"><b>Ready for Agent</b><span>실제 사례를 처리할 수 있을까요?</span></div>
-            </div></div>
-            <div class="fm-arrow" aria-hidden="true"><svg viewBox="0 0 32 16"><path d="M1 8h28M23 2l6 6-6 6" fill="none" stroke="#6A4FD0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-            <div class="fm-box"><b>Version</b><span>준비 규칙, 평가 조건과 함께 보관</span></div>
-          </div>
-          <div class="fm-eng">
-            <div class="fm-box"><img src="/assets/media/websummit-2026/dts.png" alt="DTS"><span>업무에 맞게 부족한 사례를 채우고 편중된 분포를 조정</span></div>
-            <div class="fm-box"><img src="/assets/media/websummit-2026/llm-capsule.png" alt="LLM Capsule"><span>맥락을 유지하는 대체값으로 외부 AI에 전달하는 경로</span></div>
-          </div>
-        </div>
-        <div class="fm-arrow" aria-hidden="true"><svg viewBox="0 0 32 16"><path d="M1 8h28M23 2l6 6-6 6" fill="none" stroke="#6A4FD0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <div class="fm-side"><span class="t">사용하는 곳</span><h3>모델, Agent, 업무</h3><p>기준을 충족한 Version 위에서 만듭니다.</p></div>
-      </div>
-      <div class="fm-loop" aria-hidden="true"><div class="bar"></div><p><b>Prove / Recover.</b> 결과가 기준에 못 미치면 빠진 부분을 찾아 채우고, 같은 평가로 다시 검증합니다. 그때마다 새 Version이 남습니다.</p></div>
-      <ol class="fm-steps" aria-label="운영 흐름"><li>Prepare</li><li>Adapt</li><li>Prove / Recover</li><li>Operate</li></ol>
-      <div class="watch">
-        <a class="shot" href="https://youtu.be/2iKkvJKYV0k" target="_blank" rel="noopener"><img src="/assets/media/syntitan-video.jpg" alt="Syntitan 화면: AI Readiness 점수, Ready for Model, Version 이력" loading="lazy"><span>영상 보기 ↗</span></a>
-        <div><h3>제품 화면에서 확인할 수 있습니다.</h3><p>Syntitan 화면에서 데이터의 준비 상태 점수, Ready for Model 점검, 결과마다 남은 Version 이력을 볼 수 있습니다.</p></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 4 · RESULTS  [1 large + 2 small] customer cases -->
-  <section class="sec v rv">
-    <div class="wrap">
-      <h2>도입 사례</h2>
-      <p class="say">고객 프로젝트 결과입니다. 고객사는 업종만 공개합니다.</p>
-      <div class="cases"><div class="card lead"><span class="st">보험 · Syntitan · 2025년 1월</span><div class="big">+30%p</div><h3>기존에 놓치던 상담 유형 29개를 분류합니다.</h3><p>가중 F1 점수 58.6% → 88.6%. 상담 유형 64개, 상담 녹취록 6,874건으로 준비하고 실제 상담 687건으로 테스트했습니다.</p></div><div class="cases-side"><div class="card"><span class="st">은행 · Syntitan · 2025년 11월</span><div class="big">+35%p</div><h3>불완전한 거래 테이블 3개를 정리해 하나로 합쳤습니다.</h3><p>데이터 완전성 59.4% → 94.2%. 학습 데이터의 결측률은 40.57%에서 5.75%로 낮아졌습니다.</p></div><div class="card"><span class="st">마케팅 · Syntitan · 2025년 3월</span><div class="big">45×</div><h3>실제 설문 응답을 AI 학습 레코드로 늘렸습니다.</h3><p>실제 설문 응답 2,200건으로 100,000건 규모의 가상 패널을 만들고, 합성데이터 공개 품질 가이드라인에 맞춰 확인했습니다.</p></div></div></div>
-    </div>
-  </section>
-
-  <!-- 5 · PRODUCTS  three cards, each available on its own -->
-  <section class="sec v rv">
-    <div class="wrap">
-      <h2>세 제품은 각각 단독으로 쓸 수 있습니다.</h2>
-      <p class="say">지금 마주한 걸림돌에 맞는 제품부터 시작할 수 있습니다.</p>
-      <div class="prod3">
-        <a class="card" href="https://cubig.ai/syntitan/"><img src="/assets/media/websummit-2026/syntitan.png" alt="Syntitan"><span class="what">AI-Ready Data Platform</span><p>Use Case별로 데이터를 검증하고, 결과마다 바탕이 된 데이터 Version을 기록합니다. 데모에서는 잘 되던 AI가 실제 운영 데이터에서 다른 결과를 낼 때 적합합니다.</p><div class="foot"><span class="link">Syntitan</span></div></a>
-        <a class="card" href="https://cubig.ai/dts/"><img src="/assets/media/websummit-2026/dts.png" alt="DTS"><span class="what">Data Enablement for AI</span><p>원본 데이터의 패턴과 관계를 학습해, 모델에 부족한 데이터를 다시 만듭니다. 데이터가 부족하거나 그대로 쓰기 어려울 때 적합합니다.</p><div class="foot"><span class="link">DTS</span></div></a>
-        <a class="card" href="https://cubig.ai/llmcapsule/"><img src="/assets/media/websummit-2026/llm-capsule.png" alt="LLM Capsule"><span class="what">Context-Preserving Data Layer for AI</span><p>맥락을 유지하는 대체값으로 바꿔 LLM에 보내고, 실제 값은 고객 환경 안에서 복원합니다. 기록을 LLM에 그대로 보낼 수 없을 때 적합합니다.</p><div class="foot"><span class="link">LLM Capsule</span></div></a>
-      </div>
-    </div>
-  </section>
-
-  <!-- 6 · CUSTOMERS  one logo line -->
-  <section class="sec v rv">
-    <div class="wrap">
-      <h2>금융, 통신, 유통 분야 기업이 함께하고 있습니다.</h2>
-      <ul class="logo-line" aria-label="도입 고객사"><li><img src="/assets/media/websummit-2026/logos/woori-bank.svg" alt="우리은행" loading="lazy"></li><li><img src="/assets/media/websummit-2026/logos/ibk-industrial-bank-of-korea.svg" alt="IBK기업은행" loading="lazy"></li><li><img src="/assets/media/brand/nh-nonghyup-bank-t.png" alt="NH농협은행" loading="lazy"></li><li><img src="/assets/media/brand/samsung-securities-t.png" alt="삼성증권" loading="lazy"></li><li><img src="/assets/media/brand/kyobo-life-t.png" alt="교보생명" loading="lazy"></li><li><img src="/assets/media/websummit-2026/logos/db-insurance.svg" alt="DB손해보험" loading="lazy"></li><li><img src="/assets/media/websummit-2026/logos/sk-telecom.svg" alt="SK텔레콤" loading="lazy"></li><li><img src="/assets/media/websummit-2026/logos/danal.svg" alt="다날" loading="lazy"></li><li><img src="/assets/media/brand/cj-freshway-t.png" alt="CJ프레시웨이" loading="lazy"></li></ul>
-    </div>
-  </section>
-
-  <!-- 7 · CLOSING  black band: CEO card + book a meeting -->
-  <section class="sec closing">
-    <div class="wrap closing-grid">
-      <div>
-        <div class="ceo"><img src="/assets/media/ho-bae-face.jpg" alt="배호 (Ho Bae) 대표"><div><b>배호 (Ho Bae)</b><span>CUBIG 공동창업자 · 대표</span><span>이화여자대학교 교수 · NeurIPS, ICLR, AAAI 등 논문 20편 이상</span></div></div>
-        <h2>라스베이거스에서 만나지 못하셨나요? 30분 온라인 미팅으로 이어갑니다.</h2>
-        <p>파일럿은 잘 됐지만 아직 실제 운영에 들어가지 못한 AI Use Case 하나를 알려 주시면, CUBIG 팀이 Use Case, 막힌 지점, 다음에 확인할 항목을 함께 정리합니다.</p>
-        <div class="actions"><a class="btn light" data-ev-href="booking" href="https://cubig.ai/ko/events/meet/">온라인 미팅 신청하기</a></div>
-      </div>
-      <div>
-        <dl class="facts"><dt>행사</dt><dd>Oracle AI World 2026</dd><dt>일정</dt><dd>2026년 10월 26–28일</dd><dt>방식</dt><dd>30분 온라인 미팅</dd><dt>문의</dt><dd><a href="mailto:contact@cubig.ai?subject=Call%20after%20Oracle%20AI%20World%202026">contact@cubig.ai</a></dd></dl>
-      </div>
-    </div>
-  </section>
-
-  <!-- 8 · BADGES  small, above the footer -->
-  <section class="badges">
-    <div class="wrap">
-      <div class="row">
-        <a href="https://cubig.ai/news/cubig-gartner-recognition-ai-ready-data/" target="_blank" rel="noopener"><img class="wide" src="/assets/media/brand/gartner.svg" alt="Gartner"></a>
-        <a href="https://cubig.ai/news/iso-certified-ai-ready-data-infrastructure-cubig-achieves-27001-42001/" target="_blank" rel="noopener"><img src="/assets/media/brand/iso-42001-t.png" alt="ISO/IEC 42001:2023 인증 마크"></a>
-        <a href="https://cubig.ai/news/iso-certified-ai-ready-data-infrastructure-cubig-achieves-27001-42001/" target="_blank" rel="noopener"><img src="/assets/media/brand/iso-27001-t.png" alt="ISO/IEC 27001:2022 인증 마크"></a>
-        <a href="https://aws.amazon.com/marketplace/seller-profile?id=seller-esnte65usql66" target="_blank" rel="noopener"><img class="wide" src="/assets/media/oracle-2026/aws-marketplace.svg" alt="AWS Marketplace"></a>
-        <a href="https://marketplace.microsoft.com/en-us/product/cubigcorp1782959405251.llm-capsule?tab=Overview" target="_blank" rel="noopener"><img class="wide" src="/assets/media/brand/microsoft-marketplace-t.png" alt="Microsoft Marketplace"></a>
-      </div>
-      <p>Gartner® 2025–2026 · <a href="https://cubig.ai/news/cubigs-llm-capsule-wins-runner-up-at-t-challenge-2026-the-deutsche-telekom-x-t-mobile-us-global-innovation-program/" target="_blank" rel="noopener">T Challenge 2026 준우승</a> (Deutsche Telekom x T-Mobile US) · ISO/IEC 42001:2023 · ISO/IEC 27001:2022, KFQ 인증, KAB 인정 · AWS·Microsoft Marketplace 입점</p>
-      <p>* GARTNER is a registered trademark of Gartner, Inc. and/or its affiliates, used with permission. Gartner does not endorse any vendor, product or service depicted in its research publications.</p>
-    </div>
-  </section>
-
-  <!-- Booth module kept for reuse (does not render) -->
-      <template id="booth-module">
-      <!-- Find us: booth module. Strip (live/ended from config dates) + spec card + floor plan -->
-      <div class="sec-head"><div><h2>부스 위치</h2><p>미팅은 30분 동안 진행합니다. 진행 중인 AI Use Case 하나만 있으면 됩니다.</p></div></div>
-      <div class="findus">
-        <div class="strip" data-ev-status="upcoming"><span data-ev="strip">Oracle AI World 2026 · 라스베이거스</span><span class="state">예정</span></div>
-        <div class="body">
-          <div class="spec">
-            <span class="lbl">부스</span>
-            <div class="bn" data-ev="booth">#2032</div>
-            <dl class="rows">
-              <div class="r"><dt class="lbl">장소</dt><dd data-ev="venue">The Venetian Expo, 라스베이거스</dd></div>
-              <div class="r"><dt class="lbl">일정</dt><dd>10월 26–28일, 라스베이거스 현지 시간</dd></div>
-              <div class="r" data-ev-row="area"><dt class="lbl">구역</dt><dd data-ev="area"></dd></div>
-              <div class="r"><dt class="lbl">찾아오는 길</dt><dd data-ev="landmark">전시장 입구에서 지도 경로를 따라 안쪽 왼편에 있습니다. CUBIG 부스는 #2032이며 부스 #2020 근처입니다.</dd></div>
-              <div class="r" data-ev-row="hours"><dt class="lbl">운영 시간</dt><dd data-ev="hours"></dd></div>
-            </dl>
-            <div class="actions">
-              <a class="btn" data-ev-href="booking" href="https://calendar.app.google/oCAQAos8bo4denCr7" target="_blank" rel="noopener">미팅 신청하기</a>
-              <a class="btn line" data-ev-href="mapsUrl" href="https://www.google.com/maps/search/?api=1&query=The+Venetian+Expo+Las+Vegas" target="_blank" rel="noopener">길 찾기</a>
-            </div>
-          </div>
-          <div class="plan">
-            <!-- boothMap: simplified plan, 1px lines, aisle grid. Labels from the original map only. Not the official floor plan. -->
-            <svg viewBox="0 0 560 360" role="img" aria-label="The Venetian Expo 전시장 약도. CUBIG 부스 #2032는 안쪽 왼편, 부스 #2020 근처입니다">
-              <defs><pattern id="aisle" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M20 0H0V20" fill="none" stroke="#e6e7e9" stroke-width="1"/></pattern></defs>
-              <rect x=".5" y=".5" width="559" height="359" rx="10" fill="url(#aisle)" stroke="#d4d4d8"/>
-              <g fill="#fff" stroke="#c9c9ce" stroke-width="1">
-                <rect x="40" y="40" width="140" height="64" rx="4"/><rect x="210" y="40" width="140" height="64" rx="4"/><rect x="380" y="40" width="140" height="64" rx="4"/>
-                <rect x="40" y="140" width="80" height="48" rx="4"/><rect x="290" y="140" width="60" height="48" rx="4"/><rect x="380" y="140" width="140" height="48" rx="4"/>
-                <rect x="40" y="220" width="140" height="48" rx="4"/><rect x="210" y="220" width="60" height="48" rx="4"/><rect x="380" y="220" width="140" height="48" rx="4"/>
-              </g>
-              <g font-size="11" fill="#5f5f66" text-anchor="middle" letter-spacing=".06em">
-                <text x="110" y="76">THEATERS</text><text x="280" y="76">DATA CENTER</text><text x="450" y="76">APPS</text>
-                <text x="80" y="168" fill="#8b8b92">2020</text>
-              </g>
-              <path d="M300 330 V205 H205 V194" fill="none" stroke="#6A4FD0" stroke-width="1.5" stroke-dasharray="4 4"/>
-              <rect class="ring" x="140" y="140" width="130" height="48" rx="6" fill="none" stroke="#6A4FD0" stroke-width="2"/>
-              <rect x="140" y="140" width="130" height="48" rx="4" fill="#6A4FD0"/>
-              <text x="205" y="161" fill="#fff" font-size="10" text-anchor="middle" letter-spacing=".08em" opacity=".8">BOOTH</text>
-              <text x="205" y="178" fill="#fff" font-size="14" font-weight="600" text-anchor="middle">CUBIG #2032</text>
-              <g transform="translate(300 330)"><path d="M-36 0 H36" stroke="#16161a" stroke-width="2"/><text y="20" font-size="11" text-anchor="middle" fill="#16161a" letter-spacing=".08em">ENTRANCE</text></g>
-            </svg>
-            <p class="cap"><span>간략 약도 · 공식 배치도 아님</span><span data-ev="venue">The Venetian Expo, 라스베이거스</span></p>
-          </div>
-        </div>
-      </div>
-
-      </template>
-
-  <!-- 현장 사진: 행사 끝난 뒤 figure를 넣으면 자동으로 보임 (예정 행사·사진 없으면 숨김). alt = "행사명 CUBIG 부스, 장면" -->
-  <section class="sec ev-photos" data-after="2026-10-28" hidden>
-    <div class="wrap">
-      <h2>현장 사진</h2>
-      <div class="ph-grid"></div>
-    </div>
-  </section>
+<body data-strip="off" data-lang-toggle data-cta="https://cubig.ai/ko/events/meet/" data-cta-label="온라인 미팅 신청하기">
+<main>
+<section class="d-hero">
+<div class="wrap">
+<div class="d-hero__in">
+<div class="d-hero__txt">
+<nav aria-label="이동 경로" class="crumb"><a href="https://cubig.ai/ko/events/">행사</a><span>›</span><a href="https://cubig.ai/ko/events/">전시·행사</a><span>›</span><span>Oracle AI World 2026</span></nav>
+<div class="tg">전시 · 2026년 10월</div>
+<h1>Oracle AI World 2026에서 만난 CUBIG</h1>
+<div class="with">부스 #2032</div>
+<div class="d-acts"><a class="d-go" href="https://cubig.ai/ko/events/meet/">온라인 미팅 신청하기 <i aria-hidden="true">→</i></a></div>
+</div>
+<div class="d-hero__ph"><img alt="" fetchpriority="high" height="720" src="/assets/media/oracle-2026/floor-2026.webp" width="1280"/></div>
+</div>
+<dl aria-label="한눈에 보기" class="d-facts"><div><dt>행사</dt><dd>Oracle AI World 2026</dd></div><div><dt>장소</dt><dd>The Venetian Expo, 라스베이거스</dd></div><div><dt>부스</dt><dd>#2032</dd></div><div><dt>일정</dt><dd>2026년 10월 26–28일</dd></div></dl>
+</div>
+</section>
+<div class="wrap">
+<div class="d-body d-body--one">
+<article class="d-main">
+<p>부스 #2032를 찾아 주셔서 감사합니다. Syntitan은 Use Case별로 데이터를 검증하고, 결과마다 어떤 데이터 Version에서 나왔는지 기록합니다.</p>
+<h2>CUBIG이 보여준 것</h2>
+<div class="sy-tiles">
+<a aria-label="Syntitan, AI-ready data platform" class="sy-tile" href="https://cubig.ai/ko/syntitan/"><span class="sy-top"><svg aria-label="Syntitan" class="sy-logo sy-logo--sy" fill="none" focusable="false" height="28" preserveaspectratio="xMinYMid meet" role="img" viewbox="0 0 602 148" width="114" xmlns="http://www.w3.org/2000/svg"><path d="M531.477 115.52V32.0001H576.757C593.077 32.0001 601.237 40.1601 601.237 56.4801V115.52H585.717V54.8801C585.717 48.6934 582.623 45.6001 576.437 45.6001H546.997V115.52H531.477Z" fill="black"></path><path d="M464.609 115.52C448.182 115.52 439.969 107.36 439.969 91.0401C439.969 74.7201 448.182 66.5601 464.609 66.5601H491.649V54.8801C491.649 48.6934 488.555 45.6001 482.369 45.6001H448.129V37.4401L455.489 32.0001H482.689C499.009 32.0001 507.169 40.1601 507.169 56.4801V115.52H464.609ZM455.489 92.4801C455.489 98.7734 458.635 101.92 464.929 101.92H491.649V78.7201H464.929C458.635 78.7201 455.489 81.8667 455.489 88.1601V92.4801Z" fill="black"></path><path d="M379.438 90.8851V5.12506H394.957V32.0051H424.557V45.6051H394.957V92.4851C394.957 98.7784 398.104 101.925 404.397 101.925H426.158V110.085L418.798 115.525H403.918C387.598 115.525 379.438 107.312 379.438 90.8851Z" fill="black"></path><path d="M338.969 16.9601V6.10352e-05H355.609V16.9601H338.969ZM339.609 115.52V32.0001H355.129V115.52H339.609Z" fill="black"></path><path d="M274.594 90.8851V5.12506H290.114V32.0051H319.714V45.6051H290.114V92.4851C290.114 98.7784 293.26 101.925 299.554 101.925H321.314V110.085L313.954 115.525H299.074C282.754 115.525 274.594 107.312 274.594 90.8851Z" fill="black"></path><path d="M181.164 115.52V32.0001H226.444C242.764 32.0001 250.924 40.1601 250.924 56.4801V115.52H235.404V54.8801C235.404 48.6934 232.311 45.6001 226.124 45.6001H196.684V115.52H181.164Z" fill="black"></path><path d="M86.8828 34.5601L88.6428 32.0001H102.083L124.803 101.92H127.683L150.563 32.0001H163.843L165.603 34.5601L127.683 147.52H114.243L112.643 144.96L123.043 115.52H114.243L86.8828 34.5601Z" fill="black"></path><path d="M0 109.125V100.805H49.28C55.36 100.805 58.4 97.8184 58.4 91.8451V79.2051C58.4 73.9784 56.1067 70.9384 51.52 70.0851L18.08 63.2051C6.02667 60.8584 0 52.8051 0 39.0451V30.4051C0 13.5517 8.37333 5.12506 25.12 5.12506H63.2L71.36 11.5251V19.8451H25.28C19.2 19.8451 16.16 22.8317 16.16 28.8051V39.6851C16.16 44.9117 18.4533 47.9517 23.04 48.8051L56.64 55.3651C68.5867 57.9251 74.56 66.0317 74.56 79.6851V90.2451C74.56 107.098 66.1867 115.525 49.44 115.525H8.16L0 109.125Z" fill="black"></path></svg><i aria-hidden="true">→</i></span><span class="sy-label">AI-ready data platform</span></a>
+<a aria-label="DTS, Data Enablement for AI" class="sy-tile" href="https://cubig.ai/ko/dts/"><span class="sy-top"><img alt="DTS" class="sy-logo sy-logo--dts" height="28" src="/assets/media/brand/tile-dts.png" width="108"/><i aria-hidden="true">→</i></span><span class="sy-label">Data Enablement for AI</span></a>
+<a aria-label="LLM Capsule, Context-Preserving Data Layer for AI" class="sy-tile" href="https://cubig.ai/ko/llmcapsule/"><span class="sy-top"><img alt="LLM Capsule" class="sy-logo sy-logo--llm" height="28" src="/assets/media/brand/tile-llm-capsule.png" width="200"/><i aria-hidden="true">→</i></span><span class="sy-label">Context-Preserving Data Layer for AI</span></a>
+</div>
+<h2>현장에서 들은 이야기</h2>
+<ol>
+<li><span>01</span><div class="t">가장 큰 어려움으로 많이 나온 건,<br class="ws-br"/>데이터를 쓸 수 있게 만드는 수작업이에요.</div></li>
+<li><span>02</span><div class="t">이미 AI를 업무에 쓰는 팀은 질문이 달라요.<br class="ws-br"/>“AI를 쓸까”에서 “이 결과를 믿고 써도 될까”로 옮겨 가요.</div></li>
+<li><span>03</span><div class="t">데이터를 AI 업무에 맞게 준비하고,<br class="ws-br"/>결과의 근거를 남겨 두는 일이<br class="ws-br"/>앞으로 더 중요해질 것으로 보여요.</div></li>
+</ol>
+</article>
+</div>
+</div>
+<section class="d-news">
+<div class="wrap">
+<div class="p-head"><div><h2>관련 기사</h2></div></div>
+<ul class="news-list"><li><a href="https://www.sisunnews.co.kr/news/articleView.html?idxno=248780" rel="noopener" target="_blank"><span class="src">시선뉴스</span><span class="ttl">큐빅, '오라클 AI 월드 2026' 참가… 'Syntitan(신타이탄)' 선보여</span><time datetime="2026-10-30">2026.10.30</time></a></li><li><a href="https://www.kdpress.co.kr/news/articleView.html?idxno=209634" rel="noopener" target="_blank"><span class="src">데일리경제</span><span class="ttl">큐빅, 오라클 AI 월드 2026에서 AI-레디 데이터 플랫폼 'Syntitan' 소개</span><time datetime="2026-10-30">2026.10.30</time></a></li></ul>
+</div>
+</section>
+<section class="d-gal">
+<div class="wrap">
+<div class="p-head"><div><h2>현장 사진</h2></div></div>
+<div class="gal n4"><figure class=""><img alt="Oracle AI World 2026에서 만난 CUBIG" decoding="async" loading="lazy" src="/assets/media/photos/oracle-2026/booth-talk-1.jpg"/></figure><figure class=""><img alt="Oracle AI World 2026에서 만난 CUBIG" decoding="async" loading="lazy" src="/assets/media/photos/oracle-2026/booth-talk-3.jpg"/></figure><figure class=""><img alt="Oracle AI World 2026에서 만난 CUBIG" decoding="async" loading="lazy" src="/assets/media/photos/oracle-2026/s-IMG_4973-booth-2032-two-staff-landscape.jpg"/></figure><figure class=""><img alt="Oracle AI World 2026에서 만난 CUBIG" decoding="async" loading="lazy" src="/assets/media/photos/oracle-2026/booth-setup.jpg"/></figure></div>
+</div>
+</section>
+<section class="more">
+<div class="wrap">
+<div class="p-head"><div><h2>다른 전시·행사</h2></div><a class="link" href="https://cubig.ai/ko/events/">전체 보기</a></div>
+<div class="ev-grid">
+<a class="ev-it" data-e="2026-11-12" data-s="2026-11-09" href="/ko/websummit-2026/"><div class="ev-it__im"><img alt="" decoding="async" height="360" loading="lazy" src="/websummit-2026/venue-thumb.webp" width="640"/><small class="ev-it__cr">사진: Web Summit via Flickr, CC BY 2.0</small></div><div class="ev-it__b"><em class="ev-st is-past" data-ev-st="">종료</em><h3 class="ev-it__n">Web Summit Lisbon</h3><small class="ev-it__m">2026년 11월 9–12일 · 리스본</small><strong class="ev-it__go">자세히 보기 <i aria-hidden="true">→</i></strong></div></a>
+<a class="ev-it" data-e="2026-03-27" data-s="2026-03-25" href="/ko/korea-nara-jangteo-expo-2026/"><div class="ev-it__im"><img alt="" decoding="async" height="360" loading="lazy" src="/assets/media/photos/narajangteo-expo-2026/01-thumb.webp" width="640"/></div><div class="ev-it__b"><em class="ev-st is-past" data-ev-st="">종료</em><h3 class="ev-it__n">Korea Nara Jangteo Expo 2026</h3><small class="ev-it__m">2026년 3월 25–27일 · 고양</small><strong class="ev-it__go">자세히 보기 <i aria-hidden="true">→</i></strong></div></a>
+</div>
+</div>
+</section>
+<section aria-labelledby="ev-book-h" class="ev-sec ev-close" id="book">
+<div class="ev-wrap">
+<div class="ev-end ev-dark">
+<h2 class="ev-end__h" id="ev-book-h">어디서든, 30분이면 돼요.</h2>
+<div class="ev-end__r">
+<p class="ev-end__p">AI 업무 하나를 알려 주시고, CUBIG 팀과 만날 30분 시간을 골라 주세요.</p>
+<div class="ev-ctas">
+<a class="ev-cta ev-cta--light" data-cta-id="events_meet" data-cta-location="events-book" href="https://cubig.ai/ko/events/meet/">30분 미팅 신청하기</a>
+<a class="ev-cta ev-cta--text" href="mailto:team-gtm@cubig.ai">team-gtm@cubig.ai</a>
+</div>
+</div>
+</div>
+</div>
+</section>
 </main>
 </body>
 </html>

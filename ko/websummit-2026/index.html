@@ -32,12 +32,12 @@ gtag('config', 'G-8MRD9BZ1VJ');
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-8MRD9BZ1VJ"></script>
 
 <link rel="stylesheet" href="/assets/ev.css">
-<link rel="stylesheet" href="/assets/ev-detail.css">
+<link rel="stylesheet" href="/assets/ev-pages.css">
 <link rel="stylesheet" href="/assets/site/cubig-site.css">
 <link rel="stylesheet" href="/assets/site/ev-site.css">
+<link rel="stylesheet" href="/assets/ev-basic.css">
 <script src="/assets/site/cubig-site.js" defer></script>
 <script src="/assets/ev-nav.js" defer></script>
-<script src="/assets/ev-detail.js" defer></script>
 <script type="application/ld+json" id="ev-jsonld">
 {
  "@context": "https://schema.org",
@@ -91,177 +91,64 @@ gtag('config', 'G-8MRD9BZ1VJ');
 }
 </script>
 </head>
-<body data-cta="https://cubig.ai/ko/events/meet/" data-cta-label="미팅 신청하기" data-lang-toggle>
-<!-- Exhibition detail template (see /_template/DETAIL-TEMPLATE.md). Section order:
-     1 hero · 2 gartner · 3 problem · 4 results (dark) · 5 stack · 6 how · 7 team · 8 region · 9 proof wall · 10 closing (black band) -->
-<main class="dt">
-
-  <!-- 1 · HERO: h1, lead + actions | event meta, full-width photo -->
-  <section class="hero">
-    <div class="wrap">
-      <h1 class="ev-h1">Web Summit Lisbon 2026에서 만난 CUBIG</h1>
-      <p class="h1-sub">AI 업무에 쓸 수 있도록 데이터를 준비합니다. 조건이 바뀌어도 계속 쓸 수 있게 관리합니다.</p>
-      <div class="hero-row">
-        <div>
-          <p class="lead">리스본에서 만나 주셔서 감사합니다.<br>Syntitan은 실제로 쓰기 전에 고객의 모델이나 Agent로 데이터를 검증하고, 결과마다 해당 데이터 Version을 남깁니다.</p>
-          <div class="actions">
-            <a class="btn" href="https://cubig.ai/ko/events/meet/">미팅 신청하기</a>
-            <a class="link" href="/websummit-2026/syntitan-product-overview.pdf" target="_blank" rel="noopener">소개서 먼저 보기 (PDF)</a>
-          </div>
-        </div>
-        <dl class="meta" aria-label="행사 정보">
-          <div><dt>일정</dt><dd>2026년 11월 9–12일</dd></div>
-          <div><dt>장소</dt><dd>리스본 MEO Arena &amp; FIL</dd></div>
-        </dl>
-      </div>
-      <figure class="bleed">
-        <img src="/websummit-2026/venue.jpg" alt="Web Summit Lisbon, MEO Arena 전경">
-        <figcaption class="cap"><i></i>리스본 MEO Arena &amp; FIL · Web Summit via Flickr, CC BY 2.0</figcaption>
-      </figure>
-    </div>
-    <div class="wrap">
-      <p class="gline"><img src="/assets/media/brand/gartner.svg" alt="Gartner"><span>2026년 Gartner® 리포트 3건 등재*, 2025년부터 총 4건.</span><a class="link" href="https://cubig.ai/news/cubig-gartner-recognition-ai-ready-data/" target="_blank" rel="noopener">뉴스 보기</a></p>
-      <div class="band4"><div><b>3</b><span>건, 2026년 한 해 Gartner® 리포트 등재*</span></div><div><b>2위</b><span>T Challenge 2026 결선 12팀 중</span></div><div><b>88.55%</b><span>보험사 상담 분류 모델의 weighted F1, 기존 58.55%에서 상승</span></div><div><b>30분</b><span>행사 이후 CUBIG 팀과 온라인 미팅</span></div></div>
-    </div>
-  </section>
-
-  <!-- 2 · PROBLEM  [5:7] headline + stacked survey numbers | numbered blockers -->
-  <section class="sec v rv">
-    <div class="wrap">
-      <div class="vis2 top">
-        <div><h2>파일럿까지는 잘 됩니다. 그다음 데이터 작업이 처음부터 다시 시작됩니다.</h2><p class="say">잘 되는 파일럿과 실제로 쓰는 AI Use Case 사이에서 같은 걸림돌 네 가지가 반복됩니다.</p><div class="nstack"><div><b>42%</b><span>2025년 AI 이니셔티브 대부분을 중단한 기업 비율입니다. 1년 전에는 17%였습니다.</span></div><div><b>57%</b><span>기업이 AI를 실제 운영에 서둘러 적용하는 가운데, 데이터 신뢰성을 가장 큰 걸림돌로 꼽은 데이터 리더 비율입니다.</span></div><div><b>5.7시간</b><span>데이터 분석가가 매주 데이터 준비와 정제에 쓰는 시간입니다.</span></div></div></div>
-        <ol class="steps6 numl">
-          <li><b>01</b><div><h3>Use Case가 바뀌면 <em class="kw">데이터도 다시 맞춰야 합니다</em>.</h3><p>업무마다 필드, 형식, 규칙이 달라 준비 작업을 매번 새로 합니다.</p></div></li>
-          <li><b>02</b><div><h3>어떤 데이터는 <em class="kw">그대로 쓸 수 없습니다</em>.</h3><p>민감한 값은 옮길 수 없고, 정작 중요한 사례는 수십 건에 그칩니다.</p></div></li>
-          <li><b>03</b><div><h3>결과가 틀려도 <em class="kw">원인을 알 수 없습니다</em>.</h3><p>모델 문제일까요, 데이터 문제일까요? 평가 조건이 같지 않으면 가려낼 수 없습니다.</p></div></li>
-          <li><b>04</b><div><h3>하나만 바뀌어도 <em class="kw">전부 다시 확인해야 합니다</em>.</h3><p>데이터, 모델, 정책이 새로 바뀌면 무엇이 여전히 유효하고 무엇을 다시 확인해야 하는지 알기 어렵습니다.</p></div></li>
-        </ol>
-      </div>
-      <p class="srcs">출처: <a href="https://www.spglobal.com/market-intelligence/en/news-insights/research/ai-experiences-rapid-adoption-but-with-mixed-outcomes-highlights-from-vote-ai-machine-learning" target="_blank" rel="noopener">S&amp;P Global Market Intelligence, 2025</a> · <a href="https://www.informatica.com/blogs/cdo-insights-2026-ai-adoption-accelerates-but-trust-and-governance-lag-behind.html" target="_blank" rel="noopener">Informatica, CDO Insights 2026</a> · <a href="https://www.alteryx.com/wp-content/uploads/media/whitepaper/2026-state-of-the-data-analyst-the-rise-of-business-logic.pdf" target="_blank" rel="noopener">Alteryx, 2026 State of the Data Analyst</a>.</p>
-    </div>
-  </section>
-
-  <!-- 3 · HOW IT WORKS  [centrepiece] flow diagram + product video -->
-  <section class="sec v hw rv" aria-labelledby="hw-h">
-    <div class="wrap">
-      <h2 id="hw-h">Syntitan이 AI 업무에 맞게 데이터를 준비하는 방식입니다.</h2>
-      <p class="say">데이터는 기존 플랫폼에 그대로 둡니다. Syntitan은 Use Case마다 복사본을 준비해 고객의 모델이나 Agent로 확인하고, 기준을 충족한 Version을 남깁니다.</p>
-      <div class="flowmap" role="img" aria-label="원본 Dataset은 기존 데이터 플랫폼에 그대로 있습니다. Syntitan에서 Project는 복사본 v1에서 시작해 Ready for Raw Data, Model, Agent로 점검합니다. DTS는 부족한 사례를 채우고, LLM Capsule은 외부 AI로 가는 기록을 보호합니다. 결과는 Version으로 남아 모델, Agent, 업무에 쓰입니다. 결과가 기준에 못 미치면 Prove / Recover로 빈 곳을 채우고 다시 검증합니다.">
-        <div class="fm-side"><span class="t">기존 데이터 플랫폼</span><h3>원본 Dataset</h3><p>지금 있는 곳에 그대로 둡니다. 저장과 관리 방식은 바뀌지 않습니다.</p></div>
-        <div class="fm-arrow" aria-hidden="true"><svg viewBox="0 0 32 16"><path d="M1 8h28M23 2l6 6-6 6" fill="none" stroke="#6A4FD0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <div class="fm-core">
-          <div class="head"><img src="/assets/media/websummit-2026/syntitan.png" alt="Syntitan"><span>AI-ready data platform</span></div>
-          <div class="fm-row">
-            <div class="fm-box"><b>Project · v1</b><span>Use Case 하나를 위한 복사본</span></div>
-            <div class="fm-arrow" style="" aria-hidden="true"><svg viewBox="0 0 32 16"><path d="M1 8h28M23 2l6 6-6 6" fill="none" stroke="#6A4FD0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-            <div class="fm-readyset"><span class="lab">이 Use Case에 필요한 점검을 셋 중에서 순서와 관계없이 고릅니다</span><div class="fm-ready">
-              <div class="fm-box"><b>Ready for Raw Data</b><span>쓸 수 있는 상태일까요?</span></div>
-              <div class="fm-box"><b>Ready for Model</b><span>같은 평가로 준비 전후 비교</span></div>
-              <div class="fm-box"><b>Ready for Agent</b><span>실제 사례를 처리할 수 있을까요?</span></div>
-            </div></div>
-            <div class="fm-arrow" aria-hidden="true"><svg viewBox="0 0 32 16"><path d="M1 8h28M23 2l6 6-6 6" fill="none" stroke="#6A4FD0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-            <div class="fm-box"><b>Version</b><span>준비 규칙, 평가 조건과 함께 보관</span></div>
-          </div>
-          <div class="fm-eng">
-            <div class="fm-box"><img src="/assets/media/websummit-2026/dts.png" alt="DTS"><span>업무에 맞게 부족한 사례를 채우고 편중된 분포를 조정</span></div>
-            <div class="fm-box"><img src="/assets/media/websummit-2026/llm-capsule.png" alt="LLM Capsule"><span>맥락을 유지하는 대체값으로 외부 AI에 전달하는 경로</span></div>
-          </div>
-        </div>
-        <div class="fm-arrow" aria-hidden="true"><svg viewBox="0 0 32 16"><path d="M1 8h28M23 2l6 6-6 6" fill="none" stroke="#6A4FD0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <div class="fm-side"><span class="t">사용하는 곳</span><h3>모델, Agent, 업무</h3><p>기준을 충족한 Version 위에서 만듭니다.</p></div>
-      </div>
-      <div class="fm-loop" aria-hidden="true"><div class="bar"></div><p><b>Prove / Recover.</b> 결과가 기준에 못 미치면 빠진 부분을 찾아 채우고, 같은 평가로 다시 검증합니다. 그때마다 새 Version이 남습니다.</p></div>
-      <ol class="fm-steps" aria-label="운영 흐름"><li>Prepare</li><li>Adapt</li><li>Prove / Recover</li><li>Operate</li></ol>
-      <div class="watch">
-        <a class="shot" href="https://youtu.be/2iKkvJKYV0k" target="_blank" rel="noopener"><img src="/assets/media/syntitan-video.jpg" alt="Syntitan 화면: AI Readiness 점수, Ready for Model, Version 이력" loading="lazy"><span>영상 보기 ↗</span></a>
-        <div><h3>제품 화면에서 확인할 수 있습니다.</h3><p>Syntitan 화면에서 데이터의 준비 상태 점수, Ready for Model 점검, 결과마다 남은 Version 이력을 볼 수 있습니다.</p></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 4 · RESULTS  [1 large + 2 small] customer cases -->
-  <section class="sec v rv">
-    <div class="wrap">
-      <h2>여러 업종에서 데이터 걸림돌을 해결했습니다.</h2>
-      <p class="say">금융, 통신, 유통 분야 주요 기업과 함께했습니다.</p>
-      <div class="cases"><div class="card lead"><span class="st">DTS · 국내 보험사</span><div class="big">88.55%</div><h3>고객 상담 분류 모델</h3><p>DTS로 드문 상담 유형의 예시를 더 준비해 실제 데이터에 더하자, weighted F1이 58.55%에서 올랐습니다.</p></div><div class="cases-side"><div class="card"><span class="st">Syntitan · Ready for Model 예시</span><div class="big">+18</div><h3>이탈 예측, 같은 모델과 같은 평가</h3><p>원본 데이터로는 이탈 고객 140명, 준비한 데이터로는 158명을 찾았습니다. 바뀐 것은 데이터뿐입니다.</p></div><div class="card"><span class="st">LLM Capsule · DB손해보험</span><h3>외부 LLM 활용</h3><p>민감한 값은 외부 LLM으로 보낼 수 없었습니다. 질의 전에 대체값으로 바꾸고, 응답 후 내부에서 복원했습니다.</p></div></div></div>
-      <p class="srcs">이 밖에 삼성증권 이탈 예측에서는 옮길 수 없던 계열사 데이터를 작업용 데이터셋으로 만들었습니다(2025년 우수상). CJ프레시웨이 견적서 초안 작성에서는 메뉴, 레시피, 상품 정보를 하나의 데이터셋으로 합쳤습니다. F1은 CUBIG이 측정했습니다(실제 데이터 vs. 실제 데이터 + DTS로 준비한 데이터). 기업명은 승인을 받아 표기했습니다.</p>
-    </div>
-  </section>
-
-  <!-- 5 · PRODUCTS  three cards, each available on its own -->
-  <section class="sec v rv">
-    <div class="wrap">
-      <h2>세 제품은 각각 단독으로 쓸 수 있습니다.</h2>
-      <p class="say">지금 마주한 걸림돌에 맞는 제품부터 시작할 수 있습니다.</p>
-      <div class="prod3">
-        <a class="card" href="https://cubig.ai/syntitan/"><img src="/assets/media/websummit-2026/syntitan.png" alt="Syntitan"><span class="what">AI-Ready Data Platform</span><p>Use Case마다 데이터를 점검·준비·검증하고, 결과마다 해당 데이터 Version을 남깁니다. 파일럿은 잘 됐지만 그 데이터를 아직 실제 운영에 믿고 쓰기 어려울 때 적합합니다.</p><div class="foot"><span class="link">Syntitan</span></div></a>
-        <a class="card" href="https://cubig.ai/dts/"><img src="/assets/media/websummit-2026/dts.png" alt="DTS"><span class="what">Data Enablement for AI</span><p>민감 데이터 제약이 있거나 드문 사례가 부족해 쓰기 어려운 데이터를 진단하고, AI 업무에 필요한 데이터 후보를 채웁니다. 중요한 사례가 너무 적거나 데이터를 그대로 쓸 수 없을 때 적합합니다.</p><div class="foot"><span class="link">DTS</span></div></a>
-        <a class="card" href="https://cubig.ai/llmcapsule/"><img src="/assets/media/websummit-2026/llm-capsule.png" alt="LLM Capsule"><span class="what">Context-Preserving Data Layer for AI</span><p>기록이 외부 LLM이나 RAG로 가기 전에 민감한 값을 맥락이 살아 있는 대체값으로 바꾸고, 결과에서 원래 업무 값으로 복원합니다. 기록을 LLM에 그대로 보낼 수 없을 때 적합합니다.</p><div class="foot"><span class="link">LLM Capsule</span></div></a>
-      </div>
-    </div>
-  </section>
-
-  <!-- 6 · CUSTOMERS  one logo line -->
-  <section class="sec v rv">
-    <div class="wrap">
-      <h2>금융, 통신, 유통 분야 기업이 함께하고 있습니다.</h2>
-      <ul class="logo-line" aria-label="도입 고객사"><li><img src="/assets/media/websummit-2026/logos/woori-bank.svg" alt="우리은행" loading="lazy"></li><li><img src="/assets/media/websummit-2026/logos/ibk-industrial-bank-of-korea.svg" alt="IBK기업은행" loading="lazy"></li><li><img src="/assets/media/brand/nh-nonghyup-bank-t.png" alt="NH농협은행" loading="lazy"></li><li><img src="/assets/media/brand/samsung-securities-t.png" alt="삼성증권" loading="lazy"></li><li><img src="/assets/media/brand/kyobo-life-t.png" alt="교보생명" loading="lazy"></li><li><img src="/assets/media/websummit-2026/logos/db-insurance.svg" alt="DB손해보험" loading="lazy"></li><li><img src="/assets/media/websummit-2026/logos/sk-telecom.svg" alt="SK텔레콤" loading="lazy"></li><li><img src="/assets/media/websummit-2026/logos/danal.svg" alt="다날" loading="lazy"></li><li><img src="/assets/media/brand/cj-freshway-t.png" alt="CJ프레시웨이" loading="lazy"></li></ul>
-    </div>
-  </section>
-
-  <!-- 7 · EUROPE  headline | three questions -->
-  <section class="sec v rv">
-    <div class="wrap">
-      <div class="vis2 top">
-        <div><h2>Europe에서는 결과가 어떻게 나왔는지까지 보여줄 수 있어야 합니다.</h2><p class="say">판정마다 남는 Version 기록은 EU AI Act가 요구하는 질문에 답할 때도 도움이 됩니다. 적용 범위는 해마다 넓어지며, 고위험 시스템은 2027년 12월 2일부터 적용됩니다.</p></div>
-        <ol class="steps6 numl">
-          <li><b>Q1</b><div><h3>이 결과는 어떤 데이터에서 나왔을까요?</h3><p>최신 테이블이 아니라, 결과를 확인할 때 썼던 바로 그 Version이어야 합니다.</p></div></li>
-          <li><b>Q2</b><div><h3>확인한 뒤 무엇이 바뀌었을까요?</h3><p>데이터, 모델, 정책이 바뀌면 어떤 점검 항목이 영향을 받는지 짚을 수 있어야 합니다.</p></div></li>
-          <li><b>Q3</b><div><h3>같은 결과를 다시 보여줄 수 있을까요?</h3><p>결과만큼 중요한 게 그 결과를 만든 조건과 데이터 Version입니다.</p></div></li>
-        </ol>
-      </div>
-      <p class="srcs">출처: Regulation (EU) 2024/1689 (AI Act), Regulation (EU) 2026/1744로 개정. <a href="https://eur-lex.europa.eu/eli/reg/2024/1689/oj">공식 원문</a>. Syntitan은 결과마다 그 뒤의 데이터와 실행 조건을 기록해 두도록 돕습니다. 법률 자문이 아니며, Syntitan만으로 EU AI Act 준수가 보장되지는 않습니다.</p>
-    </div>
-  </section>
-
-  <!-- 8 · CLOSING  black band: CEO card + book a meeting -->
-  <section class="sec closing">
-    <div class="wrap closing-grid">
-      <div>
-        <div class="ceo"><img src="/assets/media/ho-bae-face.jpg" alt="배호 (Ho Bae) 대표"><div><b>배호 (Ho Bae)</b><span>CUBIG 공동창업자 · 대표</span><span>이화여자대학교 교수 · NeurIPS, ICLR, AAAI 등 논문 20편 이상</span></div></div>
-        <h2>리스본에서 만나지 못하셨나요? 30분 온라인 미팅으로 이어갑니다.</h2>
-        <p>AI 업무 하나를 들려주세요. 데이터가 어디서 막히는지 듣고, 그 사례에서 제품이 어떻게 동작하는지 보여드립니다.</p>
-        <div class="actions"><a class="btn light" data-ev-href="booking" href="https://cubig.ai/ko/events/meet/">온라인 미팅 신청하기</a></div>
-      </div>
-      <div>
-        <dl class="facts"><dt>행사</dt><dd>Web Summit Lisbon 2026</dd><dt>일정</dt><dd>2026년 11월 9–12일</dd><dt>방식</dt><dd>30분 온라인 미팅</dd><dt>문의</dt><dd><a href="mailto:contact@cubig.ai?subject=Call%20after%20Web%20Summit%20Lisbon%202026">contact@cubig.ai</a></dd></dl>
-      </div>
-    </div>
-  </section>
-
-  <!-- 9 · BADGES  small, above the footer -->
-  <section class="badges">
-    <div class="wrap">
-      <div class="row">
-        <a href="https://cubig.ai/news/cubig-gartner-recognition-ai-ready-data/" target="_blank" rel="noopener"><img class="wide" src="/assets/media/brand/gartner.svg" alt="Gartner"></a>
-        <a href="https://cubig.ai/news/iso-certified-ai-ready-data-infrastructure-cubig-achieves-27001-42001/" target="_blank" rel="noopener"><img src="/assets/media/brand/iso-42001-t.png" alt="ISO/IEC 42001:2023 인증 마크"></a>
-        <a href="https://cubig.ai/news/iso-certified-ai-ready-data-infrastructure-cubig-achieves-27001-42001/" target="_blank" rel="noopener"><img src="/assets/media/brand/iso-27001-t.png" alt="ISO/IEC 27001:2022 인증 마크"></a>
-        <a href="https://aws.amazon.com/marketplace/seller-profile?id=seller-esnte65usql66" target="_blank" rel="noopener"><img class="wide" src="/assets/media/oracle-2026/aws-marketplace.svg" alt="AWS Marketplace"></a>
-        <a href="https://marketplace.microsoft.com/en-us/product/cubigcorp1782959405251.llm-capsule?tab=Overview" target="_blank" rel="noopener"><img class="wide" src="/assets/media/brand/microsoft-marketplace-t.png" alt="Microsoft Marketplace"></a>
-      </div>
-      <p>Gartner® 2025–2026 · <a href="https://cubig.ai/news/cubigs-llm-capsule-wins-runner-up-at-t-challenge-2026-the-deutsche-telekom-x-t-mobile-us-global-innovation-program/" target="_blank" rel="noopener">T Challenge 2026 준우승</a> (Deutsche Telekom x T-Mobile US) · ISO/IEC 42001:2023 · ISO/IEC 27001:2022, KFQ 인증, KAB 인정 · AWS·Microsoft Marketplace 입점</p>
-      <p>* GARTNER is a registered trademark of Gartner, Inc. and/or its affiliates, used with permission. Gartner does not endorse any vendor, product or service depicted in its research publications.</p>
-    </div>
-  </section>
-
-  <!-- 현장 사진: 행사 끝난 뒤 figure를 넣으면 자동으로 보임 (예정 행사·사진 없으면 숨김). alt = "행사명 CUBIG 부스, 장면" -->
-  <section class="sec ev-photos" data-after="2026-11-12" hidden>
-    <div class="wrap">
-      <h2>현장 사진</h2>
-      <div class="ph-grid"></div>
-    </div>
-  </section>
+<body data-strip="off" data-lang-toggle data-cta="https://cubig.ai/ko/events/meet/" data-cta-label="온라인 미팅 신청하기">
+<main>
+<section class="d-hero">
+<div class="wrap">
+<div class="d-hero__in">
+<div class="d-hero__txt">
+<nav aria-label="이동 경로" class="crumb"><a href="https://cubig.ai/ko/events/">행사</a><span>›</span><a href="https://cubig.ai/ko/events/">전시·행사</a><span>›</span><span>Web Summit Lisbon 2026</span></nav>
+<div class="tg">전시 · 2026년 11월</div>
+<h1>Web Summit Lisbon 2026에서 만난 CUBIG</h1>
+<div class="with">리스본 MEO Arena &amp; FIL</div>
+<div class="d-acts"><a class="d-go" href="https://cubig.ai/ko/events/meet/">온라인 미팅 신청하기 <i aria-hidden="true">→</i></a></div>
+</div>
+<div class="d-hero__ph"><img alt="" fetchpriority="high" height="720" src="/websummit-2026/venue.jpg" width="1280"/></div>
+</div>
+<p class="credit">사진: Web Summit via Flickr, CC BY 2.0</p>
+<dl aria-label="한눈에 보기" class="d-facts"><div><dt>행사</dt><dd>Web Summit Lisbon 2026</dd></div><div><dt>장소</dt><dd>리스본 MEO Arena &amp; FIL</dd></div><div><dt>일정</dt><dd>2026년 11월 9–12일</dd></div></dl>
+</div>
+</section>
+<div class="wrap">
+<div class="d-body d-body--one">
+<article class="d-main d-main--bottom">
+<p>리스본에서 만나 주셔서 감사합니다.</p><p>여러 나라 사람들이 한자리에 모인 행사라, 함께할 수 있는 일을 많이 떠올려 볼 수 있었어요.</p>
+<div class="sy-group">
+<h2>CUBIG이 보여준 것</h2>
+<div class="sy-tiles sy-tiles--1">
+<a aria-label="Syntitan, AI-ready data platform" class="sy-tile" href="https://cubig.ai/ko/syntitan/"><span class="sy-top"><svg aria-label="Syntitan" class="sy-logo sy-logo--sy" fill="none" focusable="false" height="28" preserveaspectratio="xMinYMid meet" role="img" viewbox="0 0 602 148" width="114" xmlns="http://www.w3.org/2000/svg"><path d="M531.477 115.52V32.0001H576.757C593.077 32.0001 601.237 40.1601 601.237 56.4801V115.52H585.717V54.8801C585.717 48.6934 582.623 45.6001 576.437 45.6001H546.997V115.52H531.477Z" fill="black"></path><path d="M464.609 115.52C448.182 115.52 439.969 107.36 439.969 91.0401C439.969 74.7201 448.182 66.5601 464.609 66.5601H491.649V54.8801C491.649 48.6934 488.555 45.6001 482.369 45.6001H448.129V37.4401L455.489 32.0001H482.689C499.009 32.0001 507.169 40.1601 507.169 56.4801V115.52H464.609ZM455.489 92.4801C455.489 98.7734 458.635 101.92 464.929 101.92H491.649V78.7201H464.929C458.635 78.7201 455.489 81.8667 455.489 88.1601V92.4801Z" fill="black"></path><path d="M379.438 90.8851V5.12506H394.957V32.0051H424.557V45.6051H394.957V92.4851C394.957 98.7784 398.104 101.925 404.397 101.925H426.158V110.085L418.798 115.525H403.918C387.598 115.525 379.438 107.312 379.438 90.8851Z" fill="black"></path><path d="M338.969 16.9601V6.10352e-05H355.609V16.9601H338.969ZM339.609 115.52V32.0001H355.129V115.52H339.609Z" fill="black"></path><path d="M274.594 90.8851V5.12506H290.114V32.0051H319.714V45.6051H290.114V92.4851C290.114 98.7784 293.26 101.925 299.554 101.925H321.314V110.085L313.954 115.525H299.074C282.754 115.525 274.594 107.312 274.594 90.8851Z" fill="black"></path><path d="M181.164 115.52V32.0001H226.444C242.764 32.0001 250.924 40.1601 250.924 56.4801V115.52H235.404V54.8801C235.404 48.6934 232.311 45.6001 226.124 45.6001H196.684V115.52H181.164Z" fill="black"></path><path d="M86.8828 34.5601L88.6428 32.0001H102.083L124.803 101.92H127.683L150.563 32.0001H163.843L165.603 34.5601L127.683 147.52H114.243L112.643 144.96L123.043 115.52H114.243L86.8828 34.5601Z" fill="black"></path><path d="M0 109.125V100.805H49.28C55.36 100.805 58.4 97.8184 58.4 91.8451V79.2051C58.4 73.9784 56.1067 70.9384 51.52 70.0851L18.08 63.2051C6.02667 60.8584 0 52.8051 0 39.0451V30.4051C0 13.5517 8.37333 5.12506 25.12 5.12506H63.2L71.36 11.5251V19.8451H25.28C19.2 19.8451 16.16 22.8317 16.16 28.8051V39.6851C16.16 44.9117 18.4533 47.9517 23.04 48.8051L56.64 55.3651C68.5867 57.9251 74.56 66.0317 74.56 79.6851V90.2451C74.56 107.098 66.1867 115.525 49.44 115.525H8.16L0 109.125Z" fill="black"></path></svg><i aria-hidden="true">→</i></span><span class="sy-label">AI-ready data platform</span></a>
+</div>
+</div>
+</article>
+</div>
+</div>
+<section class="d-gal">
+<div class="wrap">
+<div class="p-head"><div><h2>현장 사진</h2></div></div>
+<div class="gal n4"><figure class="t-big"><img alt="Web Summit Lisbon 2026에서 만난 CUBIG" decoding="async" loading="lazy" src="/assets/media/photos/websummit-2026/booth-team.jpg"/></figure><figure class=""><img alt="Web Summit Lisbon 2026에서 만난 CUBIG" decoding="async" loading="lazy" src="/assets/media/photos/websummit-2026/s-KakaoTalk_Image_2026-11-10-10-51-52_001-venue-hall-coffee-area.jpg"/></figure><figure class=""><img alt="Web Summit Lisbon 2026에서 만난 CUBIG" decoding="async" loading="lazy" src="/assets/media/photos/websummit-2026/s-KakaoTalk_Image_2026-11-10-10-52-04_002-ps17-row-booth-wide.jpg"/></figure><figure class=""><img alt="Web Summit Lisbon 2026에서 만난 CUBIG" decoding="async" loading="lazy" src="/assets/media/photos/websummit-2026/booth-sign.jpg"/></figure></div></div></section>
+<section class="more">
+<div class="wrap">
+<div class="p-head"><div><h2>다른 전시·행사</h2></div><a class="link" href="https://cubig.ai/ko/events/">전체 보기</a></div>
+<div class="ev-grid">
+<a class="ev-it" data-e="2026-10-28" data-s="2026-10-26" href="/ko/oracle-ai-world-2026/"><div class="ev-it__im"><img alt="" decoding="async" height="360" loading="lazy" src="/assets/media/oracle-2026/floor-2026-thumb.webp" width="640"/></div><div class="ev-it__b"><em class="ev-st is-past" data-ev-st="">종료</em><h3 class="ev-it__n">Oracle AI World</h3><small class="ev-it__m">2026년 10월 26–28일 · 라스베이거스 · 부스 #2032</small><strong class="ev-it__go">자세히 보기 <i aria-hidden="true">→</i></strong></div></a>
+<a class="ev-it" data-e="2026-03-27" data-s="2026-03-25" href="/ko/korea-nara-jangteo-expo-2026/"><div class="ev-it__im"><img alt="" decoding="async" height="360" loading="lazy" src="/assets/media/photos/narajangteo-expo-2026/01-thumb.webp" width="640"/></div><div class="ev-it__b"><em class="ev-st is-past" data-ev-st="">종료</em><h3 class="ev-it__n">Korea Nara Jangteo Expo 2026</h3><small class="ev-it__m">2026년 3월 25–27일 · 고양</small><strong class="ev-it__go">자세히 보기 <i aria-hidden="true">→</i></strong></div></a>
+</div>
+</div>
+</section>
+<section aria-labelledby="ev-book-h" class="ev-sec ev-close" id="book">
+<div class="ev-wrap">
+<div class="ev-end ev-dark">
+<h2 class="ev-end__h" id="ev-book-h">어디서든, 30분이면 돼요.</h2>
+<div class="ev-end__r">
+<p class="ev-end__p">AI 업무 하나를 알려 주시고, CUBIG 팀과 만날 30분 시간을 골라 주세요.</p>
+<div class="ev-ctas">
+<a class="ev-cta ev-cta--light" data-cta-id="events_meet" data-cta-location="events-book" href="https://cubig.ai/ko/events/meet/">30분 미팅 신청하기</a>
+<a class="ev-cta ev-cta--text" href="mailto:team-gtm@cubig.ai">team-gtm@cubig.ai</a>
+</div>
+</div>
+</div>
+</div>
+</section>
 </main>
 </body>
 </html>

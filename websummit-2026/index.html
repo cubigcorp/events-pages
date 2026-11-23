@@ -32,12 +32,12 @@ gtag('config', 'G-8MRD9BZ1VJ');
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-8MRD9BZ1VJ"></script>
 
 <link rel="stylesheet" href="/assets/ev.css">
-<link rel="stylesheet" href="/assets/ev-detail.css">
+<link rel="stylesheet" href="/assets/ev-pages.css">
 <link rel="stylesheet" href="/assets/site/cubig-site.css">
 <link rel="stylesheet" href="/assets/site/ev-site.css">
+<link rel="stylesheet" href="/assets/ev-basic.css">
 <script src="/assets/site/cubig-site.js" defer></script>
 <script src="/assets/ev-nav.js" defer></script>
-<script src="/assets/ev-detail.js" defer></script>
 <script type="application/ld+json" id="ev-jsonld">
 {
  "@context": "https://schema.org",
@@ -91,177 +91,64 @@ gtag('config', 'G-8MRD9BZ1VJ');
 }
 </script>
 </head>
-<body data-cta="https://cubig.ai/events/meet/" data-cta-label="Book a meeting" data-lang-toggle>
-<!-- Exhibition detail template (see /_template/DETAIL-TEMPLATE.md). Section order:
-     1 hero · 2 gartner · 3 problem · 4 results (dark) · 5 stack · 6 how · 7 team · 8 region · 9 proof wall · 10 closing (black band) -->
-<main class="dt">
-
-  <!-- 1 · HERO: h1, lead + actions | event meta, full-width photo -->
-  <section class="hero">
-    <div class="wrap">
-      <h1 class="ev-h1">CUBIG at Web Summit Lisbon 2026</h1>
-      <p class="h1-sub">Make your data work for AI. Keep it ready as things change.</p>
-      <div class="hero-row">
-        <div>
-          <p class="lead">Thanks for meeting us in Lisbon.<br>Syntitan validates your data against your model or agent before it goes live, and keeps the version behind each result.</p>
-          <div class="actions">
-            <a class="btn" href="https://cubig.ai/events/meet/">Book a meeting</a>
-            <a class="link" href="syntitan-product-overview.pdf" target="_blank" rel="noopener">Product Deck (PDF)</a>
-          </div>
-        </div>
-        <dl class="meta" aria-label="Event details">
-          <div><dt>When</dt><dd>November 9-12, 2026</dd></div>
-          <div><dt>Where</dt><dd>MEO Arena &amp; FIL, Lisbon</dd></div>
-        </dl>
-      </div>
-      <figure class="bleed">
-        <img src="venue.jpg" alt="Web Summit Lisbon, MEO Arena">
-        <figcaption class="cap"><i></i>Lisbon, MEO Arena &amp; FIL · Web Summit via Flickr, CC BY 2.0</figcaption>
-      </figure>
-    </div>
-    <div class="wrap">
-      <p class="gline"><img src="/assets/media/brand/gartner.svg" alt="Gartner"><span>Named in 3 Gartner® reports in 2026*, 4 since 2025.</span><a class="link" href="https://cubig.ai/news/cubig-gartner-recognition-ai-ready-data/" target="_blank" rel="noopener">Read the news</a></p>
-      <div class="band4"><div><b>3</b><span>Gartner® reports naming CUBIG in 2026*</span></div><div><b>2nd</b><span>of 12 finalists at T Challenge 2026</span></div><div><b>88.55%</b><span>weighted F1 on an insurance call classifier, up from 58.55%</span></div><div><b>30 min</b><span>video call with the CUBIG team, after the event</span></div></div>
-    </div>
-  </section>
-
-  <!-- 2 · PROBLEM  [5:7] headline + stacked survey numbers | numbered blockers -->
-  <section class="sec v rv">
-    <div class="wrap">
-      <div class="vis2 top">
-        <div><h2>The pilot works. Then the data work starts over.</h2><p class="say">Four blockers show up again and again between a working pilot and a live AI use case.</p><div class="nstack"><div><b>42%</b><span>of companies abandoned most of their AI initiatives in 2025, up from 17% a year earlier</span></div><div><b>57%</b><span>of data leaders say data reliability is a top barrier as companies race to production</span></div><div><b>5.7h</b><span>a week that data analysts spend preparing and cleaning data</span></div></div></div>
-        <ol class="steps6 numl">
-          <li><b>01</b><div><h3>Every new use case <em class="kw">reshapes the data</em>.</h3><p>Each task needs different fields, formats and rules, so the prep work starts again every time.</p></div></li>
-          <li><b>02</b><div><h3>Some of the data <em class="kw">can't be used as it is</em>.</h3><p>Sensitive values can't move, and the cases that matter most show up only a few dozen times.</p></div></li>
-          <li><b>03</b><div><h3>When a result misses, <em class="kw">no one knows why</em>.</h3><p>Was it the model, or the data? Without the same test conditions, teams can't tell.</p></div></li>
-          <li><b>04</b><div><h3>Every change means <em class="kw">checking it all again</em>.</h3><p>New data, a new model or a new policy, and it's unclear what still holds and what to recheck.</p></div></li>
-        </ol>
-      </div>
-      <p class="srcs">Sources: <a href="https://www.spglobal.com/market-intelligence/en/news-insights/research/ai-experiences-rapid-adoption-but-with-mixed-outcomes-highlights-from-vote-ai-machine-learning" target="_blank" rel="noopener">S&amp;P Global Market Intelligence, 2025</a> · <a href="https://www.informatica.com/blogs/cdo-insights-2026-ai-adoption-accelerates-but-trust-and-governance-lag-behind.html" target="_blank" rel="noopener">Informatica, CDO Insights 2026</a> · <a href="https://www.alteryx.com/wp-content/uploads/media/whitepaper/2026-state-of-the-data-analyst-the-rise-of-business-logic.pdf" target="_blank" rel="noopener">Alteryx, 2026 State of the Data Analyst</a>.</p>
-    </div>
-  </section>
-
-  <!-- 3 · HOW IT WORKS  [centrepiece] flow diagram + product video -->
-  <section class="sec v hw rv" aria-labelledby="hw-h">
-    <div class="wrap">
-      <h2 id="hw-h">How Syntitan gets your data ready for AI.</h2>
-      <p class="say">Your platform keeps the data. Syntitan prepares a copy for each use case, checks it against your model or agent, and keeps the version that worked.</p>
-      <div class="flowmap" role="img" aria-label="Your original dataset stays in your data platform. In Syntitan, a project starts from a copy as version 1, is checked with Ready for Raw Data, Model and Agent, DTS fills missing cases, LLM Capsule protects records going to an external AI, and each result is kept as a version for your models, agents and work. When a result falls short, Prove / Recover fills the gap and validates again.">
-        <div class="fm-side"><span class="t">Your data platform</span><h3>Original Dataset</h3><p>Stays where it is. Storage and management don't change.</p></div>
-        <div class="fm-arrow" aria-hidden="true"><svg viewBox="0 0 32 16"><path d="M1 8h28M23 2l6 6-6 6" fill="none" stroke="#6A4FD0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <div class="fm-core">
-          <div class="head"><img src="/assets/media/websummit-2026/syntitan.png" alt="Syntitan"><span>AI-ready data platform</span></div>
-          <div class="fm-row">
-            <div class="fm-box"><b>Project · v1</b><span>A copy for one use case</span></div>
-            <div class="fm-arrow" style="" aria-hidden="true"><svg viewBox="0 0 32 16"><path d="M1 8h28M23 2l6 6-6 6" fill="none" stroke="#6A4FD0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-            <div class="fm-readyset"><span class="lab">Check what this use case needs: any of the three, in any order</span><div class="fm-ready">
-              <div class="fm-box"><b>Ready for Raw Data</b><span>Is the data in usable shape?</span></div>
-              <div class="fm-box"><b>Ready for Model</b><span>Before vs. after, same test.</span></div>
-              <div class="fm-box"><b>Ready for Agent</b><span>Does it handle real cases?</span></div>
-            </div></div>
-            <div class="fm-arrow" aria-hidden="true"><svg viewBox="0 0 32 16"><path d="M1 8h28M23 2l6 6-6 6" fill="none" stroke="#6A4FD0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-            <div class="fm-box"><b>Version</b><span>Kept with its rules and test conditions</span></div>
-          </div>
-          <div class="fm-eng">
-            <div class="fm-box"><img src="/assets/media/websummit-2026/dts.png" alt="DTS"><span>Fills missing cases and adjusts skewed data for the task</span></div>
-            <div class="fm-box"><img src="/assets/media/websummit-2026/llm-capsule.png" alt="LLM Capsule"><span>Path to an external AI, with context-preserving substitutes</span></div>
-          </div>
-        </div>
-        <div class="fm-arrow" aria-hidden="true"><svg viewBox="0 0 32 16"><path d="M1 8h28M23 2l6 6-6 6" fill="none" stroke="#6A4FD0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <div class="fm-side"><span class="t">Where it's used</span><h3>Models, agents and work</h3><p>Built on a version that met your criteria.</p></div>
-      </div>
-      <div class="fm-loop" aria-hidden="true"><div class="bar"></div><p><b>Prove / Recover.</b> When a result falls short, find what's missing, fill the gap and validate again on the same test. Each pass becomes a new Version.</p></div>
-      <ol class="fm-steps" aria-label="The cycle"><li>Prepare</li><li>Adapt</li><li>Prove / Recover</li><li>Operate</li></ol>
-      <div class="watch">
-        <a class="shot" href="https://youtu.be/2iKkvJKYV0k" target="_blank" rel="noopener"><img src="/assets/media/syntitan-video.jpg" alt="Syntitan screen: AI Readiness scores, Ready for Model and version history" loading="lazy"><span>Watch how it works ↗</span></a>
-        <div><h3>See it in the product.</h3><p>The Syntitan screen shows readiness scores for the data, the Ready for Model check, and the version history behind each result.</p></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 4 · RESULTS  [1 large + 2 small] customer cases -->
-  <section class="sec v rv">
-    <div class="wrap">
-      <h2>Data blockers cleared across industries.</h2>
-      <p class="say">Worked with leading financial services, telecom and distribution enterprises.</p>
-      <div class="cases"><div class="card lead"><span class="st">DTS · Insurance, Korea</span><div class="big">88.55%</div><h3>Customer service classifier</h3><p>Weighted F1 rose from 58.55% after DTS prepared more examples of rare call types and added them to the real data.</p></div><div class="cases-side"><div class="card"><span class="st">Syntitan · Ready for Model example</span><div class="big">+18</div><h3>Churn prediction, same model and test</h3><p>The original data found 140 churners; the prepared data found 158. Only the data changed.</p></div><div class="card"><span class="st">LLM Capsule · DB Insurance</span><h3>External LLM in use</h3><p>Sensitive values couldn't go to an external LLM. They were substituted before the query and restored inside after.</p></div></div></div>
-      <p class="srcs">Also: Samsung Securities, churn prediction, where affiliate data that couldn't move became a working set (excellence award, 2025). CJ Freshway, quote drafting, where menus, recipes and products were joined into one dataset. F1 measured by CUBIG: real data vs. real + DTS-prepared data. Names shown with approval.</p>
-    </div>
-  </section>
-
-  <!-- 5 · PRODUCTS  three cards, each available on its own -->
-  <section class="sec v rv">
-    <div class="wrap">
-      <h2>Three products. Each works on its own.</h2>
-      <p class="say">Start with the one that matches the blocker in front of you.</p>
-      <div class="prod3">
-        <a class="card" href="https://cubig.ai/syntitan/"><img src="/assets/media/websummit-2026/syntitan.png" alt="Syntitan"><span class="what">AI-Ready Data Platform</span><p>Checks, prepares and validates data for each use case, and keeps the data version behind each result. Use it when a pilot works but the data behind it can't yet be trusted in production.</p><div class="foot"><span class="link">Syntitan</span></div></a>
-        <a class="card" href="https://cubig.ai/dts/"><img src="/assets/media/websummit-2026/dts.png" alt="DTS"><span class="what">Data Enablement for AI</span><p>Diagnoses data that is hard to use because of sensitive-data limits or missing rare cases, and fills in the data candidates your AI task needs. Use it when the cases that matter are too few, or the data can't be used as it is.</p><div class="foot"><span class="link">DTS</span></div></a>
-        <a class="card" href="https://cubig.ai/llmcapsule/"><img src="/assets/media/websummit-2026/llm-capsule.png" alt="LLM Capsule"><span class="what">Context-Preserving Data Layer for AI</span><p>Swaps sensitive values for context-preserving stand-ins before records reach an external LLM or RAG, then restores the original business values in the results. Use it when records can't go to an LLM as they are.</p><div class="foot"><span class="link">LLM Capsule</span></div></a>
-      </div>
-    </div>
-  </section>
-
-  <!-- 6 · CUSTOMERS  one logo line -->
-  <section class="sec v rv">
-    <div class="wrap">
-      <h2>Trusted by teams in financial services, telecom and distribution.</h2>
-      <ul class="logo-line" aria-label="Customers"><li><img src="/assets/media/websummit-2026/logos/woori-bank.svg" alt="Woori Bank" loading="lazy"></li><li><img src="/assets/media/websummit-2026/logos/ibk-industrial-bank-of-korea.svg" alt="IBK Industrial Bank of Korea" loading="lazy"></li><li><img src="/assets/media/brand/nh-nonghyup-bank-t.png" alt="NH NongHyup Bank" loading="lazy"></li><li><img src="/assets/media/brand/samsung-securities-t.png" alt="Samsung Securities" loading="lazy"></li><li><img src="/assets/media/brand/kyobo-life-t.png" alt="Kyobo Life" loading="lazy"></li><li><img src="/assets/media/websummit-2026/logos/db-insurance.svg" alt="DB Insurance" loading="lazy"></li><li><img src="/assets/media/websummit-2026/logos/sk-telecom.svg" alt="SK Telecom" loading="lazy"></li><li><img src="/assets/media/websummit-2026/logos/danal.svg" alt="Danal" loading="lazy"></li><li><img src="/assets/media/brand/cj-freshway-t.png" alt="CJ Freshway" loading="lazy"></li></ul>
-    </div>
-  </section>
-
-  <!-- 7 · EUROPE  headline | three questions -->
-  <section class="sec v rv">
-    <div class="wrap">
-      <div class="vis2 top">
-        <div><h2>In Europe, show how each result was produced.</h2><p class="say">The version records behind each verdict help answer the questions the EU AI Act brings. More of it applies each year, with high-risk systems from 2 Dec 2027.</p></div>
-        <ol class="steps6 numl">
-          <li><b>Q1</b><div><h3>Which data state produced this result?</h3><p>The exact version used when the result was checked, not the latest table.</p></div></li>
-          <li><b>Q2</b><div><h3>What changed after it was checked?</h3><p>Data, model and policy changes should point to the checks they affect.</p></div></li>
-          <li><b>Q3</b><div><h3>Can the team show it again?</h3><p>The conditions and data version behind a result matter as much as the result.</p></div></li>
-        </ol>
-      </div>
-      <p class="srcs">Regulation (EU) 2024/1689 (AI Act), as amended by Regulation (EU) 2026/1744. <a href="https://eur-lex.europa.eu/eli/reg/2024/1689/oj">Official text</a>. Syntitan helps teams keep the data and run conditions behind each result. It is not legal advice and does not by itself establish compliance with the EU AI Act.</p>
-    </div>
-  </section>
-
-  <!-- 8 · CLOSING  black band: CEO card + book a meeting -->
-  <section class="sec closing">
-    <div class="wrap closing-grid">
-      <div>
-        <div class="ceo"><img src="/assets/media/ho-bae-face.jpg" alt="Ho Bae"><div><b>Ho Bae</b><span>Co-founder and CEO, CUBIG</span><span>Professor, Ewha Womans University · 20+ papers, incl. NeurIPS, ICLR, AAAI</span></div></div>
-        <h2>Missed us in Lisbon? Book 30 minutes.</h2>
-        <p>Tell us about one AI task. We'll listen to where the data gets in the way, then show you how the product handles it on your case.</p>
-        <div class="actions"><a class="btn light" data-ev-href="booking" href="https://cubig.ai/events/meet/">Book a meeting</a></div>
-      </div>
-      <div>
-        <dl class="facts"><dt>Event</dt><dd>Web Summit Lisbon 2026</dd><dt>Dates</dt><dd>November 9-12, 2026</dd><dt>Format</dt><dd>30-minute video call</dd><dt>Email</dt><dd><a href="mailto:contact@cubig.ai?subject=Call%20after%20Web%20Summit%20Lisbon%202026">contact@cubig.ai</a></dd></dl>
-      </div>
-    </div>
-  </section>
-
-  <!-- 9 · BADGES  small, above the footer -->
-  <section class="badges">
-    <div class="wrap">
-      <div class="row">
-        <a href="https://cubig.ai/news/cubig-gartner-recognition-ai-ready-data/" target="_blank" rel="noopener"><img class="wide" src="/assets/media/brand/gartner.svg" alt="Gartner"></a>
-        <a href="https://cubig.ai/news/iso-certified-ai-ready-data-infrastructure-cubig-achieves-27001-42001/" target="_blank" rel="noopener"><img src="/assets/media/brand/iso-42001-t.png" alt="ISO/IEC 42001:2023 certification mark"></a>
-        <a href="https://cubig.ai/news/iso-certified-ai-ready-data-infrastructure-cubig-achieves-27001-42001/" target="_blank" rel="noopener"><img src="/assets/media/brand/iso-27001-t.png" alt="ISO/IEC 27001:2022 certification mark"></a>
-        <a href="https://aws.amazon.com/marketplace/seller-profile?id=seller-esnte65usql66" target="_blank" rel="noopener"><img class="wide" src="/assets/media/oracle-2026/aws-marketplace.svg" alt="AWS Marketplace"></a>
-        <a href="https://marketplace.microsoft.com/en-us/product/cubigcorp1782959405251.llm-capsule?tab=Overview" target="_blank" rel="noopener"><img class="wide" src="/assets/media/brand/microsoft-marketplace-t.png" alt="Microsoft Marketplace"></a>
-      </div>
-      <p>Gartner® 2025–2026 · <a href="https://cubig.ai/news/cubigs-llm-capsule-wins-runner-up-at-t-challenge-2026-the-deutsche-telekom-x-t-mobile-us-global-innovation-program/" target="_blank" rel="noopener">T Challenge 2026 runner-up</a> (Deutsche Telekom x T-Mobile US) · ISO/IEC 42001:2023 and ISO/IEC 27001:2022, certified by KFQ, accredited by KAB · Available on AWS and Microsoft Marketplace.</p>
-      <p>* GARTNER is a registered trademark of Gartner, Inc. and/or its affiliates, used with permission. Gartner does not endorse any vendor, product or service depicted in its research publications.</p>
-    </div>
-  </section>
-
-  <!-- 현장 사진: 행사 끝난 뒤 figure를 넣으면 자동으로 보임 (예정 행사·사진 없으면 숨김). alt = "CUBIG booth at 행사명, 장면" -->
-  <section class="sec ev-photos" data-after="2026-11-12" hidden>
-    <div class="wrap">
-      <h2>From the floor</h2>
-      <div class="ph-grid"></div>
-    </div>
-  </section>
+<body data-strip="off" data-lang-toggle data-cta="https://cubig.ai/events/meet/" data-cta-label="Book a call">
+<main>
+<section class="d-hero">
+<div class="wrap">
+<div class="d-hero__in">
+<div class="d-hero__txt">
+<nav aria-label="Breadcrumb" class="crumb"><a href="https://cubig.ai/events/">Events</a><span>›</span><a href="https://cubig.ai/events/">On the floor</a><span>›</span><span>Web Summit Lisbon 2026</span></nav>
+<div class="tg">Exhibition · November 2026</div>
+<h1>CUBIG at Web Summit Lisbon 2026</h1>
+<div class="with">MEO Arena &amp; FIL, Lisbon</div>
+<div class="d-acts"><a class="d-go" href="https://cubig.ai/events/meet/">Book a call <i aria-hidden="true">→</i></a></div>
+</div>
+<div class="d-hero__ph"><img alt="" fetchpriority="high" height="720" src="/websummit-2026/venue.jpg" width="1280"/></div>
+</div>
+<p class="credit">Photo: Web Summit via Flickr, CC BY 2.0</p>
+<dl aria-label="At a glance" class="d-facts"><div><dt>Event</dt><dd>Web Summit Lisbon 2026</dd></div><div><dt>Where</dt><dd>MEO Arena &amp; FIL, Lisbon</dd></div><div><dt>Date</dt><dd>November 9–12, 2026</dd></div></dl>
+</div>
+</section>
+<div class="wrap">
+<div class="d-body d-body--one">
+<article class="d-main d-main--bottom">
+<p>Thanks for meeting us in Lisbon.</p><p>With people from many countries in one place, we came away with plenty of ideas for working together.</p>
+<div class="sy-group">
+<h2>What CUBIG brought</h2>
+<div class="sy-tiles sy-tiles--1">
+<a aria-label="Syntitan, AI-ready data platform" class="sy-tile" href="https://cubig.ai/syntitan/"><span class="sy-top"><svg aria-label="Syntitan" class="sy-logo sy-logo--sy" fill="none" focusable="false" height="28" preserveaspectratio="xMinYMid meet" role="img" viewbox="0 0 602 148" width="114" xmlns="http://www.w3.org/2000/svg"><path d="M531.477 115.52V32.0001H576.757C593.077 32.0001 601.237 40.1601 601.237 56.4801V115.52H585.717V54.8801C585.717 48.6934 582.623 45.6001 576.437 45.6001H546.997V115.52H531.477Z" fill="black"></path><path d="M464.609 115.52C448.182 115.52 439.969 107.36 439.969 91.0401C439.969 74.7201 448.182 66.5601 464.609 66.5601H491.649V54.8801C491.649 48.6934 488.555 45.6001 482.369 45.6001H448.129V37.4401L455.489 32.0001H482.689C499.009 32.0001 507.169 40.1601 507.169 56.4801V115.52H464.609ZM455.489 92.4801C455.489 98.7734 458.635 101.92 464.929 101.92H491.649V78.7201H464.929C458.635 78.7201 455.489 81.8667 455.489 88.1601V92.4801Z" fill="black"></path><path d="M379.438 90.8851V5.12506H394.957V32.0051H424.557V45.6051H394.957V92.4851C394.957 98.7784 398.104 101.925 404.397 101.925H426.158V110.085L418.798 115.525H403.918C387.598 115.525 379.438 107.312 379.438 90.8851Z" fill="black"></path><path d="M338.969 16.9601V6.10352e-05H355.609V16.9601H338.969ZM339.609 115.52V32.0001H355.129V115.52H339.609Z" fill="black"></path><path d="M274.594 90.8851V5.12506H290.114V32.0051H319.714V45.6051H290.114V92.4851C290.114 98.7784 293.26 101.925 299.554 101.925H321.314V110.085L313.954 115.525H299.074C282.754 115.525 274.594 107.312 274.594 90.8851Z" fill="black"></path><path d="M181.164 115.52V32.0001H226.444C242.764 32.0001 250.924 40.1601 250.924 56.4801V115.52H235.404V54.8801C235.404 48.6934 232.311 45.6001 226.124 45.6001H196.684V115.52H181.164Z" fill="black"></path><path d="M86.8828 34.5601L88.6428 32.0001H102.083L124.803 101.92H127.683L150.563 32.0001H163.843L165.603 34.5601L127.683 147.52H114.243L112.643 144.96L123.043 115.52H114.243L86.8828 34.5601Z" fill="black"></path><path d="M0 109.125V100.805H49.28C55.36 100.805 58.4 97.8184 58.4 91.8451V79.2051C58.4 73.9784 56.1067 70.9384 51.52 70.0851L18.08 63.2051C6.02667 60.8584 0 52.8051 0 39.0451V30.4051C0 13.5517 8.37333 5.12506 25.12 5.12506H63.2L71.36 11.5251V19.8451H25.28C19.2 19.8451 16.16 22.8317 16.16 28.8051V39.6851C16.16 44.9117 18.4533 47.9517 23.04 48.8051L56.64 55.3651C68.5867 57.9251 74.56 66.0317 74.56 79.6851V90.2451C74.56 107.098 66.1867 115.525 49.44 115.525H8.16L0 109.125Z" fill="black"></path></svg><i aria-hidden="true">→</i></span><span class="sy-label">AI-ready data platform</span></a>
+</div>
+</div>
+</article>
+</div>
+</div>
+<section class="d-gal">
+<div class="wrap">
+<div class="p-head"><div><h2>From the floor</h2></div></div>
+<div class="gal n4"><figure class="t-big"><img alt="CUBIG at Web Summit Lisbon 2026" decoding="async" loading="lazy" src="/assets/media/photos/websummit-2026/booth-team.jpg"/></figure><figure class=""><img alt="CUBIG at Web Summit Lisbon 2026" decoding="async" loading="lazy" src="/assets/media/photos/websummit-2026/s-KakaoTalk_Image_2026-11-10-10-51-52_001-venue-hall-coffee-area.jpg"/></figure><figure class=""><img alt="CUBIG at Web Summit Lisbon 2026" decoding="async" loading="lazy" src="/assets/media/photos/websummit-2026/s-KakaoTalk_Image_2026-11-10-10-52-04_002-ps17-row-booth-wide.jpg"/></figure><figure class=""><img alt="CUBIG at Web Summit Lisbon 2026" decoding="async" loading="lazy" src="/assets/media/photos/websummit-2026/booth-sign.jpg"/></figure></div></div></section>
+<section class="more">
+<div class="wrap">
+<div class="p-head"><div><h2>More on the floor</h2></div><a class="link" href="https://cubig.ai/events/">See all</a></div>
+<div class="ev-grid">
+<a class="ev-it" data-e="2026-10-28" data-s="2026-10-26" href="/oracle-ai-world-2026/"><div class="ev-it__im"><img alt="" decoding="async" height="360" loading="lazy" src="/assets/media/oracle-2026/floor-2026-thumb.webp" width="640"/></div><div class="ev-it__b"><em class="ev-st is-past" data-ev-st="">Wrapped</em><h3 class="ev-it__n">Oracle AI World</h3><small class="ev-it__m">Oct 26–28, 2026 · Las Vegas · Booth #2032</small><strong class="ev-it__go">See details <i aria-hidden="true">→</i></strong></div></a>
+<a class="ev-it" data-e="2026-03-27" data-s="2026-03-25" href="/korea-nara-jangteo-expo-2026/"><div class="ev-it__im"><img alt="" decoding="async" height="360" loading="lazy" src="/assets/media/photos/narajangteo-expo-2026/01-thumb.webp" width="640"/></div><div class="ev-it__b"><em class="ev-st is-past" data-ev-st="">Wrapped</em><h3 class="ev-it__n">Korea Nara Jangteo Expo 2026</h3><small class="ev-it__m">Mar 25–27, 2026 · Goyang</small><strong class="ev-it__go">See details <i aria-hidden="true">→</i></strong></div></a>
+</div>
+</div>
+</section>
+<section aria-labelledby="ev-book-h" class="ev-sec ev-close" id="book">
+<div class="ev-wrap">
+<div class="ev-end ev-dark">
+<h2 class="ev-end__h" id="ev-book-h">30 minutes, from anywhere.</h2>
+<div class="ev-end__r">
+<p class="ev-end__p">Tell us about one AI task, then pick a 30-minute slot with the CUBIG team.</p>
+<div class="ev-ctas">
+<a class="ev-cta ev-cta--light" data-cta-id="events_meet" data-cta-location="events-book" href="https://cubig.ai/events/meet/">Book a 30-minute call</a>
+<a class="ev-cta ev-cta--text" href="mailto:team-gtm@cubig.ai">team-gtm@cubig.ai</a>
+</div>
+</div>
+</div>
+</div>
+</section>
 </main>
 </body>
 </html>
