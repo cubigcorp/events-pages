@@ -1,6 +1,6 @@
 /*
   CUBIG 행사·수상 역사 (2024.4 ~). 행사 하나 = 한 줄.
-  kind: exhibition(전시) · pitch(피치·데모데이·발표) · award(수상·선정) · live(크리에이터 방송) · next(예정)
+  kind: exhibition(전시) · pitch(피치·데모데이·발표) · award(수상·선정) · partner(기술 파트너·후원·심사 — 발표·수상이 아닌 무대 참여, 11-24) · live(크리에이터 방송) · next(예정)
   출처: 슬랙 #4-exhibition, 컨플 '(검토중) 수상 내역', cubig.ai/news (2026-11-14 정리)
   photo: 우리 슬랙 사진(photos/) 또는 cubig.ai 공식 이미지(press/)만. 날짜가 기사 게시일이면 note에 적음.
 */
@@ -45,7 +45,7 @@ function dateKo(t){
 if (IS_KO) HISTORY = HISTORY.map(function(e){var c={}; for(var k in e) c[k]=e[k]; c.name_en=e.name; c.city_en=e.city; c.name=e.name_ko||NAME_KO[e.name]||e.name; c.city=CITY_KO[e.city]||e.city; c.date=dateKo(e.date); return c;});
 
 
-var KIND = IS_KO ? {exhibition:'전시', pitch:'피칭·발표', award:'수상', live:'방송', next:'예정'} : {exhibition:'Exhibition', pitch:'Pitch & talk', award:'Award', live:'On air', next:'Next'};
+var KIND = IS_KO ? {exhibition:'전시', pitch:'피칭·발표', award:'수상', partner:'파트너·후원', live:'방송', next:'예정'} : {exhibition:'Exhibition', pitch:'Pitch & talk', award:'Award', partner:'Partner', live:'On air', next:'Next'};
 
 /* 표 그리기: 연도별 묶음 + 종류 필터 */
 (function(){
@@ -53,7 +53,7 @@ var KIND = IS_KO ? {exhibition:'전시', pitch:'피칭·발표', award:'수상',
   var cur='all';
   function counts(k){return HISTORY.filter(function(h){return k==='all'||h.kind===k;}).length;}
   function filters(){
-    fbox.innerHTML=['all','exhibition','pitch','award','live'].map(function(k){
+    fbox.innerHTML=['all','exhibition','pitch','award','partner','live'].map(function(k){
       return '<button class="pill" data-k="'+k+'" aria-pressed="'+(cur===k)+'">'+(k==='all'?(IS_KO?'전체':'All'):KIND[k])+' <em>'+counts(k)+'</em></button>';}).join('');
   }
   /* 달력판: 연도마다 12칸(월), 칸 안에 행사 칩. 칩에 마우스를 올리면 사진·정보 미리보기 */

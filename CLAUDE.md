@@ -152,7 +152,7 @@ events-pages/
 | `summary` · `summary_ko` | | 한 줄 소개 (상세 페이지 description과 같게) |
 | `thumb` · `photo` · `credit` | | 썸네일 · 대표 사진 · 사진 출처 표기. `thumb`·`photo`는 상세 페이지 첫 화면 대표 사진과 같은 사진(유튜브 썸네일 등 다른 사진 ❌, `check_pages.py`가 다르면 경고). `thumb`는 photo 원본을 쓰지 말고 작은 사본(640px 폭 webp, 장당 60KB 안쪽, 같은 폴더 `<이름>-thumb.webp`)으로. 허브 카드·달력이 이 파일을 내려받는다. 만들기: `cwebp -q 75 -resize 640 0 원본.jpg -o 원본-thumb.webp` |
 | `video` · `with` · `length` | | On air: 영상 주소 · 함께한 사람·채널 · 길이 |
-| `kind` | | 세부 분류: `exhibition` · `pitch` · `award` · `live` |
+| `kind` | | 세부 분류: `exhibition` · `pitch` · `award` · `partner`(기술 파트너·후원·심사) · `live` |
 | `label` · `label_ko` · `date` | | 연혁에 보이는 이름 · 날짜 표기 (없으면 title·start로 만듦) |
 | `city` · `cc` · `intl` | | 도시 · 나라 코드 · 해외 여부(해외 도장) |
 | `major` | 다가오는 행사는 ✓ | 대표 행사 여부 `true`/`false`. 대표 = 해외 대형 전시·컨퍼런스, 국내라도 큰 전시. 공홈 /events 예정 영역(배너·예정 카드)에서 `true`가 먼저 보이고, 같은 급끼리는 날짜순. **새 행사를 넣을 때 값을 모르면 작성자에게 묻고 꼭 적습니다**(빠지면 `check_pages.py` 경고). 기준은 GTM이 정하고, 애매하면 GTM(수경님) 확인 |

@@ -24,7 +24,7 @@ from pathlib import Path
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE = 'https://events.cubig.ai/'
 TYPE = {'exhibition': ('On the floor', '전시·행사', ''), 'stage': ('On stage', '무대·수상', ''), 'live': ('On air', '라이브 방송', '#now')}
-KIND = {'exhibition': ('Exhibition', '전시'), 'pitch': ('Pitch', '피칭'), 'award': ('Award', '수상'), 'live': ('Live', '라이브 방송')}
+KIND = {'exhibition': ('Exhibition', '전시'), 'pitch': ('Pitch', '피칭'), 'award': ('Award', '수상'), 'partner': ('Partner', '파트너·후원'), 'live': ('Live', '라이브 방송')}
 MORE_H = {'exhibition': ('More from the floor', '다른 전시·행사'), 'stage': ('More from the stage', '다른 무대·수상'), 'live': ('More creator collaborations', '다른 라이브 방송')}
 L = {  # 화면 글자(영, 한)
     'events': ('Events', '행사'), 'crumb': ('Breadcrumb', '이동 경로'), 'facts': ('At a glance', '한눈에 보기'),
