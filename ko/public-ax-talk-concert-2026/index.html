@@ -118,11 +118,12 @@ gtag('config', 'G-8MRD9BZ1VJ');
 </div>
 <h2>발표 내용</h2>
 <ol>
-<li><span>01</span><div class="t"><strong>공공 데이터를 AI에 바로 쓰기 어려운 이유</strong><br/>개인정보는 외부 AI에 넣을 수 없고, 원본은 기관 밖으로 내보낼 수 없으며, <br class="ws-br"/>내보낼 때는 담당자 검토를 거쳐야 합니다.</div></li>
-<li><span>02</span><div class="t"><strong>첫 번째 사례: 통계표 반출 심의</strong><br/>연구 결과 통계표를 내보내기 전 심의에서 AI는 표 구조와 합계 관계만 판정하고, <br class="ws-br"/>담당자가 확인해 확정하면 가림 처리와 근거 기록은 정해진 규칙대로 처리합니다.</div></li>
-<li><span>03</span><div class="t"><strong>두 번째 사례: 내부망 데이터의 외부 활용</strong><br/>내부망에서만 분석하던 의료 데이터를 외부망에서도 쓸 수 있도록 <br class="ws-br"/>원본과 특성이 비슷한 가상 데이터를 만들고, 활용성과 안전성을 함께 점검했습니다.</div></li>
-<li><span>04</span><div class="t"><strong>실무 제안: 찾고, 바꾸고, 복원하기</strong><br/>개인정보를 빠짐없이 찾고, 지우는 대신 종류를 남긴 대체값으로 바꿔 AI에 보내고, <br class="ws-br"/>답변은 원래 값으로 복원하는 방법을 LLM Capsule로 보여 줬습니다.</div></li>
-<li><span>05</span><div class="t"><strong>정리: AI를 고르기 전에 확인할 세 가지</strong><br/>이 데이터를 AI에 넣어도 되는지, AI 결과가 업무에 쓸 만한지, <br class="ws-br"/>나중에 근거를 확인할 수 있는지를 먼저 확인합니다.</div></li>
+<li><span>01</span><div class="t"><strong>AI에 바로 쓰기 어려운 공공 데이터</strong><br/>개인정보는 외부 AI에 넣을 수 없고, 원본은 기관 밖으로 내보낼 수 없습니다. <br class="ws-br"/>그래서 두 기관은 데이터를 그대로 두고, AI를 기관 안에서 쓰는 방법을 택했습니다.</div></li>
+<li><span>02</span><div class="t"><strong>통계표 반출 심의</strong><br/>수만 행에 이르는 통계표를 담당자가 한 칸씩 확인하기는 어렵습니다. <br class="ws-br"/>AI는 표 구조와 합계 관계만 판정하고, 반출 여부는 담당자가 결정하며, 가림 처리와 근거 기록은 정해진 규칙대로 처리합니다.</div></li>
+<li><span>03</span><div class="t"><strong>내부망 의료 데이터의 외부 활용</strong><br/>새 장비 없이 기존 내부망 서버로 원본과 특성이 비슷한 가상 데이터를 만들고, <br class="ws-br"/>개인정보보호위원회 기준으로 활용성과 안전성을 점검했습니다. 이 검증은 본사업으로 이어졌습니다.</div></li>
+<li><span>04</span><div class="t"><strong>지우지 않고 종류를 남겨 바꾸기</strong><br/>개인정보를 별표로 지우면 AI가 내용을 이해하지 못합니다. <br class="ws-br"/>[전화번호_A]처럼 종류를 남긴 대체값으로 바꿔야 AI가 원문에 가까운 수준으로 답할 수 있습니다.</div></li>
+<li><span>05</span><div class="t"><strong>답변은 기관 안에서 원래 값으로</strong><br/>AI에는 원래 값과 대응표를 넘기지 않고, 답변을 받은 뒤 기관 쪽에서 원래 값으로 복원합니다. <br class="ws-br"/>LLM Capsule이 찾고, 바꾸고, 복원하는 과정을 맡습니다.</div></li>
+<li><span>06</span><div class="t"><strong>AI를 고르기 전에 확인할 세 가지</strong><br/>이 데이터를 AI에 넣어도 되는지, AI 결과가 업무에 쓸 만한지, 나중에 근거를 확인할 수 있는지를 먼저 확인합니다. <br class="ws-br"/>이 조건을 갖춘 데이터가 AI-Ready Data입니다.</div></li>
 </ol>
 </article>
 </div>
