@@ -200,11 +200,11 @@ p,li,dd,dt,h4,figcaption,.s-big{text-wrap:balance}
 .d-main .sy-tile{display:flex;flex-direction:column;gap:8px;box-sizing:border-box;min-width:0;padding:14px 16px;background:transparent;border:1px solid #e6e7ec;border-radius:12px;color:var(--ink);text-decoration:none;transition:border-color .2s}
 .d-main .sy-tile:hover{border-color:#c9cad2}
 .d-main .sy-tile:focus-visible{outline:2px solid #6a4fd0;outline-offset:2px}
-.d-main .sy-tile .sy-top{display:flex;align-items:center;justify-content:space-between;gap:8px;min-width:0}
+.d-main .sy-tile .sy-top{display:flex;align-items:center;justify-content:space-between;gap:8px;min-width:0;min-height:20px}
 .d-main .sy-tile .sy-logo{display:block;flex:0 1 auto;min-width:0;height:20px;max-width:100%;object-fit:contain;object-position:left center}
 .d-main .sy-tile .sy-logo--sy{width:81px}
-.d-main .sy-tile .sy-logo--dts{width:77px}
-.d-main .sy-tile .sy-logo--llm{width:143px}
+.d-main .sy-tile .sy-logo--dts{height:16px;width:62px}
+.d-main .sy-tile .sy-logo--llm{height:18px;width:128px}   /* 11-24 현세 「로고 시각 비율」: 높이를 같게 두면 DTS(대문자 도트)·LLM Capsule(굵은 글씨)이 커 보임 → 글자 높이 기준으로 Syntitan 20 · LLM Capsule 18 · DTS 16 */
 .d-main .sy-tile .sy-label{font-size:13px;line-height:1.4;color:var(--ink-3)}
 .d-main .sy-tile i{display:inline-block;flex:none;font-style:normal;font-size:13px;font-weight:500;line-height:1;color:var(--ink);transition:transform .25s cubic-bezier(.22,1,.36,1)}
 .d-main .sy-tile:hover i{transform:translateX(3px)}
@@ -213,4 +213,4 @@ p,li,dd,dt,h4,figcaption,.s-big{text-wrap:balance}
 .d-main .sy-group h2{margin:0 0 20px}
 @media (min-width:1025px){.d-main--bottom{display:flex;flex-direction:column}.d-main--bottom .sy-group{margin-top:auto}}
 @media (max-width:1024px){.d-main .sy-group{padding-top:0}.d-main .sy-group h2{margin-top:48px}}
-@media (max-width:560px){ .d-main h2,.d-news .p-head h2{font-size:24px} .d-main .ws-br{display:none} .d-main .sy-tiles,.d-main .sy-tiles--1{grid-template-columns:minmax(0,1fr)} .d-main .sy-tile .sy-logo{height:18px} .d-main .sy-tile .sy-logo--sy{width:73px} .d-main .sy-tile .sy-logo--dts{width:69px} .d-main .sy-tile .sy-logo--llm{width:129px} }
+@media (max-width:560px){ .d-main h2,.d-news .p-head h2{font-size:24px} .d-main .ws-br{display:none} .d-main .sy-tiles,.d-main .sy-tiles--1{grid-template-columns:minmax(0,1fr)} .d-main .sy-tile .sy-logo{height:18px} .d-main .sy-tile .sy-logo--sy{width:73px} .d-main .sy-tile .sy-logo--dts{height:14px;width:54px} .d-main .sy-tile .sy-logo--llm{height:16px;width:114px} .d-main .sy-tile .sy-top{min-height:18px} }
