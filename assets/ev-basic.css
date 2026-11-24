@@ -74,6 +74,14 @@ a.d-hero__ph:hover img{transform:scale(1.03)}
 .d-main ol li:last-child{border-bottom:0}
 .d-main ol li span{display:grid;place-items:center;width:28px;height:28px;margin-top:-2px;border-radius:50%;background:var(--vio-t);color:var(--vio-dd);font-size:11.5px;font-weight:600;font-variant-numeric:tabular-nums}
 .d-main .src{font-size:13px;color:var(--h-soft)}
+/* 11-24 현세: 제품 타일(sy-tiles)이 두 칸을 다 차지해 오른쪽 목록이 한 줄 밀리던 문제 → 타일은 오른쪽 칸(소제목 옆), 목록은 타일 아래.
+   오른쪽 칸의 첫 줄 = 소제목 줄과 같은 검정 선. 두 칸 = 760px부터(759 이하는 아래 @media에서 한 칸) */
+@media (min-width:760px){
+  .d-main ol{border-top-color:var(--h-ink)}
+  .d-main > h2 + .sy-tiles{grid-column:2;align-self:start;margin:64px 0 0;padding-top:14px;border-top:1px solid var(--h-ink);grid-template-columns:repeat(auto-fill,minmax(180px,1fr))}
+  .d-main > h2:first-child + .sy-tiles{margin-top:0}
+  .d-main > .sy-tiles + ol{margin-top:20px;border-top-color:var(--h-line-2)}
+}
 
 /* ── 다른 행사 = 허브 묶음과 같은 머리 + 카드 ── */
 .more{border-top:1px solid var(--h-line-2);padding:var(--h-py) 0;background:#fff}
@@ -124,7 +132,8 @@ a.ev-it:hover .ev-it__go i{transform:translateX(3px)}
   .d-main > p:first-child{font-size:18px}
   .d-main h2{margin-top:48px}
   .d-main ol{margin-top:16px}
-  .more .p-head{flex-direction:row;align-items:flex-end;justify-content:space-between}
+  .more .p-head{flex-direction:row;flex-wrap:wrap;row-gap:16px;align-items:flex-end;justify-content:space-between}   /* 11-24: 300~360px에서 '전체 보기' 버튼이 화면 밖으로 나가던 것 → 넘치면 아래 줄로 */
+  .d-main > h2 + .sy-tiles{margin:16px 0 0}   /* 11-24: 소제목에 붙던 제품 타일 띄우고, 타일-목록 사이 48px → 목록 margin 16px만 */
 }
 @media (max-width:599px){
   /* 모바일 버튼 줄: 버튼은 화면 폭에 맞춰 세로로 쌓고, 미팅 링크는 그 아래 */
