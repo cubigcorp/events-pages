@@ -25,7 +25,7 @@ CITY_KO = {'Online': '온라인', 'US': '미국', 'Goyang': '고양', 'Busan': '
            'Bonn': '본', 'Seoul': '서울', 'Seongnam': '성남', 'New York': '뉴욕', 'Las Vegas': '라스베이거스', 'San Francisco': '샌프란시스코',
            'Lisbon': '리스본', 'Paris': '파리', 'Barcelona': '바르셀로나', 'London': '런던', 'Singapore': '싱가포르', 'Tokyo': '도쿄', 'Osaka': '오사카'}
 MON = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-T = {'more': ('See details', '자세히 보기'), 'meet': ('Book an online meeting', '온라인 미팅 신청하기'),
+T = {'more': ('See details', '자세히 보기'), 'meet': ('Book a 30-minute call', '30분 미팅 신청하기'),
      'past': ('Wrapped', '종료'), 'facts': ('At a glance', '한눈에 보기')}
 
 

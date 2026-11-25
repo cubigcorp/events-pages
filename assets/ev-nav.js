@@ -2,7 +2,7 @@
   events.cubig.ai 공통 머리글·햄버거 메뉴·상단 띠·바닥글 (초안)
   - 페이지에 <script src="/assets/ev-nav.js" defer></script> 한 줄.
   - 메뉴와 상단 띠는 /events.json 을 읽어 자동으로 채웁니다.
-  - 페이지 <body data-cta="예약링크" data-cta-label="Book a meeting"> 로 머리글 버튼을 바꿀 수 있습니다.
+  - 페이지 <body data-cta="예약링크" data-cta-label="Book a 30-minute call"> 로 머리글 버튼을 바꿀 수 있습니다.
 */
 (function () {
   var KO = (document.documentElement.lang||'').slice(0,2)==='ko';
@@ -120,7 +120,7 @@
     document.querySelectorAll('.ev-it[data-s] [data-ev-st]').forEach(function(st){ var a=st.closest('.ev-it'), t=new Date(); t.setHours(0,0,0,0);
       var k=t<d(a.getAttribute('data-s'))?'up':(t<=d(a.getAttribute('data-e')||a.getAttribute('data-s'))?'now':'past');
       st.className='ev-st is-'+k; st.textContent=(KO?{up:'예정',now:'진행 중',past:'종료'}:{up:'Upcoming',now:'Happening now',past:'Wrapped'})[k]; });
-    var cta=body.getAttribute('data-cta'), ctaLabel=body.getAttribute('data-cta-label')||(KO?'온라인 미팅 신청하기':'Book a meeting');
+    var cta=body.getAttribute('data-cta'), ctaLabel=body.getAttribute('data-cta-label')||(KO?'30분 미팅 신청하기':'Book a 30-minute call');
     if(cta==='/meet/'||cta==='/ko/meet/') cta=KO?'https://cubig.ai/ko/events/meet/':'https://cubig.ai/events/meet/'; // 옛 주소를 적은 페이지도 cubig.ai 미팅 페이지로
 
     // 상단 띠: 가장 가까운 예정 행사 (페이지가 data-strip="off" 면 생략)

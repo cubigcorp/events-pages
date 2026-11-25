@@ -30,7 +30,7 @@ L = {  # 화면 글자(영, 한)
     'events': ('Events', '행사'), 'crumb': ('Breadcrumb', '이동 경로'), 'facts': ('At a glance', '한눈에 보기'),
     'event': ('Event', '행사'), 'date': ('Date', '일시'), 'place': ('Place', '장소'), 'role': ('CUBIG', 'CUBIG 참여'),
     'news': ('Read the news', '보도자료 보기'), 'watch': ('Watch the video', '영상 보기'), 'site': ('Event website', '행사 사이트'),
-    'book': ('Book a meeting', '현장 미팅 잡기'), 'meet': ('Book an online meeting', '온라인 미팅 신청하기'), 'all': ('See all', '전체 보기'),
+    'book': ('Book a meeting', '현장 미팅 잡기'), 'meet': ('Book a 30-minute call', '30분 미팅 신청하기'), 'all': ('See all', '전체 보기'),
     'suffix': ('CUBIG Events', 'CUBIG 행사'), 'main': ('What CUBIG brought', 'CUBIG이 보여준 것'),
 }
 GA = """<!-- ⑤ 추적 코드 (GA4, 마케팅팀 관리 — 직접 수정·삭제하지 마세요) -->
@@ -91,7 +91,7 @@ def build(e, ko, events):
     acts = []
     if e.get('booking'):
         acts.append(f'<a class="d-btn" href="{esc(e["booking"])}" target="_blank" rel="noopener" data-booking-after="hide">{esc(pick(e, "booking_label", ko) or t("book", ko))}</a>')
-    if e.get('src'):
+    if e.get('src') and not re.search(r'cubig\.ai/(ko/)?news/', e['src']):  # 보도자료 링크는 '관련 기사' 칸에만 둔다(2026-11-25 GTM)
         cls = 'd-btn d-btn--line' if acts else 'd-btn'
         acts.append(f'<a class="{cls}" href="{esc(e["src"])}" target="_blank" rel="noopener">{src_label(e["src"], ko)} ↗</a>')
     acts.append(f'<a class="d-go" href="{meet}">{t("meet", ko)} <i aria-hidden="true">→</i></a>')
