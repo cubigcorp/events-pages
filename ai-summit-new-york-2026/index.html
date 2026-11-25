@@ -400,6 +400,7 @@ gtag('config', 'G-8MRD9BZ1VJ');
           <p class="d-lead">CUBIG prepares and validates enterprise data for a specific AI task, and keeps the version behind each result. Bring one AI task to our booth and talk it through with our CEO.</p>
           <div class="actions d-acts">
           <a class="btn" href="https://calendar.app.google/xtuJgkSbPFrL33WY7" target="_blank" rel="noopener" data-booking-until="2026-12-10">Meet us at AI Summit</a>
+          <a class="link" href="#product-overview" data-deck-open>Get the product overview (PDF)</a>
         </div>
         </div>
         <figure class="d-hero__fig">
@@ -520,6 +521,28 @@ gtag('config', 'G-8MRD9BZ1VJ');
     </div>
   </section>
 
+  <!-- 5-1 · PRODUCT OVERVIEW (soft copy): HubSpot form "(26.12.09) AI Summit New York soft copy" (cloned from the Alex Wang live form). Embed code pasted as is. -->
+  <section class="sec deck rv" id="product-overview" aria-labelledby="deck-h">
+    <div class="wrap deck-grid">
+      <button type="button" class="deck-cover-btn" data-deck-open aria-label="Get the Syntitan product overview (PDF)"><img class="deck-cover" src="/assets/media/ai-summit-ny-2026/product-overview-cover.webp" alt="Cover of the Syntitan product overview for The AI Summit New York 2026" loading="lazy" width="960" height="540"><span class="deck-cover-cta">Get the PDF &rarr;</span></button>
+      <div class="deck-copy">
+        <p class="deck-tag">Product overview, PDF</p>
+        <h2 id="deck-h">Take the Syntitan product overview with you.</h2>
+        <p class="say">How Syntitan prepares and validates data for a specific AI task, where LLM Capsule and DTS fit, and what our customers ran.</p>
+        <div class="actions"><button type="button" class="btn" data-deck-open>Get the product overview</button></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Soft copy form opens in a dialog. HubSpot form "(26.12.09) AI Summit New York soft copy", loaded on first open. -->
+  <dialog class="deck-dlg" id="deck-dlg" aria-labelledby="deck-dlg-h">
+    <div class="deck-dlg-head">
+      <p id="deck-dlg-h">Get the Syntitan product overview (PDF)</p>
+      <button type="button" class="deck-dlg-x" aria-label="Close" data-deck-close>&times;</button>
+    </div>
+    <div class="deck-dlg-body" id="deck-dlg-body"></div>
+  </dialog>
+
   <!-- 6 · CLOSING -->
   <section class="sec closing">
     <div class="wrap closing-grid">
@@ -557,5 +580,9 @@ gtag('config', 'G-8MRD9BZ1VJ');
     </div>
   </section>
 </main>
+<script>(function(){var d=document.getElementById("deck-dlg");if(!d||!d.showModal)return;var loaded=false;
+function open(){if(!loaded){loaded=true;var f=document.createElement("div");f.className="hs-form-frame";f.setAttribute("data-region","na2");f.setAttribute("data-form-id","1cc4a0a0-1218-42ad-b850-a8cf91d911fe");f.setAttribute("data-portal-id","244718287");document.getElementById("deck-dlg-body").appendChild(f);var sc=document.createElement("script");sc.src="https://js-na2.hsforms.net/forms/embed/244718287.js";sc.defer=true;document.body.appendChild(sc);}d.showModal();}
+document.addEventListener("click",function(e){var t=e.target.closest&&e.target.closest("[data-deck-open]");if(t){e.preventDefault();e.stopPropagation();open();return;}if(e.target.closest&&e.target.closest("[data-deck-close]")){d.close();return;}if(e.target===d)d.close();},true);
+if(location.hash==="#get-overview")open();})();</script>
 </body>
 </html>
