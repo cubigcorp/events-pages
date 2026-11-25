@@ -216,7 +216,7 @@ def make_missing(dry_run=False):
             f = os.path.join(ROOT, 'ko' if ko else '', e['page'])
             if os.path.exists(f):
                 continue
-            made.append(os.path.relpath(f, ROOT))
+            made.append(os.path.relpath(f, ROOT).replace(os.sep, '/'))  # 윈도우 역슬래시 → 사이트맵 주소 깨짐 방지(2026-11-25)
             if not dry_run:
                 os.makedirs(os.path.dirname(f), exist_ok=True)
                 open(f, 'w', encoding='utf-8').write(page_seo.apply(page_blocks.apply(build(e, ko, events), e, ko), e, Path(f), ko))
